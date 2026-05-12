@@ -210,7 +210,7 @@ aside a:hover {
     display: block;
 }
 
-.seccion_panel h2, .seccion_panel h3 {
+.seccion_panel h2, .seccion_panel h3{
     color: white;
     margin-top: 6px;
     margin-bottom: 12px;
@@ -221,7 +221,7 @@ aside a:hover {
 }
 
 .seccion_panel input, .seccion_panel select, .seccion_panel textarea {
-    width: 100%;
+    width: 50%;
     padding: 12px;
     border: 1px solid rgb(51, 65, 85);
     border-radius: 8px;
@@ -229,12 +229,18 @@ aside a:hover {
     color: white;
     margin-top: 6px;
     margin-bottom: 18px;
+    margin-left: 30px;
 }
 
 .seccion_panel label {
     display: block;
     margin-bottom: 5px;
     font-weight: 600;
+    margin-left: 30px;
+}
+
+.seccion_panel h2 {
+    margin-bottom: 35px;
 }
 
 .seccion_panel input:focus, .seccion_panel select:focus, .seccion_panel textarea:focus {
@@ -243,6 +249,9 @@ aside a:hover {
 }
 
 .seccion_panel input[type="submit"] {
+    display: flex;
+    justify-content: flex-start;
+    width: 10%;
     background-color: rgb(51, 65, 85);
     color: white;
     border: none;
@@ -286,6 +295,61 @@ aside a:hover {
     border: 1px solid rgb(255, 255, 255); 
     padding: 10px;
     border-collapse: collapse;
+}
+
+.act_notificaciones {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    gap: 80px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* Contenedor principal del interruptor */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 37px;
+    height: 24px;
+}
+
+/* Ocultar el checkbox original */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* El fondo del deslizador (Estado Desactivado) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: 0.4s;
+}
+
+/* El círculo que se mueve dentro del interruptor */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px; width: 20px;
+    left: 2px; bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+/* Cambio de color de fondo al hacer clic (Estado Activado) */
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+/* Movimiento del círculo hacia la derecha (Estado Activado) */
+input:checked + .slider:before {
+    transform: translateX(14px);
 }
 
 footer {
