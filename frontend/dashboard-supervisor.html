@@ -42,32 +42,35 @@
         </div>
     </aside>
     <section class="inicio_dashboard" id="inicio_dashboard">
+        <h1>Sistema de Gestión de Inventarios Internos</h1>
         <article>
-            <h1>Sistema de Gestión de Inventarios Internos</h1>
             <h2>Bienvenido Supervisor 1</h2>
             <p>Administra ingresos, movimientos y control de stock desde un único panel centralizado.
             Utiliza el menú lateral para acceder rápidamente a las distintas áreas del sistema.</p>
         </article>
-        <section class="resumen_dashboard">
-            <article class="card_dashboard">
-                <h3>Productos Registrados</h3>
-                <p>245 productos activos</p>
-            </article>
-            <article class="card_dashboard">
-                <h3>Ingresos del Día</h3>
-                <p>18 movimientos registrados</p>
-            </article>
-            <article class="card_dashboard">
-                <h3>Alertas de Stock</h3>
-                <p>7 productos con bajo stock</p>
-            </article>
-            <article class="card_dashboard">
-                <h3>Última Actualización</h3>
-                <p>11/05/2026 - 14:32 hs</p>
-            </article>
+        <section>
+            <h2>Indicadores Principales</h2>
+            <div class="resumen_dashboard">   
+                <article class="card_dashboard">
+                    <h3>Productos Registrados</h3>
+                    <p>245 productos activos</p>
+                </article>
+                <article class="card_dashboard">
+                    <h3>Ingresos del Día</h3>
+                    <p>18 movimientos registrados</p>
+                </article>
+                <article class="card_dashboard">
+                    <h3>Alertas de Stock</h3>
+                    <p>7 productos con bajo stock</p>
+                </article>
+                <article class="card_dashboard">
+                    <h3>Última Actualización</h3>
+                    <p>11/05/2026 - 14:32 hs</p>
+                </article>
+            </div> 
         </section>
         <section class="actividad_reciente">
-            <h3>Actividad Reciente</h3>
+            <h2>Actividad Reciente</h2>
             <ul>
                 <li>Ingreso registrado: Producto 5 (+25 unidades)</li>
                 <li>Ajuste negativo realizado: Producto 2 (-3 unidades)</li>
@@ -77,10 +80,10 @@
         </section>
     </section>
     <main class="panel_control">
+        <h2>Panel de Control</h2>
         <section class="seccion_panel" id="ingresos">
-            <h2>Panel de Control</h2>
             <h3>Registrar Ingresos</h3>
-            <form class="form_panel" method="post" action="">
+            <form class="form_panel" method="post">
                 <label for="ingreso_producto">Producto</label>
                 <select name="ingreso_producto" id="ingreso_producto" required>
                     <option value="">Seleccionar</option>
@@ -130,9 +133,8 @@
             </form>
         </section>
         <section class="seccion_panel" id="ajustes">
-            <h2>Panel de Control</h2>
             <h3>Ajustes de Stock</h3>
-            <form class="form_panel" method="post" action="">
+            <form class="form_panel" method="post">
                 <label for="ajuste_producto">Producto</label>
                 <select name="ajuste_producto" id="ajuste_producto" required>
                     <option value="">Seleccionar</option>
@@ -187,7 +189,6 @@
             </form>
         </section>
         <section class="seccion_panel" id="productos">
-            <h2>Panel de Control</h2>
             <h3>Productos</h3>
             <form>
                 <input type="search" name="buscar_producto" id="buscar_producto" placeholder="Buscar producto">
@@ -377,7 +378,7 @@
         </section>
         <section class="seccion_panel" id="generar_reporte">
             <h2>Generar Reporte</h2>
-            <form class="form_panel" method="post" action="">
+            <form class="form_panel" method="post">
                 <label for="tipo_reporte">Tipo de Reporte</label>
                 <select id="tipo_reporte" required>
                     <option value="">Seleccionar</option>
@@ -410,7 +411,7 @@
                     <option value="supervisor1">Supervisor 1</option>
                     <option value="supervisor2">Supervisor 2</option>
                 </select>
-                <button type="submit">Generar Reporte</button>
+                <input type="submit" value="Generar">
             </form>
         </section>
         <section class="seccion_panel" id="historial_reportes">
@@ -462,7 +463,7 @@
         </section>
         <section class="seccion_panel" id="alertas_dashboard">
             <h2>Alertas</h2>
-            <section class="resumen_dashboard">
+            <div class="resumen_dashboard">
                 <article class="card_dashboard">
                     <h3>Stock bajo</h3>
                     <p>12 productos con stock bajo</p>
@@ -485,11 +486,11 @@
                     <h3>Última Actualización</h3>
                     <p>11/05/2026 - 14:32 hs</p>
                 </article>
-            </section>
+            </div>
         </section>
         <section class="seccion_panel" id="usuarios">
             <h2>Usuarios</h2>
-            <section class="resumen_dashboard">
+            <div class="resumen_dashboard">
                 <article class="card_dashboard">
                     <h3>Usuarios Activos</h3>
                     <p>24 usuarios conectados</p>
@@ -513,14 +514,12 @@
                     <p>11/05/2026 - 15:47 hs</p>
                     <p>Administrador principal</p>
                 </article>
-            </section>
+            </div>
         </section>
         <section class="seccion_panel" id="configuracion">
             <h2>Configuración</h2>
             <form class="form_panel">
-                <label for="nombre_usuario">
-                    Nombre de Usuario
-                </label>
+                <label for="nombre_usuario">Nombre de Usuario</label>
                 <input type="text" id="nombre_usuario" value="Supervisor 1">
                 <label for="correo_usuario">Correo Electrónico</label>
                 <input type="email" id="correo_usuario" value="supervisor@sinertech.com">
@@ -534,12 +533,16 @@
                     <option value="oscuro">Oscuro</option>
                     <option value="claro">Claro</option>
                 </select>
-                <label for="notificaciones">Recibir notificaciones</label>
-                <button type="button" id="notificaciones_act">Activar</button>
-                <button type="button" id="notificaciones_des">Desactivar</button>
+                <div class="act_notificaciones">
+                    <label>Recibir Notificaciones</label>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
                 <label for="nueva_password">Nueva Contraseña</label>
                 <input type="password" id="nueva_password">
-                <input type="submit" value="Guardar Cambios">
+                <input type="submit" value="Guardar">
             </form>
         </section>
     </main>
