@@ -1,0 +1,356 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+:root {
+    --sidebar-width: 240px;
+    --header-height: 65px;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding-top: 65px;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(
+        180deg,
+        rgb(15, 23, 32),
+        rgb(10, 15, 24)
+    );
+}
+
+main {
+    flex: 1;
+    background-color: transparent;
+}
+
+.header_dashboard_supervisor {
+    height: 65px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(22, 31, 43);
+    border-bottom: 1px solid rgb(64, 78, 95);
+    z-index: 1000;
+}
+
+.header_dashboard_supervisor h1 {
+    color: rgb(247, 247, 247);
+    margin-left: 20px;
+    padding-left: 18px;
+}
+
+.navbar_global {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 15px;
+}
+
+.navbar_global ul{
+    display: flex;
+    gap: 8px;
+    list-style: none;
+}
+
+.acciones_header {
+    display: flex;
+    list-style: none;
+}
+
+.acciones_header a {
+    text-decoration: none;
+    color: rgb(216, 216, 216);
+    padding: 10px 10px;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+.acciones_header a:hover {
+    background-color: rgb(64, 78, 95);
+    color: rgb(247, 247, 247);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: rgb(247, 247, 247);
+}
+
+.home img {
+    width: 40px;
+    height: 40px;
+}
+
+.home span {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.acceso_panel {
+    display: flex;
+    flex-direction: column;
+    width: var(--sidebar-width);
+    height: calc(100vh - var(--header-height));
+    top: var(--header-height);
+    left: 0;
+    position: fixed;
+    background-color: rgb(22, 31, 43);
+    color: white;
+    padding: 20px;
+    border-right: 1px solid rgb(64, 78, 95);
+}
+
+aside span {
+    margin-left: 10px;
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+}
+
+aside a {
+    display: block;
+    text-decoration: none;
+    color: rgb(247, 247, 247);
+    padding: 5px 12px;
+    border-radius: 5px;
+}
+
+aside a:hover {
+    background-color: rgb(64, 78, 95);
+    color: rgb(247, 247, 247);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.opc_panel {
+    font-weight: 900;
+}
+
+.opc_general {
+    margin-top: auto;
+    border-top: 1px solid rgb(64, 78, 95);
+    padding-top: 10px;
+}
+
+.opc_inventario, .opc_reporte {
+    margin-left: 9px;
+    text-decoration: none;
+    color: rgb(247, 247, 247);
+    font-weight: 300;
+}
+
+.inicio_dashboard {
+    width: calc(100% - var(--sidebar-width));
+    margin-top: 5px;
+    margin-left: var(--sidebar-width);
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: block;
+    padding: 40px;
+    color: rgb(247, 247, 247);
+}
+
+.inicio_dashboard h1 {
+    margin-bottom: 20px;
+}
+
+.inicio_dashboard h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.inicio_dashboard p {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.resumen_dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin-top: 35px;
+}
+
+.card_dashboard {
+    padding: 20px;
+    min-width: 0;
+}
+
+.actividad_reciente {
+    margin-top: 40px;
+}
+
+.actividad_reciente ul {
+    margin: 5px;
+    padding: 5px;
+}
+
+.seccion_panel {
+    display: none;
+    margin-top: 5px;
+    margin-left: var(--sidebar-width);
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 30px;
+}
+
+.seccion_panel:target {
+    display: block;
+}
+
+.seccion_panel h2, .seccion_panel h3 {
+    color: white;
+    margin-top: 6px;
+    margin-bottom: 12px;
+}
+
+.form_panel {
+    color: white;
+}
+
+.seccion_panel input, .seccion_panel select, .seccion_panel textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgb(51, 65, 85);
+    border-radius: 8px;
+    background-color: rgb(30, 41, 59);
+    color: white;
+    margin-top: 6px;
+    margin-bottom: 18px;
+}
+
+.seccion_panel label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.seccion_panel input:focus, .seccion_panel select:focus, .seccion_panel textarea:focus {
+    outline: none;
+    border-color: rgb(81, 123, 158);
+}
+
+.seccion_panel input[type="submit"] {
+    background-color: rgb(51, 65, 85);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.seccion_panel button {
+    background-color: rgb(36, 44, 59);
+    border-radius: 8px;
+    border: 1px solid rgb(51, 65, 85);
+    color: white;
+    padding: 8px 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.seccion_panel button:hover, input[type="submit"]:hover {
+    background-color: rgb(249, 115, 22);
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+}
+
+.seccion_panel, .inicio_dashboard, .card_dashboard {
+    background-color: rgb(30, 41, 59);
+    border-radius: 16px;
+    border: 1px solid rgb(51, 65, 85);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.seccion_panel p {
+    color: white;
+}
+
+
+.tabla_stock {
+    color: white;
+    border: 1px solid rgb(255, 255, 255); 
+    padding: 10px;
+    border-collapse: collapse;
+}
+
+footer {
+    margin-left: var(--sidebar-width);
+    margin-bottom: 0;
+    background-color: rgb(36, 44, 59);
+    color: white;
+    padding: 20px;
+    border: 1px solid rgb(51, 65, 85);
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --sidebar-width: 200px;
+    }
+
+    .inicio_dashboard,
+    .seccion_panel {
+        margin-left: calc(var(--sidebar-width) + 5px);
+        width: calc(100% - var(--sidebar-width));
+    }
+
+    footer {
+        margin-left: var(--sidebar-width);
+    }
+}
+
+@media (max-width: 768px) {
+
+    :root {
+        --sidebar-width: 160px;
+    }
+
+    /* Sidebar más compacta */
+    .acceso_panel {
+        width: var(--sidebar-width);
+        padding: 10px;
+        overflow-x: hidden;
+    }
+
+    /* Texto más chico */
+    aside a,
+    aside summary {
+        font-size: 0.85rem;
+    }
+
+    /* Contenido ocupa el resto */
+    .inicio_dashboard,
+    .seccion_panel {
+        margin-left: var(--sidebar-width);
+        width: calc(100% - var(--sidebar-width));
+        padding: 15px;
+    }
+
+    footer {
+        margin-left: var(--sidebar-width);
+    }
+
+    /* Grid más chico */
+    .resumen_dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+.inicio_dashboard,
+.seccion_panel {
+    transition: all 0.3s ease;
+}
