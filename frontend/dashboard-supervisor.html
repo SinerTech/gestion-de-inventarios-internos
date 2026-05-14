@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<body>
+<body class="body_dashboard_supervisor">
     <header class="header_dashboard_supervisor">
         <nav class="navbar_global">
-            <a class="home" href="index.html">
+            <a class="home_dashboard_supervisor" href="index.html">
                 <img src="img/SinerTech.png" alt="Logo SinerTech">
                 <span>Sinertech</span>
             </a>
@@ -21,27 +21,27 @@
         </nav>
     </header>
     <aside class="acceso_panel">
-        <div class="opc_panel">
+        <div class="opcion_panel">
             <span>Inventario</span>
             <ul>
-                <li><a class="opc_inventario" href="#ingresos">Registrar Ingresos</a></li>
-                <li><a class="opc_inventario" href="#ajustes">Movimientos</a></li>
-                <li><a class="opc_inventario" href="#productos">Control de Stock</a></li>
+                <li><a class="opcion_inventario" href="#ingresos">Registrar Ingresos</a></li>
+                <li><a class="opcion_inventario" href="#ajustes">Movimientos</a></li>
+                <li><a class="opcion_inventario" href="#productos">Control de Stock</a></li>
             </ul>
             <span>Reportes</span>
             <ul>
-                <li><a class="opc_reporte" href="#generar_reporte">Generar Reporte</a></li>
-                <li><a class="opc_reporte" href="#historial_reportes">Historial de Reportes</a></li>
+                <li><a class="opcion_reporte" href="#generar_reporte">Generar Reporte</a></li>
+                <li><a class="opcion_reporte" href="#historial_reportes">Historial de Reportes</a></li>
             </ul>
             <a href="#alertas_dashboard">Alertas</a>
             <a href="#usuarios">Usuarios</a>
         </div>
-        <div class="opc_general">
+        <div class="opciones_generales">
             <a class="configuracion" href="#configuracion">Configuración</a>
             <a class="cerrar_sesion" href="">Cerrar Sesión</a>
         </div>
     </aside>
-    <section class="inicio_dashboard" id="inicio_dashboard">
+    <section class="inicio_dashboard_supervisor" id="inicio_dashboard_supervisor">
         <h1>Sistema de Gestión de Inventarios Internos</h1>
         <article>
             <h2>Bienvenido Supervisor 1</h2>
@@ -50,26 +50,26 @@
         </article>
         <section>
             <h2>Indicadores Principales</h2>
-            <div class="resumen_dashboard">   
-                <article class="card_dashboard">
+            <div class="resumen_dashboard_supervisor">   
+                <article class="card_dashboard_supervisor">
                     <h3>Productos Registrados</h3>
                     <p>245 productos activos</p>
                 </article>
-                <article class="card_dashboard">
+                <article class="card_dashboard_supervisor">
                     <h3>Ingresos del Día</h3>
                     <p>18 movimientos registrados</p>
                 </article>
-                <article class="card_dashboard">
+                <article class="card_dashboard_supervisor">
                     <h3>Alertas de Stock</h3>
                     <p>7 productos con bajo stock</p>
                 </article>
-                <article class="card_dashboard">
+                <article class="card_dashboard_supervisor">
                     <h3>Última Actualización</h3>
                     <p>11/05/2026 - 14:32 hs</p>
                 </article>
             </div> 
         </section>
-        <section class="actividad_reciente">
+        <section class="actividad_reciente_dashboard_supervisor">
             <h2>Actividad Reciente</h2>
             <ul>
                 <li>Ingreso registrado: Producto 5 (+25 unidades)</li>
@@ -463,26 +463,26 @@
         </section>
         <section class="seccion_panel" id="alertas_dashboard">
             <h2>Alertas</h2>
-            <div class="resumen_dashboard">
-                <article class="card_dashboard">
+            <div class="resumen_dashboard_supervisor">
+                <article class="card_dashboard_supervisor">
                     <h3>Stock bajo</h3>
                     <p>12 productos con stock bajo</p>
                     <p>Última actualización: hace 5 min</p>
                     <button type="button">Ver productos</button>
                 </article>
-                <article class="card_dashboard">
+                <article class="card_dashboard_supervisor">
                     <h3>Productos vencidos</h3>
                     <p>3 productos vencidos</p>
                     <p>Requieren revisión inmediata</p>
                     <button type="button">Revisar</button>
                 </article>
-                <article class="card_dashboard">
+                <article class="card_dashboard_supervisor">
                     <h3>Productos faltantes</h3>
                     <p>5 productos sin reposición</p>
                     <p>Puede afectar ventas</p>
                     <button type="button">Ver faltantes</button>
                 </article>
-                <article class="card_dashboard">
+                <article class="card_dashboard_supervisor">
                     <h3>Última Actualización</h3>
                     <p>11/05/2026 - 14:32 hs</p>
                 </article>
@@ -490,26 +490,26 @@
         </section>
         <section class="seccion_panel" id="usuarios">
             <h2>Usuarios</h2>
-            <div class="resumen_dashboard">
-                <article class="card_dashboard">
+            <div class="resumen_dashboard_supervisor">
+                <article class="card_dashboard_supervisor">
                     <h3>Usuarios Activos</h3>
                     <p>24 usuarios conectados</p>
                     <p>Actividad en tiempo real</p>
                     <button type="button">Ver usuarios</button>
                 </article>
-                <article class="card_dashboard">
+                <article class="card_dashboard_supervisor">
                     <h3>Nuevos Usuarios</h3>
                     <p>3 registros recientes</p>
                     <p>Últimas 24 horas</p>
                     <button type="button">Revisar</button>
                 </article>
-                <article class="card_dashboard">
+                <article class="card_dashboard_supervisor">
                     <h3>Accesos Bloqueados</h3>
                     <p>2 intentos fallidos</p>
                     <p>Requieren verificación</p>
                     <button type="button">Ver detalles</button>
                 </article>
-                <article class="card_dashboard">
+                <article class="card_dashboard_supervisor">
                     <h3>Último Inicio de Sesión</h3>
                     <p>11/05/2026 - 15:47 hs</p>
                     <p>Administrador principal</p>
@@ -528,16 +528,16 @@
                     <option value="es">Español</option>
                     <option value="en">Inglés</option>
                 </select>
-                <label for="tema_dashboard">Tema Visual</label>
-                <select id="tema_dashboard">
+                <label for="tema_dashboard_supervisor">Tema Visual</label>
+                <select id="tema_dashboard_supervisor">
                     <option value="oscuro">Oscuro</option>
                     <option value="claro">Claro</option>
                 </select>
-                <div class="act_notificaciones">
+                <div class="activar_notificaciones">
                     <label>Recibir Notificaciones</label>
                     <label class="switch">
                         <input type="checkbox">
-                        <span class="slider"></span>
+                        <span class="slider_notificaciones"></span>
                     </label>
                 </div>
                 <label for="nueva_password">Nueva Contraseña</label>
@@ -546,7 +546,7 @@
             </form>
         </section>
     </main>
-    <footer>
+    <footer class="footer_dashboard_supervisor">
         <p>© SinerTech</p>
     </footer>
 </body>
