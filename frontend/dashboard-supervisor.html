@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard: Supervisor de Stock</title>
+    <link rel="stylesheet" href="css/styles-supervisor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="body_dashboard_supervisor">
+    <header class="header_dashboard_supervisor">
+        <nav class="navbar_global">
+            <a class="home_dashboard_supervisor" href="index.html">
+                <img src="img/SinerTech.png" alt="Logo SinerTech">
+                <span>Sinertech</span>
+            </a>
+            <ul class="acciones_header">
+                <li><a href=""><i class="fa-solid fa-bell"></i></a></li>
+                <li><a href=""><i class="fa-solid fa-circle-user"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+    <aside class="acceso_panel">
+        <div class="opcion_panel">
+            <span>PANEL PRINCIPAL</span>
+            <ul>
+                <li>
+                    <a class="opcion_inventario" href="#ingresos">
+                        <i class="fa-solid fa-box-open"></i>
+                        Registrar Ingresos
+                    </a>
+                </li>
+                <li>
+                    <a class="opcion_inventario" href="#ajustes">
+                        <i class="fa-solid fa-right-left"></i>
+                        Ajustes
+                    </a>
+                </li>
+                <li>
+                    <a class="opcion_inventario" href="#productos">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        Control de Stock
+                    </a></li>
+            </ul>
+            <span>INVENTARIO</span>
+            <a href="#alertas_dashboard">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                Alertas
+            </a>
+            <span>REPORTES</span>
+            <ul>
+                <li>
+                    <a class="opcion_reporte" href="#generar_reporte">
+                        <i class="fa-solid fa-file-lines"></i>
+                        Generar Reporte
+                    </a>
+                </li>
+                <li>
+                    <a class="opcion_reporte" href="#historial_reportes">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        Historial
+                    </a>
+                </li>
+            </ul>
+            <span>MONITOREO</span>
+            <a href="#usuarios">
+                <i class="fa-solid fa-users"></i>
+                Usuarios
+            </a>
+        </div>
+        <div class="opciones_generales">
+            <a class="configuracion" href="#configuracion">
+                <i class="fa-solid fa-gear"></i>
+                Configuración
+            </a>
+            <a class="cerrar_sesion" href="">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Cerrar Sesión
+            </a>
+        </div>
+    </aside>
+    <section class="inicio_dashboard_supervisor" id="inicio_dashboard_supervisor">
+        <h1>Sistema de Gestión de Inventarios Internos</h1>
+        <article>
+            <h2>Bienvenido Supervisor 1</h2>
+            <p>Administra ingresos, movimientos y control de stock desde un único panel centralizado.
+            Utiliza el menú lateral para acceder rápidamente a las distintas áreas del sistema.</p>
+        </article>
+        <section>
+            <h2>Indicadores Principales</h2>
+            <div class="resumen_dashboard_supervisor">   
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        Productos
+                    </h3>
+                    <p>245 productos activos</p>
+                </article>
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                        Ingresos del Día
+                    </h3>
+                    <p>18 movimientos registrados</p>
+                </article>
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        Alertas de Stock
+                    </h3>
+                    <p>7 productos con bajo stock</p>
+                </article>
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-clock"></i>
+                        Última Actualización
+                    </h3>
+                    <p>11/05/2026 - 14:32 hs</p>
+                </article>
+            </div> 
+        </section>
+        <section class="actividad_reciente_dashboard_supervisor">
+            <h2>Actividad Reciente</h2>
+            <ul>
+                <li>
+                    <i class="fa-solid fa-circle-plus"></i>
+                    Ingreso registrado: Producto 5 (+25 unidades)
+                </li>
+                <li>
+                    <i class="fa-solid fa-minus"></i>
+                    Ajuste negativo realizado: Producto 2 (-3 unidades)
+                </li>
+                <li>
+                    <i class="fa-solid fa-truck"></i>
+                    Nuevo proveedor agregado al sistema
+                </li>
+                <li>
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    Actualización de inventario completada
+                </li>
+            </ul>
+        </section>
+    </section>
+    <main class="panel_control">
+        <h2>Panel de Control</h2>
+        <section class="seccion_panel" id="ingresos">
+            <h3>Registrar Ingresos</h3>
+            <form class="form_panel" method="post">
+                <label for="ingreso_producto">Producto</label>
+                <select name="ingreso_producto" id="ingreso_producto" required>
+                    <option value="">Seleccionar</option>
+                    <option value="producto_1">Producto 1</option>
+                    <option value="producto_2">Producto 2</option>
+                    <option value="producto_3">Producto 3</option>
+                    <option value="producto_4">Producto 4</option>
+                    <option value="producto_5">Producto 5</option>
+                    <option value="producto_6">Producto 6</option>
+                    <option value="producto_7">Producto 7</option>
+                    <option value="producto_8">Producto 8</option>
+                    <option value="producto_9">Producto 9</option>
+                    <option value="producto_10">Producto 10</option>
+                    <option value="producto_11">Producto 11</option>
+                    <option value="producto_12">Producto 12</option>
+                    <option value="producto_13">Producto 13</option>
+                    <option value="producto_14">Producto 14</option>
+                    <option value="producto_15">Producto 15</option>
+                    <option value="producto_16">Producto 16</option>
+                    <option value="producto_17">Producto 17</option>
+                    <option value="producto_18">Producto 18</option>
+                    <option value="producto_19">Producto 19</option>
+                    <option value="producto_20">Producto 20</option>
+                </select>
+                <label for="ingreso_cantidad">Cantidad</label>
+                <input type="number" name="ingreso_cantidad" id="ingreso_cantidad" required>
+                <label for="ingreso_fecha">Fecha de Ingreso</label>
+                <input type="date" name="ingreso_fecha" id="ingreso_fecha" required>
+                <label for="ingreso_proveedor">Proveedor</label>
+                <select name="ingreso_proveedor" id="ingreso_proveedor" required>
+                    <option value="">Seleccionar</option>
+                    <option value="proveedor_1">Proveedor 1</option>
+                    <option value="proveedor_2">Proveedor 2</option>
+                    <option value="proveedor_3">Proveedor 3</option>
+                </select>
+                <label for="ingreso_supervisor">Supervisor</label>
+                <select name="ingreso_supervisor" id="ingreso_supervisor" required>
+                    <option value="">Seleccionar</option>
+                    <option value="supervisor_1">Supervisor 1</option>
+                    <option value="supervisor_2">Supervisor 2</option>
+                </select>
+                <label for="ingreso_lote_factura">Número de Lote/Factura</label>
+                <input type="text" name="ingreso_lote_factura" id="ingreso_lote_factura" required>
+                <label for="ingreso_observaciones">Observaciones</label>
+                <textarea name="ingreso_observaciones" id="ingreso_observaciones"></textarea>
+                <input type="submit">
+            </form>
+        </section>
+        <section class="seccion_panel" id="ajustes">
+            <h3>Ajustes de Stock</h3>
+            <form class="form_panel" method="post">
+                <label for="ajuste_producto">Producto</label>
+                <select name="ajuste_producto" id="ajuste_producto" required>
+                    <option value="">Seleccionar</option>
+                    <option value="producto_1">Producto 1</option>
+                    <option value="producto_2">Producto 2</option>
+                    <option value="producto_3">Producto 3</option>
+                    <option value="producto_4">Producto 4</option>
+                    <option value="producto_5">Producto 5</option>
+                    <option value="producto_6">Producto 6</option>
+                    <option value="producto_7">Producto 7</option>
+                    <option value="producto_8">Producto 8</option>
+                    <option value="producto_9">Producto 9</option>
+                    <option value="producto_10">Producto 10</option>
+                    <option value="producto_11">Producto 11</option>
+                    <option value="producto_12">Producto 12</option>
+                    <option value="producto_13">Producto 13</option>
+                    <option value="producto_14">Producto 14</option>
+                    <option value="producto_15">Producto 15</option>
+                    <option value="producto_16">Producto 16</option>
+                    <option value="producto_17">Producto 17</option>
+                    <option value="producto_18">Producto 18</option>
+                    <option value="producto_19">Producto 19</option>
+                    <option value="producto_20">Producto 20</option>
+                </select>
+                <label for="ajuste_tipo">Tipo de Ajuste</label>
+                <select name="ajuste_tipo" id="ajuste_tipo" required>
+                    <option value="">Seleccionar</option>
+                    <option value="ajuste_positivo">Ajuste Positivo</option>
+                    <option value="ajuste_negativo">Ajuste Negativo</option>
+                </select>
+                <label for="ajuste_motivo">Motivo del Ajuste</label>
+                <select name="ajuste_motivo" id="ajuste_motivo">
+                    <option value="reconteo_inventario">Reconteo de inventario</option>
+                    <option value="producto_danado">Producto dañado</option>
+                    <option value="error_carga">Error de carga</option>
+                    <option value="perdida">Pérdida</option>
+                    <option value="producto_encontrado">Producto encontrado</option>
+                </select>
+                <label for="ajuste_cantidad">Cantidad</label>
+                <input type="number" name="ajuste_cantidad" id="ajuste_cantidad" required>
+                <label for="ajuste_fecha">Fecha de Ajuste</label>
+                <input type="date" name="ajuste_fecha" id="ajuste_fecha" required>
+                <label for="ajuste_supervisor">Supervisor</label>
+                <select name="ajuste_supervisor" id="ajuste_supervisor" required>
+                    <option value="">Seleccionar</option>
+                    <option value="supervisor_1">Supervisor 1</option>
+                    <option value="supervisor_2">Supervisor 2</option>
+                </select>
+                <label for="ajuste_observaciones">Observaciones</label>
+                <textarea name="ajuste_observaciones" id="ajuste_observaciones"></textarea>
+                <input type="submit">
+            </form>
+        </section>
+        <section class="seccion_panel" id="productos">
+            <h3>Productos</h3>
+            <form>
+                <input type="search" name="buscar_producto" id="buscar_producto" placeholder="Buscar producto">
+                <button type="submit">Buscar</button>
+            </form>
+            <nav>
+                <button type="button">Todos</button>
+                <button type="button">Activo</button>
+                <button type="button">Inactivo</button>
+                <button type="button">Suspendido</button>
+            </nav>
+            <table>
+                <caption>Control General de Stock</caption>
+                <thead>   
+                    <tr>
+                        <th class="th_izquierdo">ID</th>
+                        <th>Producto</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                        <th>Proveedor</th>
+                        <th class="th_derecho">Último Ingreso</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>Producto 1</td>
+                        <td>50</td>
+                        <td>$1500.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>Producto 2</td>
+                        <td>33</td>
+                        <td>$1750.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>003</td>
+                        <td>Producto 3</td>
+                        <td>45</td>
+                        <td>$2000.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>004</td>
+                        <td>Producto 4</td>
+                        <td>0</td>
+                        <td>$5500.00</td>
+                        <td>Inactivo</td>
+                        <td>Proveedor 5</td>
+                        <td>22/12/2025</td>
+                    </tr>
+                    <tr>
+                        <td>005</td>
+                        <td>Producto 5</td>
+                        <td>99</td>
+                        <td>$8550.50</td>
+                        <td>Activo</td>
+                        <td>Proveedor 2</td>
+                        <td>19/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>006</td>
+                        <td>Producto 6</td>
+                        <td>56</td>
+                        <td>$6700.50</td>
+                        <td>Activo</td>
+                        <td>Proveedor 4</td>
+                        <td>22/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>007</td>
+                        <td>Producto 7</td>
+                        <td>64</td>
+                        <td>$2050.40</td>
+                        <td>Suspendido</td>
+                        <td>Proveedor 3</td>
+                        <td>09/05/2026</td>
+                    </tr>
+                    <tr>
+                        <td>008</td>
+                        <td>Producto 8</td>
+                        <td>31</td>
+                        <td>$2700.00</td>
+                        <td>Suspendido</td>
+                        <td>Proveedor 3</td>
+                        <td>09/05/2026</td>
+                    </tr>
+                    <tr>
+                        <td>009</td>
+                        <td>Producto 9</td>
+                        <td>46</td>
+                        <td>$5100.30</td>
+                        <td>Suspendido</td>
+                        <td>Proveedor 3</td>
+                        <td>09/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>010</td>
+                        <td>Producto 10</td>
+                        <td>31</td>
+                        <td>$2600.90</td>
+                        <td>Activo</td>
+                        <td>Proveedor 5</td>
+                        <td>19/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>011</td>
+                        <td>Producto 11</td>
+                        <td>31</td>
+                        <td>$2500.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>012</td>
+                        <td>Producto 12</td>
+                        <td>31</td>
+                        <td>$2550.34</td>
+                        <td>Activo</td>
+                        <td>Proveedor 2</td>
+                        <td>12/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>013</td>
+                        <td>Producto 13</td>
+                        <td>31</td>
+                        <td>$4100.40</td>
+                        <td>Activo</td>
+                        <td>Proveedor 5</td>
+                        <td>19/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>014</td>
+                        <td>Producto 14</td>
+                        <td>31</td>
+                        <td>$3750.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 3</td>
+                        <td>17/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>015</td>
+                        <td>Producto 15</td>
+                        <td>31</td>
+                        <td>$2510.40</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>016</td>
+                        <td>Producto 16</td>
+                        <td>31</td>
+                        <td>$10050.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 2</td>
+                        <td>12/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>017</td>
+                        <td>Producto 17</td>
+                        <td>31</td>
+                        <td>$2300.60</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>018</td>
+                        <td>Producto 18</td>
+                        <td>31</td>
+                        <td>$2401.55</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>019</td>
+                        <td>Producto 19</td>
+                        <td>31</td>
+                        <td>$3749.99</td>
+                        <td>Activo</td>
+                        <td>Proveedor 5</td>
+                        <td>19/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>020</td>
+                        <td>Producto 20</td>
+                        <td>31</td>
+                        <td>$2499.99</td>
+                        <td>Activo</td>
+                        <td>Proveedor 5</td>
+                        <td>19/04/2026</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="seccion_panel" id="generar_reporte">
+            <h2>Generar Reporte</h2>
+            <form class="form_panel" method="post">
+                <label for="tipo_reporte">Tipo de Reporte</label>
+                <select id="tipo_reporte" required>
+                    <option value="">Seleccionar</option>
+                    <option value="stock">Reporte de Stock</option>
+                    <option value="movimientos">Movimientos</option>
+                    <option value="ingresos">Ingresos</option>
+                    <option value="alertas">Alertas</option>
+                    <option value="usuarios">Usuarios</option>
+                </select>
+                <label for="fecha_desde">Fecha Desde</label>
+                <input type="date" id="fecha_desde">
+                <label for="fecha_hasta">Fecha Hasta</label>
+                <input type="date" id="fecha_hasta">
+                <label for="estado_reporte">Estado</label>
+                <select id="estado_reporte">
+                    <option value="">Todos</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                    <option value="suspendido">Suspendido</option>
+                </select>
+                <label for="formato_reporte">Formato</label>
+                <select id="formato_reporte">
+                    <option value="pdf">PDF</option>
+                    <option value="excel">Excel</option>
+                    <option value="csv">CSV</option>
+                </select>
+                <label for="supervisor_reporte">Supervisor</label>
+                <select id="supervisor_reporte">
+                    <option value="">Seleccionar</option>
+                    <option value="supervisor1">Supervisor 1</option>
+                    <option value="supervisor2">Supervisor 2</option>
+                </select>
+                <input type="submit" value="Generar">
+            </form>
+        </section>
+        <section class="seccion_panel" id="historial_reportes">
+            <h2>Historial de Reportes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="tabla_stock">Reporte</th>
+                        <th class="tabla_stock">Fecha</th>
+                        <th class="tabla_stock">Formato</th>
+                        <th class="tabla_stock">Generado por</th>
+                        <th class="tabla_stock">Estado</th>
+                        <th class="tabla_stock">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tabla_stock">Reporte de Stock</td>
+                        <td class="tabla_stock">11/05/2026</td>
+                        <td class="tabla_stock">PDF</td>
+                        <td class="tabla_stock">Supervisor 1</td>
+                        <td class="tabla_stock">Completado</td>
+                        <td class="tabla_stock">
+                            <button type="button">Descargar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tabla_stock">Movimientos de Inventario</td>
+                        <td class="tabla_stock">10/05/2026</td>
+                        <td class="tabla_stock">Excel</td>
+                        <td class="tabla_stock">Supervisor 2</td>
+                        <td class="tabla_stock">Completado</td>
+                        <td class="tabla_stock">
+                            <button type="button">Descargar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tabla_stock">Alertas de Stock</td>
+                        <td class="tabla_stock">09/05/2026</td>
+                        <td class="tabla_stock">CSV</td>
+                        <td class="tabla_stock">Supervisor 1</td>
+                        <td class="tabla_stock">Pendiente</td>
+                        <td class="tabla_stock">
+                            <button type="button">Ver</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="seccion_panel" id="alertas_dashboard">
+            <h2>Alertas</h2>
+            <div class="resumen_dashboard_supervisor">
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        Stock bajo
+                    </h3>
+                    <p>12 productos con stock bajo</p>
+                    <p>Última actualización: hace 5 min</p>
+                    <button type="button">Ver productos</button>
+                </article>
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-calendar-xmark"></i>
+                        Productos vencidos
+                    </h3>
+                    <p>3 productos vencidos</p>
+                    <p>Requieren revisión inmediata</p>
+                    <button type="button">Revisar</button>
+                </article>
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-box-open"></i>
+                        Productos faltantes
+                    </h3>
+                    <p>5 productos sin reposición</p>
+                    <p>Puede afectar ventas</p>
+                    <button type="button">Ver faltantes</button>
+                </article>
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        Última Actualización
+                    </h3>
+                    <p>11/05/2026 - 14:32 hs</p>
+                </article>
+            </div>
+        </section>
+        <section class="seccion_panel" id="usuarios">
+            <h2>Usuarios</h2>
+            <div class="resumen_dashboard_supervisor">
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-users"></i>
+                        Usuarios Activos
+                    </h3>
+                    <p>24 usuarios conectados</p>
+                    <p>Actividad en tiempo real</p>
+                    <button type="button">Ver usuarios</button>
+                </article>
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-user-plus"></i>
+                        Nuevos Usuarios
+                    </h3>
+                    <p>3 registros recientes</p>
+                    <p>Últimas 24 horas</p>
+                    <button type="button">Revisar</button>
+                </article>
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-user-lock"></i>
+                        Accesos Bloqueados
+                    </h3>
+                    <p>2 intentos fallidos</p>
+                    <p>Requieren verificación</p>
+                    <button type="button">Ver detalles</button>
+                </article>
+                <article class="card_dashboard_supervisor">
+                    <h3>
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        Último Inicio de Sesión
+                    </h3>
+                    <p>11/05/2026 - 15:47 hs</p>
+                    <p>Administrador principal</p>
+                </article>
+            </div>
+        </section>
+        <section class="seccion_panel" id="configuracion">
+            <h2>Configuración</h2>
+            <form class="form_panel">
+                <label for="nombre_usuario">Nombre de Usuario</label>
+                <input type="text" id="nombre_usuario" value="Supervisor 1">
+                <label for="correo_usuario">Correo Electrónico</label>
+                <input type="email" id="correo_usuario" value="supervisor@sinertech.com">
+                <label for="idioma_sistema">Idioma</label>
+                <select id="idioma_sistema">
+                    <option value="es">Español</option>
+                    <option value="en">Inglés</option>
+                </select>
+                <label for="tema_dashboard_supervisor">Tema Visual</label>
+                <select id="tema_dashboard_supervisor">
+                    <option value="oscuro">Oscuro</option>
+                    <option value="claro">Claro</option>
+                </select>
+                <div class="activar_notificaciones">
+                    <label>Recibir Notificaciones</label>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider_notificaciones"></span>
+                    </label>
+                </div>
+                <label for="nueva_password">Nueva Contraseña</label>
+                <input type="password" id="nueva_password">
+                <input type="submit" value="Guardar">
+            </form>
+        </section>
+    </main>
+    <footer class="footer_dashboard_supervisor">
+        <p>© SinerTech</p>
+    </footer>
+</body>
+</html>
