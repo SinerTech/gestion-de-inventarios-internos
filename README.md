@@ -6,6 +6,23 @@ Sistema desarrollado para optimizar la gestión del inventario interno de una or
 
 Centralizar la información del inventario para mejorar la eficiencia operativa, reducir pérdidas y facilitar la toma de decisiones.
 
+## ⚙️ Funcionalidades principales
+
+- Registro y gestión de productos
+- Control de stock
+- Visualización del inventario
+- Gestión de usuarios
+- Alertas de stock
+- Interfaz administrativa
+
+## ▶️ Ejecución del sistema (maqueta visual)
+
+1. Descargar o clonar el repositorio
+2. Ingresar a la carpeta `frontend`
+3. Ejecutar con Live Server desde Visual Studio Code el archivo `index.html`
+4. La maqueta se visualizará automáticamente en el navegador web
+
+
 ## 🧱 Estructura del proyecto
 
 - **backend/** → lógica del servidor, gestión de datos y base de datos  
@@ -15,12 +32,12 @@ Centralizar la información del inventario para mejorar la eficiencia operativa,
 ## 🛠️ Tecnologías (en progreso)
 
 - Backend: ""
-- Frontend: ""
+- Frontend: HTML5, CSS3
 - Base de datos: ""
 
 ## 🚧 Estado del proyecto
 
-En desarrollo – fase inicial (estructura base del sistema).
+- Actualmente el proyecto se encuentra en etapa de diseño y desarrollo de maqueta funcional.
 
 ## 👥 Equipo
 
