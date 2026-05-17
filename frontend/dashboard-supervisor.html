@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard: Supervisor de Stock</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles-supervisor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body class="body_dashboard_supervisor">
@@ -22,23 +22,61 @@
     </header>
     <aside class="acceso_panel">
         <div class="opcion_panel">
-            <span>Inventario</span>
+            <span>PANEL PRINCIPAL</span>
             <ul>
-                <li><a class="opcion_inventario" href="#ingresos">Registrar Ingresos</a></li>
-                <li><a class="opcion_inventario" href="#ajustes">Movimientos</a></li>
-                <li><a class="opcion_inventario" href="#productos">Control de Stock</a></li>
+                <li>
+                    <a class="opcion_inventario" href="#ingresos">
+                        <i class="fa-solid fa-box-open"></i>
+                        Registrar Ingresos
+                    </a>
+                </li>
+                <li>
+                    <a class="opcion_inventario" href="#ajustes">
+                        <i class="fa-solid fa-right-left"></i>
+                        Ajustes
+                    </a>
+                </li>
+                <li>
+                    <a class="opcion_inventario" href="#productos">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        Control de Stock
+                    </a></li>
             </ul>
-            <span>Reportes</span>
+            <span>INVENTARIO</span>
+            <a href="#alertas_dashboard">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                Alertas
+            </a>
+            <span>REPORTES</span>
             <ul>
-                <li><a class="opcion_reporte" href="#generar_reporte">Generar Reporte</a></li>
-                <li><a class="opcion_reporte" href="#historial_reportes">Historial de Reportes</a></li>
+                <li>
+                    <a class="opcion_reporte" href="#generar_reporte">
+                        <i class="fa-solid fa-file-lines"></i>
+                        Generar Reporte
+                    </a>
+                </li>
+                <li>
+                    <a class="opcion_reporte" href="#historial_reportes">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        Historial
+                    </a>
+                </li>
             </ul>
-            <a href="#alertas_dashboard">Alertas</a>
-            <a href="#usuarios">Usuarios</a>
+            <span>MONITOREO</span>
+            <a href="#usuarios">
+                <i class="fa-solid fa-users"></i>
+                Usuarios
+            </a>
         </div>
         <div class="opciones_generales">
-            <a class="configuracion" href="#configuracion">Configuración</a>
-            <a class="cerrar_sesion" href="">Cerrar Sesión</a>
+            <a class="configuracion" href="#configuracion">
+                <i class="fa-solid fa-gear"></i>
+                Configuración
+            </a>
+            <a class="cerrar_sesion" href="">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Cerrar Sesión
+            </a>
         </div>
     </aside>
     <section class="inicio_dashboard_supervisor" id="inicio_dashboard_supervisor">
@@ -52,19 +90,31 @@
             <h2>Indicadores Principales</h2>
             <div class="resumen_dashboard_supervisor">   
                 <article class="card_dashboard_supervisor">
-                    <h3>Productos Registrados</h3>
+                    <h3>
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        Productos
+                    </h3>
                     <p>245 productos activos</p>
                 </article>
                 <article class="card_dashboard_supervisor">
-                    <h3>Ingresos del Día</h3>
+                    <h3>
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                        Ingresos del Día
+                    </h3>
                     <p>18 movimientos registrados</p>
                 </article>
                 <article class="card_dashboard_supervisor">
-                    <h3>Alertas de Stock</h3>
+                    <h3>
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        Alertas de Stock
+                    </h3>
                     <p>7 productos con bajo stock</p>
                 </article>
                 <article class="card_dashboard_supervisor">
-                    <h3>Última Actualización</h3>
+                    <h3>
+                        <i class="fa-solid fa-clock"></i>
+                        Última Actualización
+                    </h3>
                     <p>11/05/2026 - 14:32 hs</p>
                 </article>
             </div> 
@@ -72,10 +122,22 @@
         <section class="actividad_reciente_dashboard_supervisor">
             <h2>Actividad Reciente</h2>
             <ul>
-                <li>Ingreso registrado: Producto 5 (+25 unidades)</li>
-                <li>Ajuste negativo realizado: Producto 2 (-3 unidades)</li>
-                <li>Nuevo proveedor agregado al sistema</li>
-                <li>Actualización de inventario completada</li>
+                <li>
+                    <i class="fa-solid fa-circle-plus"></i>
+                    Ingreso registrado: Producto 5 (+25 unidades)
+                </li>
+                <li>
+                    <i class="fa-solid fa-minus"></i>
+                    Ajuste negativo realizado: Producto 2 (-3 unidades)
+                </li>
+                <li>
+                    <i class="fa-solid fa-truck"></i>
+                    Nuevo proveedor agregado al sistema
+                </li>
+                <li>
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    Actualización de inventario completada
+                </li>
             </ul>
         </section>
     </section>
@@ -201,177 +263,198 @@
                 <button type="button">Suspendido</button>
             </nav>
             <table>
-                <caption class="tabla_stock">Stock de Productos</caption>
+                <caption>Control General de Stock</caption>
                 <thead>   
-                    <tr class="tabla_stock">
-                        <th class="tabla_stock">Producto</th>
-                        <th class="tabla_stock">Cantidad</th>
-                        <th class="tabla_stock">Precio</th>
-                        <th class="tabla_stock">Estado</th>
-                        <th class="tabla_stock">Proveedor</th>
-                        <th class="tabla_stock">Último Ingreso</th>
+                    <tr>
+                        <th class="th_izquierdo">ID</th>
+                        <th>Producto</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                        <th>Proveedor</th>
+                        <th class="th_derecho">Último Ingreso</th>
                     </tr>
                 </thead> 
                 <tbody>
-                    <tr class="tabla_stock">
-                        <td class="tabla_stock">Producto 1</td>
-                        <td class="tabla_stock">50</td>
-                        <td class="tabla_stock">$1500.00</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 1</td>
-                        <td class="tabla_stock">05/04/2026</td>
+                    <tr>
+                        <td>001</td>
+                        <td>Producto 1</td>
+                        <td>50</td>
+                        <td>$1500.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 2</td>
-                        <td class="tabla_stock">33</td>
-                        <td class="tabla_stock">$1750.00</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 1</td>
-                        <td class="tabla_stock">05/04/2026</td>
+                        <td>002</td>
+                        <td>Producto 2</td>
+                        <td>33</td>
+                        <td>$1750.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 3</td>
-                        <td class="tabla_stock">45</td>
-                        <td class="tabla_stock">$2000.00</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 1</td>
-                        <td class="tabla_stock">05/04/2026</td>
+                        <td>003</td>
+                        <td>Producto 3</td>
+                        <td>45</td>
+                        <td>$2000.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 4</td>
-                        <td class="tabla_stock">0</td>
-                        <td class="tabla_stock">$5500.00</td>
-                        <td class="tabla_stock">Inactivo</td>
-                        <td class="tabla_stock">Proveedor 5</td>
-                        <td class="tabla_stock">22/12/2025</td>
+                        <td>004</td>
+                        <td>Producto 4</td>
+                        <td>0</td>
+                        <td>$5500.00</td>
+                        <td>Inactivo</td>
+                        <td>Proveedor 5</td>
+                        <td>22/12/2025</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 5</td>
-                        <td class="tabla_stock">99</td>
-                        <td class="tabla_stock">$8550.50</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 2</td>
-                        <td class="tabla_stock">19/04/2026</td>
+                        <td>005</td>
+                        <td>Producto 5</td>
+                        <td>99</td>
+                        <td>$8550.50</td>
+                        <td>Activo</td>
+                        <td>Proveedor 2</td>
+                        <td>19/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 6</td>
-                        <td class="tabla_stock">56</td>
-                        <td class="tabla_stock">$6700.50</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 4</td>
-                        <td class="tabla_stock">22/04/2026</td>
+                        <td>006</td>
+                        <td>Producto 6</td>
+                        <td>56</td>
+                        <td>$6700.50</td>
+                        <td>Activo</td>
+                        <td>Proveedor 4</td>
+                        <td>22/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 7</td>
-                        <td class="tabla_stock">64</td>
-                        <td class="tabla_stock">$2050.40</td>
-                        <td class="tabla_stock">Suspendido</td>
-                        <td class="tabla_stock">Proveedor 3</td>
-                        <td class="tabla_stock">09/05/2026</td>
+                        <td>007</td>
+                        <td>Producto 7</td>
+                        <td>64</td>
+                        <td>$2050.40</td>
+                        <td>Suspendido</td>
+                        <td>Proveedor 3</td>
+                        <td>09/05/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 8</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$2700.00</td>
-                        <td class="tabla_stock">Suspendido</td>
-                        <td class="tabla_stock">Proveedor 3</td>
-                        <td class="tabla_stock">09/05/2026</td>
+                        <td>008</td>
+                        <td>Producto 8</td>
+                        <td>31</td>
+                        <td>$2700.00</td>
+                        <td>Suspendido</td>
+                        <td>Proveedor 3</td>
+                        <td>09/05/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 9</td>
-                        <td class="tabla_stock">46</td>
-                        <td class="tabla_stock">$5100.30</td>
-                        <td class="tabla_stock">Suspendido</td>
-                        <td class="tabla_stock">Proveedor 3</td>
-                        <td class="tabla_stock">09/04/2026</td>
+                        <td>009</td>
+                        <td>Producto 9</td>
+                        <td>46</td>
+                        <td>$5100.30</td>
+                        <td>Suspendido</td>
+                        <td>Proveedor 3</td>
+                        <td>09/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 10</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$2600.90</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 5</td>
-                        <td class="tabla_stock">19/04/2026</td>
+                        <td>010</td>
+                        <td>Producto 10</td>
+                        <td>31</td>
+                        <td>$2600.90</td>
+                        <td>Activo</td>
+                        <td>Proveedor 5</td>
+                        <td>19/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 11</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$2500.00</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 1</td>
-                        <td class="tabla_stock">05/04/2026</td>
+                        <td>011</td>
+                        <td>Producto 11</td>
+                        <td>31</td>
+                        <td>$2500.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 12</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$2550.34</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 2</td>
-                        <td class="tabla_stock">12/04/2026</td>
+                        <td>012</td>
+                        <td>Producto 12</td>
+                        <td>31</td>
+                        <td>$2550.34</td>
+                        <td>Activo</td>
+                        <td>Proveedor 2</td>
+                        <td>12/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 13</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$4100.40</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 5</td>
-                        <td class="tabla_stock">19/04/2026</td>
+                        <td>013</td>
+                        <td>Producto 13</td>
+                        <td>31</td>
+                        <td>$4100.40</td>
+                        <td>Activo</td>
+                        <td>Proveedor 5</td>
+                        <td>19/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 14</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$3750.00</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 3</td>
-                        <td class="tabla_stock">17/04/2026</td>
+                        <td>014</td>
+                        <td>Producto 14</td>
+                        <td>31</td>
+                        <td>$3750.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 3</td>
+                        <td>17/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 15</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$2510.40</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 1</td>
-                        <td class="tabla_stock">05/04/2026</td>
+                        <td>015</td>
+                        <td>Producto 15</td>
+                        <td>31</td>
+                        <td>$2510.40</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 16</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$10050.00</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 2</td>
-                        <td class="tabla_stock">12/04/2026</td>
+                        <td>016</td>
+                        <td>Producto 16</td>
+                        <td>31</td>
+                        <td>$10050.00</td>
+                        <td>Activo</td>
+                        <td>Proveedor 2</td>
+                        <td>12/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 17</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$2300.60</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 1</td>
-                        <td class="tabla_stock">05/04/2026</td>
+                        <td>017</td>
+                        <td>Producto 17</td>
+                        <td>31</td>
+                        <td>$2300.60</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 18</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$2401.55</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 1</td>
-                        <td class="tabla_stock">05/04/2026</td>
+                        <td>018</td>
+                        <td>Producto 18</td>
+                        <td>31</td>
+                        <td>$2401.55</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+                        <td>05/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 19</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$3749.99</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 5</td>
-                        <td class="tabla_stock">19/04/2026</td>
+                        <td>019</td>
+                        <td>Producto 19</td>
+                        <td>31</td>
+                        <td>$3749.99</td>
+                        <td>Activo</td>
+                        <td>Proveedor 5</td>
+                        <td>19/04/2026</td>
                     </tr>
                     <tr>
-                        <td class="tabla_stock">Producto 20</td>
-                        <td class="tabla_stock">31</td>
-                        <td class="tabla_stock">$2499.99</td>
-                        <td class="tabla_stock">Activo</td>
-                        <td class="tabla_stock">Proveedor 5</td>
-                        <td class="tabla_stock">19/04/2026</td>
+                        <td>020</td>
+                        <td>Producto 20</td>
+                        <td>31</td>
+                        <td>$2499.99</td>
+                        <td>Activo</td>
+                        <td>Proveedor 5</td>
+                        <td>19/04/2026</td>
                     </tr>
                 </tbody>
             </table>
@@ -465,25 +548,37 @@
             <h2>Alertas</h2>
             <div class="resumen_dashboard_supervisor">
                 <article class="card_dashboard_supervisor">
-                    <h3>Stock bajo</h3>
+                    <h3>
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        Stock bajo
+                    </h3>
                     <p>12 productos con stock bajo</p>
                     <p>Última actualización: hace 5 min</p>
                     <button type="button">Ver productos</button>
                 </article>
                 <article class="card_dashboard_supervisor">
-                    <h3>Productos vencidos</h3>
+                    <h3>
+                        <i class="fa-solid fa-calendar-xmark"></i>
+                        Productos vencidos
+                    </h3>
                     <p>3 productos vencidos</p>
                     <p>Requieren revisión inmediata</p>
                     <button type="button">Revisar</button>
                 </article>
                 <article class="card_dashboard_supervisor">
-                    <h3>Productos faltantes</h3>
+                    <h3>
+                        <i class="fa-solid fa-box-open"></i>
+                        Productos faltantes
+                    </h3>
                     <p>5 productos sin reposición</p>
                     <p>Puede afectar ventas</p>
                     <button type="button">Ver faltantes</button>
                 </article>
                 <article class="card_dashboard_supervisor">
-                    <h3>Última Actualización</h3>
+                    <h3>
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        Última Actualización
+                    </h3>
                     <p>11/05/2026 - 14:32 hs</p>
                 </article>
             </div>
@@ -492,25 +587,37 @@
             <h2>Usuarios</h2>
             <div class="resumen_dashboard_supervisor">
                 <article class="card_dashboard_supervisor">
-                    <h3>Usuarios Activos</h3>
+                    <h3>
+                        <i class="fa-solid fa-users"></i>
+                        Usuarios Activos
+                    </h3>
                     <p>24 usuarios conectados</p>
                     <p>Actividad en tiempo real</p>
                     <button type="button">Ver usuarios</button>
                 </article>
                 <article class="card_dashboard_supervisor">
-                    <h3>Nuevos Usuarios</h3>
+                    <h3>
+                        <i class="fa-solid fa-user-plus"></i>
+                        Nuevos Usuarios
+                    </h3>
                     <p>3 registros recientes</p>
                     <p>Últimas 24 horas</p>
                     <button type="button">Revisar</button>
                 </article>
                 <article class="card_dashboard_supervisor">
-                    <h3>Accesos Bloqueados</h3>
+                    <h3>
+                        <i class="fa-solid fa-user-lock"></i>
+                        Accesos Bloqueados
+                    </h3>
                     <p>2 intentos fallidos</p>
                     <p>Requieren verificación</p>
                     <button type="button">Ver detalles</button>
                 </article>
                 <article class="card_dashboard_supervisor">
-                    <h3>Último Inicio de Sesión</h3>
+                    <h3>
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        Último Inicio de Sesión
+                    </h3>
                     <p>11/05/2026 - 15:47 hs</p>
                     <p>Administrador principal</p>
                 </article>
