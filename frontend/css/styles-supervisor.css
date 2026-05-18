@@ -28,8 +28,8 @@
     flex-direction: column;
     background: linear-gradient(
         180deg,
-        rgb(15, 23, 32),
-        rgb(10, 15, 24)
+        rgb(17, 24, 39),
+        rgb(15, 23, 42)
     );
 }
 
@@ -46,8 +46,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgb(22, 31, 43);
-    border-bottom: 1px solid rgb(64, 78, 95);
+    background-color: rgb(30, 41, 59);
+    border-bottom: 1px solid rgb(51, 65, 85);
     z-index: 1000;
 }
 
@@ -87,9 +87,10 @@
 }
 
 .acciones_header a:hover {
-    background-color: rgb(64, 78, 95);
+    background-color: rgb(249, 115, 22);
     color: rgb(247, 247, 247);
-    transition: background-color 0.3s ease-in-out;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
 }
 
 .home_dashboard_supervisor {
@@ -120,10 +121,10 @@
     top: var(--header-height);
     left: 0;
     position: fixed;
-    background-color: rgb(22, 31, 43);
+    background-color: rgb(30, 41, 59);
+    border-right: 1px solid rgb(51, 65, 85);
     color: white;
     padding: 20px;
-    border-right: 1px solid rgb(64, 78, 95);
 }
 
 .acceso_panel span {
@@ -136,19 +137,18 @@
 }
 
 .acceso_panel a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: block;
     text-decoration: none;
     color: rgb(247, 247, 247);
     padding: 12px 14px;
     border-radius: 12px;
+    transition: all 0.3s ease;
 }
 
 .acceso_panel a:hover {
-    background-color: rgb(64, 78, 95);
+    background-color: rgb(249, 115, 22);
     color: rgb(247, 247, 247);
-    transition: background-color 0.3s ease-in-out;
+    transform: translateX(5px);
 }
 
 .acceso_panel .cerrar_sesion{
@@ -225,6 +225,19 @@
 .card_dashboard_supervisor {
     padding: 20px;
     min-width: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.01)
+    );
+}
+
+.card_dashboard_supervisor:hover {
+    transform: translateY(-5px);
+    border-color: rgba(249,115,22,0.4);
+    box-shadow: 0 10px 20px rgba(249,115,22,0.15);
 }
 
 .card_dashboard_supervisor h3{
