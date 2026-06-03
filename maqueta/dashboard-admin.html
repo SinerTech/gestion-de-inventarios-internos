@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Administrador</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+
+<body class="body_dashboard_admin dark-mode">
+
+    <!-- HEADER -->
+
+    <header class="header_quienes_somos">
+        <nav class="navbar_global">
+
+            <!-- LOGO -->
+            <a class="home_quienes_somos" href="index.html">
+                <img src="img/logo_icon.png" alt="Logo SinerTech">
+                <span>SinerTech</span>
+            </a>
+
+            <!-- NAVEGACION -->
+            <ul class="acciones_header">
+                <li>
+                    <a class="cerrar_sesion" href="index.html">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Cerrar Sesión
+
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="acceso_panel_admin">
+
+        <div class="opcion_panel_admin">
+
+            <!-- PANEL PRINCIPAL -->
+
+            <span>Panel Principal</span>
+
+            <ul>
+
+                <li>
+
+                    <a href="index.html">
+
+                        <i class="fa-solid fa-house"></i>
+                        Inicio
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="#crud_productos">
+
+                        <i class="fa-solid fa-plus"></i>
+                        Registrar Producto
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="#control_stock">
+
+                        <i class="fa-solid fa-chart-column"></i>
+                        Control Stock
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+    </aside>
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="panel_control_admin">
+
+        <!-- =========================
+             DASHBOARD
+        ========================== -->
+
+        <section class="inicio_dashboard_admin">
+
+            <h1>Panel Administrativo</h1>
+
+            <article>
+
+                <h2>Bienvenido Administrador</h2>
+
+                <p>
+                    Gestiona productos, inventario, movimientos
+                    y reportes generales desde un único panel.
+                </p>
+
+            </article>
+
+
+
+        </section>
+
+        <!-- =========================
+             CRUD PRODUCTOS
+        ========================== -->
+
+        <section class="seccion_panel_admin" id="crud_productos">
+
+            <h2>CRUD de Productos</h2>
+
+            <form class="form_panel_admin">
+
+                <label for="producto_nombre">
+                    Nombre del Producto
+                </label>
+
+                <input type="text" id="producto_nombre" placeholder="Ej: Monitor Gamer" required>
+
+                <label for="producto_categoria">
+                    Categoría
+                </label>
+
+                <input type="text" id="producto_categoria" placeholder="Ej: Tecnología">
+
+                <label for="producto_stock">
+                    Stock
+                </label>
+
+                <input type="number" id="producto_stock" placeholder="0">
+
+                <label for="producto_precio">
+                    Precio
+                </label>
+
+                <input type="number" id="producto_precio" placeholder="$0">
+
+                <label for="producto_estado">
+                    Estado
+                </label>
+
+                <select id="producto_estado">
+
+                    <option value="activo">
+                        Activo
+                    </option>
+
+                    <option value="inactivo">
+                        Inactivo
+                    </option>
+
+                    <option value="suspendido">
+                        Suspendido
+                    </option>
+
+                </select>
+
+                <label for="producto_proveedor">
+                    Proveedor
+                </label>
+
+                <select id="producto_proveedor">
+
+                    <option>
+                        Proveedor 1
+                    </option>
+
+                    <option>
+                        Proveedor 2
+                    </option>
+
+                    <option>
+                        Proveedor 3
+                    </option>
+
+                </select>
+
+                <!-- BOTONES -->
+
+                <div class="acciones_crud">
+
+                    <button type="submit">
+
+                        <i class="fa-solid fa-plus"></i>
+                        Crear
+
+                    </button>
+
+                    <button type="button">
+
+                        <i class="fa-solid fa-pen"></i>
+                        Editar
+
+                    </button>
+
+                    <button type="button">
+
+                        <i class="fa-solid fa-trash"></i>
+                        Eliminar
+
+                    </button>
+
+                    <button type="reset">
+
+                        <i class="fa-solid fa-rotate"></i>
+                        Limpiar
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <!-- =========================
+             CONTROL STOCK
+        ========================== -->
+
+        <section class="seccion_panel_admin" id="control_stock">
+
+            <h2>Control General de Stock</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Producto</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                        <th>Proveedor</th>
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>001</td>
+                        <td>Producto 1</td>
+                        <td>50</td>
+                        <td>$1500</td>
+                        <td>Activo</td>
+                        <td>Proveedor 1</td>
+
+                        <td class="acciones_crud">
+
+                            <button type="button">
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+                            <button type="button">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>002</td>
+                        <td>Producto 2</td>
+                        <td>0</td>
+                        <td>$5000</td>
+                        <td>Inactivo</td>
+                        <td>Proveedor 2</td>
+
+                        <td class="acciones_crud">
+
+                            <button type="button">
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+                            <button type="button">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+
+
+
+
+
+        <!-- =========================
+         FOOTER
+    ========================== -->
+        <footer class="footer_quienes_somos">
+            <img src="img/logo_full.jpg" alt="SinerTech">
+            <p>© 2026 <span>SinerTech</span>. Todos los derechos reservados.</p>
+            <p>
+                Hecho por el equipo SinerTech. <strong>Transformamos ideas
+                    en soluciones reales.</strong>
+            </p>
+        </footer>
+
+</body>
+
+</html>
