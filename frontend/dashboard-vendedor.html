@@ -1,0 +1,324 @@
+ <!-- Probando antes de subir--> 
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Vendedor</title>
+
+    <link rel="stylesheet" href="css/styles-vendedor.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="body_dashboard_vendedor">
+
+    <!-- Aca va el header--> 
+
+    <header class="header_dashboard_vendedor">
+
+        <nav class="navbar_global">
+
+            <a class="home_dashboard_vendedor" href="index.html">
+
+                <img src="./img/SinerTech.png" alt="Logo SinerTech">
+            </a>
+
+            <ul class="acciones_header">
+
+                <li>
+                    <a href="#">Notificaciones</a>
+                </li>
+
+                <li>
+                    <a href="#">Mi Perfil</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <aside class="acceso_panel">
+
+        <div class="opcion_panel">
+
+            <span>Panel principal del vendedor</span>
+
+            <ul>
+
+                <li>
+                    <a class="opcion_ventas" href="#registrar_venta">
+
+                        Registrar Venta
+
+                    </a>
+                </li>
+
+                <li>
+                    <a class="opcion_ventas" href="#productos">
+
+                        Productos
+
+                    </a>
+                </li>
+
+                <li>
+                    <a class="opcion_ventas" href="#historial">
+
+                        Historial
+
+                    </a>
+                </li>
+
+            </ul>
+
+            <span>CLIENTES</span>
+
+            <a href="#clientes">
+
+                Clientes
+
+            </a>
+
+            <span>CONFIGURACIÓN</span>
+
+            <a href="#configuracion">
+
+                Configuración
+
+            </a>
+
+        </div>
+
+        <div class="opciones_generales">
+
+            <a class="cerrar_sesion" href="#">
+
+
+                Cerrar Sesión
+
+            </a>
+
+        </div>
+
+    </aside>
+
+<main class="panel_control_vendedor">
+
+<!-- Aca va la seccion de inicio/bienvenida al vendedor -->
+
+    <section class="inicio_dashboard_vendedor">
+
+        <h1>Sistema de Gestión de Inventarios</h1>
+
+        <article>
+
+            <h2>Bienvenido Vendedor de SinerTech</h2>
+
+            <p>
+                En esta seccion vas a poder gestionar todo acerca de los productos, desde una simple consulta de stock hasta controlar el flujo de ventas, clientes y configuraciones.
+            </p>
+
+        </article>
+
+    </section>
+    <!-- Aca es el listado de los productos -->
+
+    <section class="seccion_panel_vendedor" id="productos">
+
+        <h2>Los productos Disponibles</h2>
+
+        <form class="buscador_productos">
+
+            <input
+            type="search"
+            name="buscar_producto"
+            id="buscar_producto"
+            placeholder="Buscar producto">
+
+            <button type="submit">Buscar</button>
+
+        </form>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Tipo de producto</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Catidad de unidades</th>
+                    <th>Estado del stock</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>001</td>
+                    <td>Periférico</td>
+                    <td>Teclado Mecánico</td>
+                    <td>$25.000</td>
+                    <td>15 unidades</td>
+                    <td>Disponible</td>
+                </tr>
+
+                <tr>
+                    <td>002</td>
+                    <td>Periférico</td>
+                    <td>Mouse Gamer</td>
+                    <td>$18.500</td>
+                    <td>8 unidades</td>
+                    <td>Disponible</td>
+                </tr>
+
+                <tr>
+                    <td>003</td>
+                    <td>Monitores</td>
+                    <td>Monitor LED</td>
+                    <td>$120.000</td>
+                    <td>3 unidades</td>
+                    <td>Stock Bajo</td>
+                </tr>
+
+                <tr>
+                    <td>004</td>
+                    <td>Periférico</td>
+                    <td>Auriculares</td>
+                    <td>$32.000</td>
+                    <td>12 unidades</td>
+                    <td>Disponible</td>
+                </tr>
+
+                <tr>
+                    <td>005</td>
+                    <td>Computadoras</td>
+                    <td>Notebook</td>
+                    <td>$450.000</td>
+                    <td>2 unidades</td>
+                    <td>Stock Bajo</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!-- Aca va el de la venta -->
+
+    <section class="seccion_panel_vendedor" id="registrar_venta">
+
+        <h2>Resumen de Venta</h2>
+
+        <form class="form_venta">
+
+            <label for="producto_venta">Producto</label>
+
+            <select id="producto_venta" required>
+
+                <option value="">Seleccionar producto</option>
+
+                <option value="teclado">Teclado Mecánico</option>
+
+                <option value="mouse">Mouse Gamer</option>
+
+                <option value="monitor">Monitor LED</option>
+
+                <option value="auriculares">Auriculares</option>
+
+            </select>
+
+            <label for="cantidad_venta">Cantidad</label>
+
+            <input
+            type="number"
+            id="cantidad_venta"
+            min="1"
+            required>
+
+            <label for="cliente_venta">Cliente</label>
+
+            <input
+            type="text"
+            id="cliente_venta"
+            placeholder="Nombre del cliente"
+            required>
+
+            <label for="metodo_pago">Método de Pago</label>
+
+            <select id="metodo_pago">
+
+                <option value="">Seleccionar</option>
+
+                <option value="efectivo">Efectivo</option>
+
+                <option value="debito">Tarjeta Débito</option>
+
+                <option value="credito">Tarjeta Crédito</option>
+
+                <option value="Codigo QR">Codigo QR</option>
+
+                <option value="transferencia">Transferencia</option>
+
+            </select>
+
+            <label for="observaciones">Observaciones de venta</label>
+
+            <textarea
+            id="observaciones"
+            placeholder="Agregar comentario"></textarea>
+
+        </form>
+
+        <!-- Esta es la seccion de los recibos -->
+
+        <article class="resumen_recibo">
+
+            <h3>Resumen / Recibo</h3>
+
+            <p>Producto: Mouse Gamer</p>
+
+            <p>Cantidad: 2</p>
+
+            <p>Subtotal: $37.000</p>
+
+            <p>IVA: $7.770</p>
+
+            <p>Total: $44.770</p>
+
+            <p>Método de Pago: Débito</p>
+
+        </article>
+
+        <!-- El boton de finalizar  -->
+
+        <button class="btn_finalizar" type="submit">
+
+            <i class="fa-solid fa-check"></i>
+
+            Finalizar Transacción
+
+        </button>
+
+    </section>
+
+</main>
+
+<footer class="footer_dashboard_vendedor">
+
+    <p>2026 SinerTech - Dashboard Vendedor.</p>
+
+</footer>       
+</body>
+</html>
