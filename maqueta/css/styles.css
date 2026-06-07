@@ -106,7 +106,7 @@ body.dark-mode {
 }
 
 /* ================================================= */
-/* ================== ENLACES NAVEGACION =========== */
+/* ================== MENU NAVEGACION =========== */
 /* ================================================= */
 
 .acciones_header {
@@ -140,6 +140,55 @@ body.dark-mode {
   color: white;
 }
 
+/* HAMBURGUESA */
+
+.navbar-toggler {
+  border: none;
+  background: transparent;
+  padding: 8px;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.navbar-toggler i {
+  color: var(--color-primario);
+  font-size: 1.7rem;
+}
+
+/* MENÚ RESPONSIVO */
+
+@media (max-width: 991.98px) {
+
+  .navbar-collapse {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #0f172a; /* fondo oscuro */
+    border-radius: 16px;
+  }
+
+  .acciones_header {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .acciones_header li {
+    width: 100%;
+  }
+
+  .acciones_header a {
+    width: 100%;
+    justify-content: center;
+  }
+
+}
 /* ================================================= */
 /* ========================= CONTENIDO ============= */
 /* ================================================= */
