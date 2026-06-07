@@ -13,6 +13,8 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body class="body_dashboard_admin dark-mode">
@@ -71,10 +73,10 @@
 
                 <li>
 
-                    <a href="#registrar_venta">
+                    <a href="#productos">
 
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        Registrar Venta
+                        <i class="fa-solid fa-box"></i>
+                        Productos
 
                     </a>
 
@@ -82,10 +84,10 @@
 
                 <li>
 
-                    <a href="#productos">
+                    <a href="#registrar_venta">
 
-                        <i class="fa-solid fa-box"></i>
-                        Productos
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Registrar Venta
 
                     </a>
 
@@ -131,14 +133,16 @@
 
                 <label for="buscar_producto">Buscar Producto</label>
 
-                <input type="search"
-                    name="buscar_producto"
-                    id="buscar_producto"
-                    placeholder="Buscar producto">
+                <input
+                type="search"
+                class="form-control"
+                name="buscar_producto"
+                id="buscar_producto"
+                placeholder="Buscar producto">
 
                 <div class="acciones_crud">
 
-                    <button type="submit">
+                    <button type="submit" class="btn btn-primary">
 
                         <i class="fa-solid fa-magnifying-glass"></i>
                         Buscar
@@ -148,20 +152,20 @@
                 </div>
 
             </form>
-
-            <table>
+            
+        <div class="table-responsive">
+            
+            <table class="table table-striped table-hover align-middle">
 
                 <thead>
 
                     <tr>
-
                         <th>ID</th>
                         <th>Tipo de Producto</th>
                         <th>Producto</th>
                         <th>Precio</th>
                         <th>Cantidad</th>
                         <th>Estado</th>
-
                     </tr>
 
                 </thead>
@@ -174,7 +178,11 @@
                         <td>Teclado Mecánico</td>
                         <td>$25.000</td>
                         <td>15 unidades</td>
-                        <td>Disponible</td>
+                        <td>
+                            <span class="badge bg-success">
+                                Disponible
+                            </span>
+                        </td>
                     </tr>
 
                     <tr>
@@ -183,7 +191,11 @@
                         <td>Mouse Gamer</td>
                         <td>$18.500</td>
                         <td>8 unidades</td>
-                        <td>Disponible</td>
+                        <td>
+                            <span class="badge bg-success">
+                                Disponible
+                            </span>
+                        </td>
                     </tr>
 
                     <tr>
@@ -192,7 +204,11 @@
                         <td>Monitor LED</td>
                         <td>$120.000</td>
                         <td>3 unidades</td>
-                        <td>Stock Bajo</td>
+                        <td>
+                            <span class="badge bg-warning">
+                                Stock Bajo
+                            </span>
+                        </td>
                     </tr>
 
                     <tr>
@@ -201,7 +217,11 @@
                         <td>Auriculares</td>
                         <td>$32.000</td>
                         <td>12 unidades</td>
-                        <td>Disponible</td>
+                        <td>
+                            <span class="badge bg-success">
+                                Disponible
+                            </span>
+                        </td>
                     </tr>
 
                     <tr>
@@ -210,14 +230,83 @@
                         <td>Notebook</td>
                         <td>$450.000</td>
                         <td>2 unidades</td>
-                        <td>Stock Bajo</td>
+                        <td>
+                            <span class="badge bg-warning">
+                                Stock Bajo
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>006</td>
+                        <td>Computadoras</td>
+                        <td>PC Gamer MiddleQ</td>
+                        <td>$900.000</td>
+                        <td>1 unidad</td>
+                        <td>
+                            <span class="badge bg-danger">
+                                Agotado
+                            </span>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>007</td>
+                        <td>Periférico</td>
+                        <td>Parlantes JBL</td>
+                        <td>$85.000</td>
+                        <td>3 unidades</td>
+                        <td>
+                            <span class="badge bg-success">
+                                Disponible
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>008</td>
+                        <td>Monitores</td>
+                        <td>Monitor Curvo 24" LG</td>
+                        <td>$150.000</td>
+                        <td>0 unidades</td>
+                        <td>
+                            <span class="badge bg-danger">
+                                Agotado
+                            </span>
+                        </td>
+                    </tr>   
+
+                    <tr>
+                        <td>009</td>
+                        <td>Computadoras</td>
+                        <td>PC Gamer HighQ</td>
+                        <td>$2.500.000</td>
+                        <td>2 unidades</td>
+                        <td>
+                            <span class="badge bg-warning">
+                                Stock Bajo
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>010</td>
+                        <td>Periférico</td>
+                        <td>Mousepad Zowie 30x40</td>
+                        <td>$45.000</td>    
+                        <td>6 unidades</td>
+                        <td>
+                            <span class="badge bg-success">
+                                Disponible
+                            </span>
+                        </td>
                     </tr>
 
                 </tbody>
 
             </table>
 
-        </section>
+        </div>
 
         <!-- REGISTRAR VENTA -->
 
@@ -227,68 +316,121 @@
 
             <form class="form_panel_admin">
 
-                <label for="producto_venta">Producto</label>
+                <div class="container">
 
-                <select id="producto_venta" required>
+                    <div class="row">
+                    
+                        <div class="col-md-6">
+                            <label for="producto_venta">Producto</label>
 
-                    <option value="">Seleccionar producto</option>
-                    <option value="teclado">Teclado Mecánico</option>
-                    <option value="mouse">Mouse Gamer</option>
-                    <option value="monitor">Monitor LED</option>
-                    <option value="auriculares">Auriculares</option>
+                            <select
+                            id="producto_venta"
+                            class="form-control"
+                            required>
 
-                </select>
+                            <option value="">Seleccionar producto</option>
+                            <option value="teclado">Teclado Mecánico</option>
+                            <option value="mouse">Mouse Gamer</option>
+                            <option value="monitor">Monitor LED</option>
+                            <option value="auriculares">Auriculares</option>
+                            <option value="notebook">Notebook</option>
+                            <option value="pc_gamer_middleq">PC Gamer MiddleQ</option>
+                            <option value="parlantes">Parlantes JBL</option>
+                            <option value="monitor_curvo">Monitor Curvo 24" LG</option>
+                            <option value="pc_gamer_highq">PC Gamer HighQ</option>
+                            <option value="mousepad">Mousepad Zowie 30x40</option>
 
-                <label for="cantidad_venta">Cantidad</label>
+                        </select>
+                    </div>
+                
+                    <div class="col-md-6">
+                        <label for="cantidad-venta">Cantidad</label>
 
-                <input type="number"
-                    id="cantidad_venta"
-                    min="1"
+                        <input
+                        type="number"
+                        class="form-control"
+                        id="cantidad-venta"
+                        min="1"
+                        placeholder="Cantidad a vender"
+                        required>
+                    </div>
+                
+                </div>
+
+                <div class="row mt-3">
+
+                    <div class="col-md-6">
+                        <label for="cliente-venta">Cliente</label>
+
+                        <input 
+                        type="text"
+                        class="form-control"
+                        id="cliente-venta"
+                        placeholder="Nombre del cliente"
+                        required>
+                    
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="metodo_pago">Método de Pago</label>
+
+                    <select 
+                    id="metodo_pago"
+                    class="form-control"
                     required>
 
-                <label for="cliente_venta">Cliente</label>
+                        <option value="">Seleccionar</option>
+                        <option value="efectivo">Efectivo</option>
+                        <option value="debito">Tarjeta Débito</option>
+                        <option value="credito">Tarjeta Crédito</option>
+                        <option value="qr">Código QR</option>
+                        <option value="transferencia">Transferencia</option>
 
-                <input type="text"
-                    id="cliente_venta"
-                    placeholder="Nombre del cliente"
-                    required>
+                    </select>
+                </div>
+            
+                </div>
 
-                <label for="metodo_pago">Método de Pago</label>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <label for="observaciones">
+                        Observaciones de Venta
+                    </label>
 
-                <select id="metodo_pago">
+                    <textarea
+                    id="observaciones"
+                    class="form-control"
+                    placeholder="Agregar comentario">
+                </textarea>
+                </div>
+            </div>
 
-                    <option value="">Seleccionar</option>
-                    <option value="efectivo">Efectivo</option>
-                    <option value="debito">Tarjeta Débito</option>
-                    <option value="credito">Tarjeta Crédito</option>
-                    <option value="qr">Código QR</option>
-                    <option value="transferencia">Transferencia</option>
+        </form>
 
-                </select>
+            <div class="card mt-4">
 
-                <label for="observaciones">Observaciones de Venta</label>
+                <div class="card-header">
+                    Resumen / Recibo de Venta
+                </div>
 
-                <textarea id="observaciones"
-                    placeholder="Agregar comentario"></textarea>
+                <div class="card-body">
 
-            </form>
+                    <p>Producto: Mouse Gamer</p>
+                    <p>Cantidad: 2</p>
+                    <p>Subtotal: $37.000</p>
+                    <p>IVA: $7.770</p>
+                    <p>Total: $44.770</p>
+                    <p>Método de Pago: Débito</p>
 
-            <section class="seccion_panel_admin">
+                </div>
 
-                <h2>Resumen / Recibo</h2>
-
-                <p>Producto: Mouse Gamer</p>
-                <p>Cantidad: 2</p>
-                <p>Subtotal: $37.000</p>
-                <p>IVA: $7.770</p>
-                <p>Total: $44.770</p>
-                <p>Método de Pago: Débito</p>
-
-            </section>
+            </div>
 
             <div class="acciones_crud">
 
-                <button class="btn_finalizar" type="submit">
+                <button 
+                class="btn_finalizar" 
+                type="submit">
 
                     <i class="fa-solid fa-check"></i>
                     Finalizar Transacción
