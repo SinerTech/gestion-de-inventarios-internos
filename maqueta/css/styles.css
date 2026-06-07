@@ -25,6 +25,10 @@ section {
   --altura-cabecera: 70px;
   --transicion: 0.3s ease;
   --sombra: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --sidebar-width: 260px;
+  --header-height: 70px;
+  --transition: 0.3s ease;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* ================================================= */
@@ -573,28 +577,6 @@ body.dark-mode {
 /* ================ dashboard    ================= */
 /* ================================================= */
 
-/* ================================================= */
-/* ================= VARIABLES BASE ================ */
-/* ================================================= */
-
-:root {
-  --sidebar-width: 260px;
-  --header-height: 70px;
-  --transition: 0.3s ease;
-  --shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-body.dark-mode {
-  --color-fondo: #0f172a;
-  --color-fondo-secundario: #111827;
-  --color-lateral: #1e293b;
-  --color-tarjeta: #1f2937;
-  --color-borde: #334155;
-  --color-texto: #f8fafc;
-  --color-texto-secundario: #cbd5e1;
-  --color-primario: #f97316;
-  --color-hover: rgba(255, 255, 255, 0.04);
-}
 
 /* ================================================= */
 /* ==================== ESTRUCTURA ================= */
