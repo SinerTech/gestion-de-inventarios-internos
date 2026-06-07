@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="body_quienes_somos dark-mode">
+    <!-- HEADER -->
+    <header class="header_quienes_somos">
+        <nav class="navbar_global">
+            <a class="home_quienes_somos" href="index.html">
+                <img src="img/logo_icon.png" alt="Logo SinerTech">
+                <span>SinerTech</span>
+            </a>
+        </nav>
+    </header>
+    <!-- CONTENIDO -->
+    <main class="contenido_quienes_somos">
+        <section class="container min-vh-100 d-flex align-items-center">
+            <div class="row align-items-center w-100">
+                <!-- IMAGEN IZQUIERDA -->
+                <div class="col-md-7 text-center mb-4 mb-md-0">
+                    <img src="img/deposito-2.png"
+                        alt="Imagen de Registro"
+                        class="img-fluid img-deposito">
+                </div>
+                <!-- FORMULARIO DERECHA -->
+                <div class="col-md-5">
+                    <div class="seccion_hero p-4 rounded">
+                        <h3 class="text-center mb-4">Crear Cuenta</h3>
+                        <form class="form_panel_admin" action="register.php" method="POST">
+                            <!-- NOMBRE -->
+                            <div class="mb-3">
+                                <label class="form-label">Nombre completo</label>
+                                <input type="text" class="form-control" name="name" required>
+                            </div>
+                            <!-- EMAIL -->
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            <!-- ROL -->
+                            <div class="mb-3">
+                                <label class="form-label">Seleccionar Rol</label>
+                                <select class="form-select" name="role" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="admin">Administrador</option>
+                                    <option value="supervisor">Supervisor</option>
+                                    <option value="operario">Operario</option>
+                                </select>
+                            </div>
+                            <!-- CONTRASEÑA -->
+                            <div class="mb-3">
+                                <label class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" name="password" required>
+                            </div>
+                            <!-- CONFIRMAR CONTRASEÑA -->
+                            <div class="mb-3">
+                                <label class="form-label">Confirmar contraseña</label>
+                                <input type="password" class="form-control" name="confirm_password" required>
+                            </div>
+                            <!-- BOTÓN -->
+                            <div class="acciones_crud">
+                                <button type="submit" class="w-100">
+                                    Registrarse
+                                </button>
+                            </div>
+                        </form>
+                        <div class="text-center mt-3">
+                            <small>¿Ya tenés cuenta? <a href="login.html">Iniciar sesión</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- FOOTER -->
+    <footer class="footer_quienes_somos">
+        <img src="img/logo_full.jpg" alt="SinerTech">
+        <p>© 2026 <span>SinerTech</span>. Todos los derechos reservados.</p>
+        <p>
+            Hecho por el equipo SinerTech.
+            <strong>Transformamos ideas en soluciones reales.</strong>
+        </p>
+    </footer>
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

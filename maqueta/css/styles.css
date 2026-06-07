@@ -17,7 +17,6 @@ section {
   scroll-margin-top: 90px;
 }
 
-
 /* ================================================= */
 /* ================= VARIABLES BASE ================ */
 /* ================================================= */
@@ -27,7 +26,6 @@ section {
   --transicion: 0.3s ease;
   --sombra: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
-
 
 /* ================================================= */
 /* ===================== MODO OSCURO =============== */
@@ -45,7 +43,6 @@ body.dark-mode {
   --color-hover: rgba(255, 255, 255, 0.04);
 }
 
-
 /* ================================================= */
 /* ======================== BODY =================== */
 /* ================================================= */
@@ -61,7 +58,6 @@ body.dark-mode {
   color: var(--color-texto);
   transition: var(--transicion);
 }
-
 
 /* ================================================= */
 /* ======================= CABECERA ================ */
@@ -105,7 +101,6 @@ body.dark-mode {
   font-weight: bold;
 }
 
-
 /* ================================================= */
 /* ================== ENLACES NAVEGACION =========== */
 /* ================================================= */
@@ -141,7 +136,6 @@ body.dark-mode {
   color: white;
 }
 
-
 /* ================================================= */
 /* ========================= CONTENIDO ============= */
 /* ================================================= */
@@ -151,7 +145,6 @@ body.dark-mode {
   margin: 0 auto;
   padding: 25px;
 }
-
 
 /* ================================================= */
 /* ================ SECCION PRESENTACION =========== */
@@ -171,7 +164,7 @@ body.dark-mode {
 }
 
 .seccion_hero::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
@@ -205,6 +198,25 @@ body.dark-mode {
   margin-bottom: 20px;
 }
 
+.button_c {
+  font-size: 1rem;
+  padding: 15px 25px;
+}
+
+.button_c:hover {
+  transform: translateY(-2px);
+  transition: var(--transicion);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.button_c:active {
+  transform: translateY(1px);
+  background-color: var(--color-primario);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: var(--color-texto);
+}
+
 .seccion_hero h1 {
   font-size: 2.4rem;
   margin-bottom: 15px;
@@ -217,7 +229,7 @@ body.dark-mode {
 
 .descripcion_hero {
   max-width: 650px;
-  margin: 0 auto;
+  margin: 30px auto;
   line-height: 1.8;
   color: var(--color-texto-secundario);
   font-size: 1rem;
@@ -242,13 +254,17 @@ body.dark-mode {
 }
 
 @keyframes float-logo {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-
 /* ================================================= */
-/* ============= MISION VISION VALORES ============= */
+/* =============          Cards        ============= */
 /* ================================================= */
 
 .seccion_info {
@@ -265,6 +281,7 @@ body.dark-mode {
   margin-bottom: 25px;
   color: var(--color-texto);
   font-size: 1.5rem;
+  text-align: center;
 }
 
 .grilla_valores {
@@ -310,7 +327,6 @@ body.dark-mode {
   color: var(--color-texto-secundario);
 }
 
-
 /* ================================================= */
 /* ================ SECCION EQUIPO ================= */
 /* ================================================= */
@@ -355,7 +371,6 @@ body.dark-mode {
   margin: 0 auto;
 }
 
-
 /* ================================================= */
 /* ============== TARJETAS DE MIEMBRO ============== */
 /* ================================================= */
@@ -394,10 +409,8 @@ body.dark-mode {
   display: block;
 }
 
-
-
 .foto_miembro::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -438,9 +451,6 @@ body.dark-mode {
   margin-bottom: 14px;
 }
 
-
-
-
 /* ================================================= */
 /* ========================= PIE DE PAGINA ========= */
 /* ================================================= */
@@ -469,7 +479,6 @@ body.dark-mode {
   font-weight: bold;
 }
 
-
 /* ================================================= */
 /* ======================== SCROLL ================= */
 /* ================================================= */
@@ -490,7 +499,6 @@ body.dark-mode {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primario);
 }
-
 
 /* ================================================= */
 /* ======================= RESPONSIVE ============== */
@@ -558,5 +566,372 @@ body.dark-mode {
 
   .acciones_header a span {
     display: none;
+  }
+}
+
+/* ================================================= */
+/* ================ dashboard    ================= */
+/* ================================================= */
+
+/* ================================================= */
+/* ================= VARIABLES BASE ================ */
+/* ================================================= */
+
+:root {
+  --sidebar-width: 260px;
+  --header-height: 70px;
+  --transition: 0.3s ease;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode {
+  --color-fondo: #0f172a;
+  --color-fondo-secundario: #111827;
+  --color-lateral: #1e293b;
+  --color-tarjeta: #1f2937;
+  --color-borde: #334155;
+  --color-texto: #f8fafc;
+  --color-texto-secundario: #cbd5e1;
+  --color-primario: #f97316;
+  --color-hover: rgba(255, 255, 255, 0.04);
+}
+
+/* ================================================= */
+/* ==================== ESTRUCTURA ================= */
+/* ================================================= */
+
+.body_dashboard_admin {
+  min-height: 100vh;
+  padding-top: var(--header-height);
+  background: linear-gradient(180deg, var(--color-fondo-secundario), var(--color-fondo));
+  color: var(--color-texto);
+  transition: var(--transition);
+}
+
+.header_quienes_somos {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--color-lateral);
+  border-bottom: 1px solid var(--color-borde);
+  z-index: 1000;
+}
+
+.navbar_global {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+}
+
+.acceso_panel_admin {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--header-height));
+  padding: 25px 18px;
+  overflow-y: auto;
+  background-color: var(--color-lateral);
+  border-right: 1px solid var(--color-borde);
+}
+
+.panel_control_admin {
+  margin-left: var(--sidebar-width);
+  padding: 25px;
+}
+
+/* ================================================= */
+/* ==================== ELEMENTOS ================== */
+/* ================================================= */
+
+.home_quienes_somos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-texto);
+}
+
+.home_quienes_somos img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.home_quienes_somos span {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* ================================================= */
+/* ====================== MENÚS ==================== */
+/* ================================================= */
+
+.opcion_panel_admin span {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-texto-secundario);
+}
+
+.opcion_panel_admin ul {
+  list-style: none;
+}
+
+.opcion_panel_admin li {
+  margin-bottom: 8px;
+}
+
+.opcion_panel_admin a,
+.opciones_generales a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--color-texto);
+  transition: var(--transition);
+}
+
+.opcion_panel_admin a:hover,
+.opciones_generales a:hover {
+  background-color: rgba(249, 115, 22, 0.12);
+  color: var(--color-primario);
+  transform: translateX(5px);
+}
+
+.opciones_generales {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-borde);
+}
+
+.cerrar_sesion {
+  color: #ef4444 !important;
+}
+
+/* ================================================= */
+/* =================== VISTAS / CARDS ============== */
+/* ================================================= */
+
+.inicio_dashboard_admin,
+.seccion_panel_admin {
+  margin-bottom: 30px;
+  padding: 35px;
+  border-radius: 22px;
+  background-color: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.inicio_dashboard_admin h1 {
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.inicio_dashboard_admin h2,
+.seccion_panel_admin h2 {
+  margin-bottom: 20px;
+  color: var(--color-texto);
+}
+
+.inicio_dashboard_admin p {
+  line-height: 1.7;
+  color: var(--color-texto-secundario);
+}
+
+/* ================================================= */
+/* ================= FORMULARIOS =================== */
+/* ================================================= */
+
+.form_panel_admin {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_panel_admin label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--color-texto-secundario);
+}
+
+.form_panel_admin input,
+.form_panel_admin select,
+.form_panel_admin textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  border: 1px solid var(--color-borde);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  transition: var(--transition);
+}
+
+.form_panel_admin textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form_panel_admin input:focus,
+.form_panel_admin select:focus,
+.form_panel_admin textarea:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+}
+
+/* ================================================= */
+/* ==================== BOTONES ==================== */
+/* ================================================= */
+
+.acciones_crud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.acciones_crud button,
+.form_panel_admin input[type="submit"],
+.seccion_panel_admin button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: var(--color-primario);
+  color: white;
+  transition: var(--transition);
+}
+
+.acciones_crud button:hover,
+.form_panel_admin input[type="submit"]:hover,
+.seccion_panel_admin button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(249, 115, 22, 0.25);
+  filter: brightness(1.1);
+}
+
+.acciones_crud button:active,
+.form_panel_admin input[type="submit"]:active,
+.seccion_panel_admin button:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  filter: brightness(0.9);
+}
+
+/* ================================================= */
+/* ===================== TABLAS ==================== */
+/* ================================================= */
+
+table {
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+thead {
+  background-color: var(--color-lateral);
+}
+
+th, td {
+  padding: 16px;
+  text-align: left;
+}
+
+th {
+  color: var(--color-texto);
+}
+
+td {
+  color: var(--color-texto-secundario);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+tbody tr {
+  transition: var(--transition);
+}
+
+tbody tr:hover {
+  background-color: var(--color-hover);
+}
+
+/* ================================================= */
+/* =================== RESPONSIVE ================== */
+/* ================================================= */
+
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 210px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 180px;
+  }
+
+  .panel_control_admin {
+    padding: 18px;
+  }
+
+  .inicio_dashboard_admin,
+  .seccion_panel_admin {
+    padding: 24px;
+  }
+
+  .acciones_crud {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --sidebar-width: 90px;
+  }
+
+  .home_quienes_somos span {
+    display: none;
+  }
+
+  .opcion_panel_admin span {
+    font-size: 0.7rem;
+  }
+
+  .opcion_panel_admin a {
+    justify-content: center;
+    padding: 10px 8px;
+    font-size: 0.75rem;
+  }
+
+  .panel_control_admin {
+    margin-left: var(--sidebar-width);
+    padding: 12px;
+  }
+
+  .inicio_dashboard_admin,
+  .seccion_panel_admin {
+    padding: 18px;
+  }
+
+  th, td {
+    padding: 10px;
+    font-size: 0.8rem;
   }
 }
