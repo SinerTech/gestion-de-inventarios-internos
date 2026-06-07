@@ -65,17 +65,22 @@
         <section class="inicio_dashboard_admin" id="inicio_dashboard_supervisor">
             <h1>Sistema de Gestión de Inventarios Internos</h1>
             <article>
+                <h2>
+                    ¡Bienvenido, Supervisor 1!
+                </h2>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-7">
                         <div class="alert alert-info" role="alert">
                             <i class="fa-solid fa-info-circle"></i>
-                            ¡Bienvenido, Supervisor 1!
+                            Las opciones y herramientas disponibles se adaptan al rol que tengas asignado.
                         </div>
                     </div>
                 </div>
                 <p>
-                    Administra ingresos, movimientos y control de stock desde un único panel centralizado.
-                    Utiliza el menú lateral para acceder rápidamente a las distintas áreas del sistema.
+                    Desde este panel podrás supervisar
+                    ingresos de mercadería, movimientos de stock y operaciones de control de forma centralizada.
+                    Accede a reportes, formularios y herramientas administrativas mediante el menú lateral,
+                    optimizando la gestión y el seguimiento de los recursos de la organización.
                 </p>
             </article>
         </section>
@@ -86,7 +91,7 @@
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label for="ingreso_producto" class="form-label">Producto</label>
-                        <select class="form-select"name="ingreso_producto" id="ingreso_producto" required>
+                        <select class="form-select" name="ingreso_producto" id="ingreso_producto" required>
                             <option value="">Seleccionar</option>
                             <option value="producto_1">Producto 1</option>
                             <option value="producto_2">Producto 2</option>
@@ -229,68 +234,71 @@
                 </div>
             </form>
         </section>
-        <section class="row">
-            <div class="col-12">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Producto</th>
-                                <th scope="col">Stock</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Proveedor</th>
-                                <th scope="col">Último Ingreso</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">001</th>
-                                <td>Producto 1</td>
-                                <td>50</td>
-                                <td>$1500</td>
-                                <td>
-                                    <span class="badge bg-success">Activo</span>
-                                </td>
-                                <td>Proveedor 1</td>
-                                <td>05/04/2026</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">002</th>
-                                <td>Producto 2</td>
-                                <td>33</td>
-                                <td>$1750</td>
-                                <td>
-                                    <span class="badge bg-success">Activo</span>
-                                </td>
-                                <td>Proveedor 1</td>
-                                <td>05/04/2026</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">003</th>
-                                <td>Producto 3</td>
-                                <td>0</td>
-                                <td>$5500</td>
-                                <td>
-                                    <span class="badge bg-danger">Inactivo</span>
-                                </td>
-                                <td>Proveedor 5</td>
-                                <td>22/12/2025</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">004</th>
-                                <td>Producto 4</td>
-                                <td>64</td>
-                                <td>$2050</td>
-                                <td>
-                                    <span class="badge bg-warning">Suspendido</span>
-                                </td>
-                                <td>Proveedor 3</td>
-                                <td>09/05/2026</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <section class="seccion_panel_admin">
+            <h2>Productos</h2>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive rounded-3 overflow-hidden border">
+                        <table class="table table-striped table-hover table-bordered m-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Proveedor</th>
+                                    <th scope="col">Último Ingreso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">001</th>
+                                    <td>Producto 1</td>
+                                    <td>50</td>
+                                    <td>$1500</td>
+                                    <td>
+                                        <span class="badge bg-success">Activo</span>
+                                    </td>
+                                    <td>Proveedor 1</td>
+                                    <td>05/04/2026</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">002</th>
+                                    <td>Producto 2</td>
+                                    <td>33</td>
+                                    <td>$1750</td>
+                                    <td>
+                                        <span class="badge bg-success">Activo</span>
+                                    </td>
+                                    <td>Proveedor 1</td>
+                                    <td>05/04/2026</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">003</th>
+                                    <td>Producto 3</td>
+                                    <td>0</td>
+                                    <td>$5500</td>
+                                    <td>
+                                        <span class="badge bg-danger">Inactivo</span>
+                                    </td>
+                                    <td>Proveedor 5</td>
+                                    <td>22/12/2025</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">004</th>
+                                    <td>Producto 4</td>
+                                    <td>64</td>
+                                    <td>$2050</td>
+                                    <td>
+                                        <span class="badge bg-warning">Suspendido</span>
+                                    </td>
+                                    <td>Proveedor 3</td>
+                                    <td>09/05/2026</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -307,6 +315,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous">
+    </script>
 </body>
 </html>
