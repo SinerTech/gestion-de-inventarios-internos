@@ -12,11 +12,61 @@
 
 <body class="body_quienes_somos dark-mode vista-autenticacion">
     <header class="header_quienes_somos">
-        <nav class="navbar_global">
-            <a class="home_quienes_somos" href="index.html">
-                <img src="img/logo_icon.png" alt="Logo SinerTech">
-                <span>SinerTech</span>
-            </a>
+        <nav class="navbar navbar-expand-lg navbar_global">
+
+            <div class="container-fluid">
+
+                <!-- LOGO -->
+                <a class="home_quienes_somos" href="index.html">
+                    <img src="img/logo_icon.png" alt="Logo SinerTech">
+                    <span>SinerTech</span>
+                </a>
+
+                <!-- BOTÓN HAMBURGUESA -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+                    aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menú">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+                <!-- MENÚ -->
+                <div class="collapse navbar-collapse" id="menuPrincipal">
+
+                    <ul class="acciones_header ms-auto">
+                        <li>
+                            <a href="index.html">
+                                <i class="fa-solid fa-house"></i>
+                                <span>Inicio</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="quienes-somos.html">
+                                <i class="fa-solid fa-users"></i>
+                                <span>Quiénes Somos</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="login.html" class="active">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                <span>Login</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-user-plus"></i>
+                                <span>Registro</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+
         </nav>
     </header>
     <main class="contenido_quienes_somos login-main-container">
@@ -38,12 +88,6 @@
                                         <option value="supervisor">Supervisor</option>
                                         <option value="operario">Operario</option>
                                     </select>
-                                </div>
-                                <div class="col-md-10 alert alert-info d-flex align-items-center" role="alert">
-                                    <i class="fa-solid fa-circle-info me-2"></i>
-                                    <div class="texto-informativo">
-                                        Selecciona tu rol asignado correctamente.
-                                    </div>
                                 </div>
                                 <div class="col-md-12 mb-3 text-start">
                                     <label for="email" class="form-label">Email</label>
