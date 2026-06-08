@@ -407,7 +407,22 @@ body.dark-mode {
   line-height: 1.6;
 }
 
-/* Eliminado: .grilla_equipo, .grilla_equipo_lideres, .grilla_equipo_devs (conflictos con Bootstrap) */
+.grilla_equipo {
+  display: grid;
+  gap: 22px;
+}
+
+.grilla_equipo_lideres {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 680px;
+  margin: 0 auto 28px;
+}
+
+.grilla_equipo_devs {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1020px;
+  margin: 0 auto;
+}
 
 /* ================================================= */
 /* ============== TARJETAS DE MIEMBRO ============== */
@@ -542,7 +557,11 @@ body.dark-mode {
 /* ======================= RESPONSIVE ============== */
 /* ================================================= */
 
-/* Eliminado query grilla_equipo_devs */
+@media (max-width: 1024px) {
+  .grilla_equipo_devs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 @media (max-width: 768px) {
   .contenido_quienes_somos {
@@ -566,7 +585,13 @@ body.dark-mode {
     grid-template-columns: 1fr;
   }
 
-  /* Eliminadas reglas de grilla_equipo_* en responsive */
+  .grilla_equipo_lideres {
+    max-width: 100%;
+  }
+
+  .grilla_equipo_devs {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
 
   .acciones_header {
     gap: 4px;
@@ -587,7 +612,10 @@ body.dark-mode {
     font-size: 1.5rem;
   }
 
-  /* Eliminadas reglas de grilla_equipo_* en responsive */
+  .grilla_equipo_lideres,
+  .grilla_equipo_devs {
+    grid-template-columns: 1fr;
+  }
 
   .acciones_header a span {
     display: none;
@@ -611,18 +639,35 @@ body.dark-mode {
   transition: var(--transition);
 }
 
-/* Eliminados duplicados redundantes de .header_quienes_somos y .navbar_global */
+.header_quienes_somos {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--color-lateral);
+  border-bottom: 1px solid var(--color-borde);
+  z-index: 1000;
+}
+
+.navbar_global {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+}
 
 .acceso_panel_admin {
   position: fixed;
   top: var(--header-height);
   left: 0;
   width: var(--sidebar-width);
-  height: calc(100vh - var(--header-height));
   padding: 25px 18px;
   overflow-y: auto;
   background-color: var(--color-lateral);
   border-right: 1px solid var(--color-borde);
+  border-bottom-right-radius: 18px;
 }
 
 .panel_control_admin {
@@ -634,7 +679,24 @@ body.dark-mode {
 /* ==================== ELEMENTOS ================== */
 /* ================================================= */
 
-/* Eliminados duplicados redundantes de .home_quienes_somos */
+.home_quienes_somos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-texto);
+}
+
+.home_quienes_somos img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.home_quienes_somos span {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
 
 /* ================================================= */
 /* ====================== MENÚS ==================== */
