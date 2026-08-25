@@ -320,96 +320,78 @@
             <h2>Resumen de Venta</h2>
 
             <form class="form_panel_admin">
-
+            
                 <div class="container">
-
+            
                     <div class="row">
-                    
+            
                         <div class="col-md-6">
                             <label for="producto_venta">Producto</label>
-
-                            <select
-                            id="producto_venta"
-                            class="form-control"
-                            required>
-
-                            <option value="">Seleccionar producto</option>
-                            <option value="teclado">Teclado Mecánico</option>
-                            <option value="mouse">Mouse Gamer</option>
-                            <option value="monitor">Monitor LED</option>
-                            <option value="auriculares">Auriculares</option>
-                            <option value="notebook">Notebook</option>
-                            <option value="pc_gamer_middleq">PC Gamer MiddleQ</option>
-                            <option value="parlantes">Parlantes JBL</option>
-                            <option value="monitor_curvo">Monitor Curvo 24" LG</option>
-                            <option value="pc_gamer_highq">PC Gamer HighQ</option>
-                            <option value="mousepad">Mousepad Zowie 30x40</option>
-
-                        </select>
+            
+                            <select id="producto_venta" class="form-control" required>
+            
+                                <option value="">Seleccionar producto</option>
+                                <option value="teclado">Teclado Mecánico</option>
+                                <option value="mouse">Mouse Gamer</option>
+                                <option value="monitor">Monitor LED</option>
+                                <option value="auriculares">Auriculares</option>
+                                <option value="notebook">Notebook</option>
+                                <option value="pc_gamer_middleq">PC Gamer MiddleQ</option>
+                                <option value="parlantes">Parlantes JBL</option>
+                                <option value="monitor_curvo">Monitor Curvo 24" LG</option>
+                                <option value="pc_gamer_highq">PC Gamer HighQ</option>
+                                <option value="mousepad">Mousepad Zowie 30x40</option>
+            
+                            </select>
+                        </div>
+            
+                        <div class="col-md-6">
+                            <label for="cantidad-venta">Cantidad</label>
+            
+                            <input type="number" class="form-control" id="cantidad-venta" min="1" placeholder="Cantidad a vender"
+                                required>
+                        </div>
+            
                     </div>
-                
-                    <div class="col-md-6">
-                        <label for="cantidad-venta">Cantidad</label>
-
-                        <input
-                        type="number"
-                        class="form-control"
-                        id="cantidad-venta"
-                        min="1"
-                        placeholder="Cantidad a vender"
-                        required>
+            
+                    <div class="row mt-3">
+            
+                        <div class="col-md-6">
+                            <label for="cliente-venta">Cliente</label>
+            
+                            <input type="text" class="form-control" id="cliente-venta" placeholder="Nombre del cliente" required>
+            
+                        </div>
+            
+                        <div class="col-md-6">
+                            <label for="metodo_pago">Método de Pago</label>
+            
+                            <select id="metodo_pago" class="form-control" required>
+            
+                                <option value="">Seleccionar</option>
+                                <option value="efectivo">Efectivo</option>
+                                <option value="debito">Tarjeta Débito</option>
+                                <option value="credito">Tarjeta Crédito</option>
+                                <option value="qr">Código QR</option>
+                                <option value="transferencia">Transferencia</option>
+            
+                            </select>
+                        </div>
+            
                     </div>
-                
-                </div>
-
-                <div class="row mt-3">
-
-                    <div class="col-md-6">
-                        <label for="cliente-venta">Cliente</label>
-
-                        <input 
-                        type="text"
-                        class="form-control"
-                        id="cliente-venta"
-                        placeholder="Nombre del cliente"
-                        required>
-                    
+            
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label for="observaciones">
+                                Observaciones de Venta
+                            </label>
+            
+                            <textarea id="observaciones" class="form-control" placeholder="Agregar comentario">
+                                </textarea>
+                        </div>
+                    </div>
                 </div>
             
-                <div class="col-md-6">
-                    <label for="metodo_pago">Método de Pago</label>
-
-                    <select 
-                    id="metodo_pago"
-                    class="form-control"
-                    required>
-
-                        <option value="">Seleccionar</option>
-                        <option value="efectivo">Efectivo</option>
-                        <option value="debito">Tarjeta Débito</option>
-                        <option value="credito">Tarjeta Crédito</option>
-                        <option value="qr">Código QR</option>
-                        <option value="transferencia">Transferencia</option>
-
-                    </select>
-                </div>
-            
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-md-12">
-                        <label for="observaciones">
-                            Observaciones de Venta
-                        </label>
-
-                        <textarea
-                        id="observaciones"
-                        class="form-control"
-                        placeholder="Agregar comentario">
-                    </textarea>
-                    </div>
-                </div>
-
             </form>
 
                 
