@@ -61,6 +61,16 @@ body.dark-mode {
   );
   color: var(--color-texto);
   transition: var(--transicion);
+  display: flex;
+  flex-direction: column;
+}
+
+.main-layout-contenido {
+  flex: 1 0 auto;
+}
+
+.footer_quienes_somos {
+  flex-shrink: 0;
 }
 
 /* ================================================= */
