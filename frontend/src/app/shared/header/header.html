@@ -1,0 +1,46 @@
+<header class="header_quienes_somos">
+    <nav class="navbar_global">
+        <a class="home_quienes_somos" routerLink="/sinertech/landing-page">
+            <img [src]="logoSinertech" alt="Logo SinerTech">
+            <span>SinerTech</span>
+        </a>
+        <ul class="acciones_header">
+            <li>
+                <a routerLink="/sinertech/landing-page" routerLinkActive="active" ariaCurrentWhenActive="page">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/sinertech/quienes-somos" routerLinkActive="active" ariaCurrentWhenActive="page">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Quiénes Somos</span>
+                </a>
+            </li>
+            @if (!estaAutenticado) {
+                <li>
+                    <a routerLink="/login">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Login</span>
+                    </a>
+                </li>
+            }
+            @if (!estaAutenticado) {
+                <li>
+                    <a routerLink="/registro">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Registro</span>
+                    </a>
+                </li>
+            }
+            @if (estaAutenticado) {
+            <li>
+                <a class="cerrar_sesion" (click)="cerrarSesion()" routerLink="/sinertech/landing-page">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Cerrar Sesión
+                </a>
+            </li>
+            }
+        </ul>
+    </nav>
+</header>
