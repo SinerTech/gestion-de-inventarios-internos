@@ -145,7 +145,7 @@ body.dark-mode {
   transform: translateY(-2px);
 }
 
-.acciones_header a.active {
+a.active {
   background-color: var(--color-primario);
   color: white;
 }
