@@ -13,8 +13,8 @@ export const routes: Routes = [
         children: [
         {path: "dashboard-supervisor", component: DashboardSupervisor,
             children: [
-                { path: '', redirectTo: 'inicio-dashboard-supervisor', pathMatch: 'full' },
-                {path: 'inicio-dashboard', component: InicioDashboard},
+                { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full'},
+                {path: 'inicio-dashboard', component: InicioDashboard, data: {tipoDashboard: 'supervisor'}},
                 {path: 'ingreso-stock', component: IngresoStock},
                 {path: 'ajuste-stock', component: AjusteStock},
                 {path: 'control-stock', component: ControlStock}
