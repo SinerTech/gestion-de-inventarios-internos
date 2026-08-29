@@ -3,7 +3,7 @@ import { DashboardSupervisor } from './pages/dashboard/dashboard-supervisor/dash
 import { MainLayout } from './layouts/main-layout/main-layout';
 import { IngresoStock } from './pages/dashboard/dashboard-supervisor/ingreso-stock/ingreso-stock';
 import { AjusteStock } from './pages/dashboard/dashboard-supervisor/ajuste-stock/ajuste-stock';
-import { ControlStock } from './pages/dashboard/dashboard-supervisor/control-stock/control-stock';
+import { ControlStock } from './shared/control-stock/control-stock';
 import { InicioDashboard } from './shared/inicio-dashboard/inicio-dashboard';
 
 
@@ -17,7 +17,7 @@ export const routes: Routes = [
                 {path: 'inicio-dashboard', component: InicioDashboard, data: {tipoDashboard: 'supervisor'}},
                 {path: 'ingreso-stock', component: IngresoStock},
                 {path: 'ajuste-stock', component: AjusteStock},
-                {path: 'control-stock', component: ControlStock}
+                {path: 'control-stock', component: ControlStock, data: {tipoDashboard: 'supervisor'}}
                 ]
             }
         ]
