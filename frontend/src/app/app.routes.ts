@@ -6,10 +6,14 @@ import { AjusteStock } from './pages/dashboard/dashboard-supervisor/ajuste-stock
 import { ControlStock } from './shared/control-stock/control-stock';
 import { InicioDashboard } from './shared/inicio-dashboard/inicio-dashboard';
 import { Pagina404 } from './pages/pagina-404/pagina-404';
+import { Login } from './auth/login/login';
+import { Registro } from './auth/registro/registro';
 
 
 export const routes: Routes = [
     {path: "", redirectTo: "sinertech/landing-page", pathMatch: 'full'},
+    {path: "login", component: Login},
+    {path: "registro", component: Registro},
     {path: "sinertech", component: MainLayout,
         children: [
             {path: "dashboard-supervisor", component: DashboardSupervisor,
