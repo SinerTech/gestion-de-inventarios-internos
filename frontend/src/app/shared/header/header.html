@@ -1,6 +1,6 @@
 <header class="header_quienes_somos">
     <nav class="navbar_global">
-        <a class="home_quienes_somos" routerLink="/sinertech/landing-page">
+        <a class="home_quienes_somos" routerLink="landing-page">
             <img [src]="logoSinertech" alt="Logo SinerTech">
             <span>SinerTech</span>
         </a>
@@ -20,7 +20,7 @@
             </li>
             @if (!estaAutenticado) {
                 <li>
-                    <a routerLink="login">
+                    <a routerLink="/login">
                         <i class="bi bi-box-arrow-in-right"></i>
                         <span>Login</span>
                     </a>
@@ -28,7 +28,7 @@
             }
             @if (!estaAutenticado) {
                 <li>
-                    <a routerLink="registro">
+                    <a routerLink="/registro">
                         <i class="bi bi-person-plus-fill"></i>
                         <span>Registro</span>
                     </a>
@@ -37,7 +37,7 @@
             }
             @if (estaAutenticado) {
             <li>
-                <a class="cerrar_sesion" (click)="cerrarSesion()" routerLink="/sinertech/landing-page">
+                <a class="cerrar_sesion" (click)="cerrarSesion()" routerLink="landing-page">
                     <i class="bi bi-box-arrow-right"></i>
                     Cerrar Sesión
                 </a>
