@@ -795,6 +795,14 @@ a.active {
 /* ================= FORMULARIOS =================== */
 /* ================================================= */
 
+/* Bootstrap - Formularios Reactivos */
+.ng-valid:not(form).ng-touched {
+border-left: 5px solid #42A948; /* green */
+}
+.ng-invalid:not(form).ng-touched {
+border-left: 5px solid #a94442; /* red */
+}
+
 .form_panel_admin {
   display: flex;
   flex-direction: column;
