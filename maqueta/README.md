@@ -1,3 +1,3 @@
-# Maqueta
+# Frontend
 
 Este módulo contiene la maqueta principal del sistema.

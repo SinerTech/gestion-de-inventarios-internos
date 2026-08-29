@@ -1,0 +1,89 @@
+<section class="seccion_panel_admin" id="ajustes">
+    <h2>Ajustes de Stock</h2>
+    <form class="form_panel_admin" [formGroup]="formularioAjuste" (ngSubmit)="aplicarAjuste()">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="ajuste_producto" class="form-label">Producto</label>
+                <select class="form-select" id="ajuste_producto" formControlName="producto">
+                    <option value="">Seleccionar</option>
+                    <option value="producto_1">Producto 1</option>
+                    <option value="producto_2">Producto 2</option>
+                    <option value="producto_3">Producto 3</option>
+                    <option value="producto_4">Producto 4</option>
+                    <option value="producto_5">Producto 5</option>
+                </select>
+                @if (
+                    formularioAjuste.get('producto')?.invalid &&
+                    formularioAjuste.get('producto')?.touched
+                ) {
+                    <div class="text-danger">Debe seleccionar un producto.</div>
+                }
+            </div>
+            <div class="col-md-6">
+                <label for="ajuste_tipo" class="form-label">Tipo de Ajuste</label>
+                <select class="form-select" id="ajuste_tipo" formControlName="tipoAjuste">
+                    <option value="">Seleccionar</option>
+                    <option value="ajuste_positivo">Ajuste Positivo</option>
+                    <option value="ajuste_negativo">Ajuste Negativo</option>
+                </select>
+                @if (
+                    formularioAjuste.get('tipoAjuste')?.invalid &&
+                    formularioAjuste.get('tipoAjuste')?.touched
+                ) {
+                    <div class="text-danger">Debe seleccionar el tipo de ajuste.</div>
+                }
+            </div>
+            <div class="col-md-6">
+                <label for="ajuste_motivo" class="form-label">Motivo del Ajuste</label>
+                <select class="form-select" id="ajuste_motivo" formControlName="motivo">
+                    <option value="">Seleccionar</option>
+                    <option value="reconteo_inventario">Reconteo de inventario</option>
+                    <option value="producto_danado">Producto dañado</option>
+                    <option value="error_carga">Error de carga</option>
+                    <option value="perdida">Pérdida</option>
+                    <option value="producto_encontrado">Producto encontrado</option>
+                </select>
+                @if (
+                    formularioAjuste.get('motivo')?.invalid &&
+                    formularioAjuste.get('motivo')?.touched
+                ) {
+                    <div class="text-danger">Debe seleccionar un motivo.</div>
+                }
+            </div>
+            <div class="col-md-6">
+                <label for="ajuste_cantidad" class="form-label">Cantidad</label>
+                <input type="number" class="form-control" id="ajuste_cantidad" formControlName="cantidad">
+                @if (
+                    formularioAjuste.get('cantidad')?.invalid &&
+                    formularioAjuste.get('cantidad')?.touched
+                ) {
+                    <div class="text-danger">Debe ingresar una cantidad válida.</div>
+                }
+            </div>
+            <div class="col-md-6">
+                <label for="ajuste_supervisor" class="form-label">Supervisor</label>
+                <select class="form-select" id="ajuste_supervisor" formControlName="supervisor">
+                    <option value="">Seleccionar</option>
+                    <option value="supervisor_1">Supervisor 1</option>
+                    <option value="supervisor_2">Supervisor 2</option>
+                </select>
+                @if (
+                    formularioAjuste.get('supervisor')?.invalid &&
+                    formularioAjuste.get('supervisor')?.touched
+                ) {
+                    <div class="text-danger">Debe seleccionar un supervisor.</div>
+                }
+            </div>
+            <div class="col-md-12">
+                <label for="ajuste_observaciones" class="form-label">Observaciones</label>
+                <textarea class="form-control" id="ajuste_observaciones" formControlName="observaciones"></textarea>
+            </div>
+            <div class="acciones_crud">
+                <button type="submit" class="btn btn-secondary">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Aplicar Ajuste
+                </button>
+            </div>
+        </div>
+    </form>
+</section>

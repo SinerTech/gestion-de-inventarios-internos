@@ -1,0 +1,65 @@
+<section class="inicio_dashboard_admin" id="inicio_dashboard_supervisor">
+    <h1>Sistema de Gestión de Inventarios Internos</h1>
+    <article>
+        <h2>
+            ¡Bienvenido, {{configuracionActual.nombre}}!
+        </h2>
+        <p>
+            {{configuracionActual.descripcion}}
+        </p>
+    </article>
+</section>
+<section class="seccion_info">
+    <h2>Accesos Directos</h2>
+    <div class="grilla_valores">
+        @for (acceso of configuracionActual.accesosDirectos; track acceso) {
+            <article class="card_valor">
+                <span class="icono_card_valor">
+                    <i class="bi" [class]="acceso.icono"></i>
+                </span>
+                <h3>{{acceso.etiqueta}}</h3>
+                <p>{{acceso.descripcion}}</p>
+                <div class="acciones_crud d-flex justify-content-center">
+                    <button type="button" class="active" [routerLink]="acceso.link">
+                        Acceder
+                    </button>
+                </div>
+            </article>
+        }
+    </div>
+</section>
+<div class="row">
+    <div class="col-6">
+        <section class="seccion_info">
+            <h3>Desde este panel podás</h3>
+            <div class="grilla_valores">
+                <ul class="list-unstyled">
+                    @for (accion of configuracionActual.accionesDisponibles; track accion) {
+                    <li class="p-1">
+                        <i class="bi bi-check-circle-fill"></i>
+                        {{accion}}
+                    </li>
+                    }
+                </ul>
+            </div>
+        </section>
+    </div>
+    <div class="col-6">
+        <section class="seccion_info">
+            <h3>Información del Sistema</h3>
+            <ul class="list-unstyled">
+                @for (info of configuracionActual.informacionSistema; track info.etiqueta) {
+                <li class="p-1">
+                    <i class="bi" [class]=info.icono></i>
+                    {{info.etiqueta}}: {{info.valor}}
+                </li>
+                }
+            </ul>
+        </section>
+    </div>
+</div>
+<section class="seccion_info">
+    <blockquote class="fs-4 text-center">
+        <p>Una gestión eficiente comienza con información organizada.</p>
+    </blockquote>
+</section>

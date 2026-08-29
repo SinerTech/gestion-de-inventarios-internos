@@ -7,48 +7,69 @@
     <title>Gestión de Inventarios</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 
 <body class="body_quienes_somos dark-mode">
 
     <!-- HEADER -->
 
     <header class="header_quienes_somos">
-        <nav class="navbar_global">
+        <nav class="navbar navbar-expand-lg navbar_global">
 
-            <!-- LOGO -->
-            <a class="home_quienes_somos" href="index.html">
-                <img src="img/logo_icon.png" alt="Logo SinerTech">
-                <span>SinerTech</span>
-            </a>
+            <div class="container-fluid">
 
-            <!-- NAVEGACION -->
-            <ul class="acciones_header">
-                <li>
-                    <a href="index.html" class="active">
-                        <i class="fa-solid fa-house"></i>
-                        <span>Inicio</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="quienes-somos.html">
-                        <i class="fa-solid fa-users"></i>
-                        <span>Quiénes Somos</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        <span>Login</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa-solid fa-user-plus"></i>
-                        <span>Registro</span>
-                    </a>
-                </li>
-            </ul>
+                <!-- LOGO -->
+                <a class="home_quienes_somos" href="index.html">
+                    <img src="img/logo_icon.png" alt="Logo SinerTech">
+                    <span>SinerTech</span>
+                </a>
+
+                <!-- BOTÓN HAMBURGUESA -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+                    aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menú">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+                <!-- MENÚ -->
+                <div class="collapse navbar-collapse" id="menuPrincipal">
+
+                    <ul class="acciones_header ms-auto">
+                        <li>
+                            <a href="index.html" class="active">
+                                <i class="fa-solid fa-house"></i>
+                                <span>Inicio</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="quienes-somos.html">
+                                <i class="fa-solid fa-users"></i>
+                                <span>Quiénes Somos</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="login.html">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                <span>Login</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-user-plus"></i>
+                                <span>Registro</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
 
         </nav>
     </header>
@@ -62,13 +83,16 @@
                 <h1>Gestión Inteligente de <span>Inventarios</span></h1>
 
                 <p class="descripcion_hero">
-                    "Optimiza el control de stock de tu empresa mediante una plataforma moderna, segura y eficiente. Centraliza tu
-                    inventario en tiempo real, automatiza las alertas de reposición y toma decisiones estratégicas basadas en datos
-                    precisos. La solución definitiva para reducir costos operativos, evitar quiebres de stock y potenciar el crecimiento de
+                    "Optimiza el control de stock de tu empresa mediante una plataforma moderna, segura y eficiente.
+                    Centraliza tu
+                    inventario en tiempo real, automatiza las alertas de reposición y toma decisiones estratégicas
+                    basadas en datos
+                    precisos. La solución definitiva para reducir costos operativos, evitar quiebres de stock y
+                    potenciar el crecimiento de
                     tu negocio."
                 </p>
-                
-                <button class="badge_hero button_c" >Comenzar</button>
+
+                <button class="badge_hero button_c">Comenzar</button>
 
             </div>
 
@@ -123,7 +147,7 @@
         </p>
     </footer>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

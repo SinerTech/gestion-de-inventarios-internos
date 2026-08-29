@@ -25,6 +25,10 @@ section {
   --altura-cabecera: 70px;
   --transicion: 0.3s ease;
   --sombra: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --sidebar-width: 260px;
+  --header-height: 70px;
+  --transition: 0.3s ease;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* ================================================= */
@@ -102,7 +106,7 @@ body.dark-mode {
 }
 
 /* ================================================= */
-/* ================== ENLACES NAVEGACION =========== */
+/* ================== MENU NAVEGACION =========== */
 /* ================================================= */
 
 .acciones_header {
@@ -136,6 +140,55 @@ body.dark-mode {
   color: white;
 }
 
+/* HAMBURGUESA */
+
+.navbar-toggler {
+  border: none;
+  background: transparent;
+  padding: 8px;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.navbar-toggler i {
+  color: var(--color-primario);
+  font-size: 1.7rem;
+}
+
+/* MENÚ RESPONSIVO */
+
+@media (max-width: 991.98px) {
+
+  .navbar-collapse {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #0f172a; /* fondo oscuro */
+    border-radius: 16px;
+  }
+
+  .acciones_header {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .acciones_header li {
+    width: 100%;
+  }
+
+  .acciones_header a {
+    width: 100%;
+    justify-content: center;
+  }
+
+}
 /* ================================================= */
 /* ========================= CONTENIDO ============= */
 /* ================================================= */
@@ -573,28 +626,6 @@ body.dark-mode {
 /* ================ dashboard    ================= */
 /* ================================================= */
 
-/* ================================================= */
-/* ================= VARIABLES BASE ================ */
-/* ================================================= */
-
-:root {
-  --sidebar-width: 260px;
-  --header-height: 70px;
-  --transition: 0.3s ease;
-  --shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-body.dark-mode {
-  --color-fondo: #0f172a;
-  --color-fondo-secundario: #111827;
-  --color-lateral: #1e293b;
-  --color-tarjeta: #1f2937;
-  --color-borde: #334155;
-  --color-texto: #f8fafc;
-  --color-texto-secundario: #cbd5e1;
-  --color-primario: #f97316;
-  --color-hover: rgba(255, 255, 255, 0.04);
-}
 
 /* ================================================= */
 /* ==================== ESTRUCTURA ================= */
@@ -632,11 +663,11 @@ body.dark-mode {
   top: var(--header-height);
   left: 0;
   width: var(--sidebar-width);
-  height: calc(100vh - var(--header-height));
   padding: 25px 18px;
   overflow-y: auto;
   background-color: var(--color-lateral);
   border-right: 1px solid var(--color-borde);
+  border-bottom-right-radius: 18px;
 }
 
 .panel_control_admin {
