@@ -1004,8 +1004,24 @@ section.pagina-404 {
 /* ============ INTERFACES LOGIN / REGISTRO ======== */
 /* ================================================= */
 
-body.body_quienes_somos.dark-mode.vista-autenticacion {
-  padding-top: 0 !important;
+.login-fondo {
+  --color-fondo: #0f172a;
+  --color-fondo-secundario: #111827;
+  --color-lateral: #1e293b;
+  --color-tarjeta: #1f2937;
+  --color-borde: #334155;
+  --color-texto: #f8fafc;
+  --color-texto-secundario: #cbd5e1;
+  --color-primario: #f97316;
+  --color-hover: rgba(255, 255, 255, 0.04);
+
+  background: linear-gradient(
+    180deg,
+    var(--color-fondo-secundario),
+    var(--color-fondo)
+  );
+
+  color: var(--color-texto);
 }
 
 .login-main-container {
@@ -1016,8 +1032,7 @@ body.body_quienes_somos.dark-mode.vista-autenticacion {
 }
 
 .login-section.container-fluid {
-  height: calc(100vh - var(--altura-cabecera));
-  margin-top: var(--altura-cabecera) !important;
+  height: 100vh;
   overflow: hidden;
   background: transparent !important;
   padding-left: 0 !important;
@@ -1043,7 +1058,6 @@ body.body_quienes_somos.dark-mode.vista-autenticacion {
   box-shadow: none !important;
 }
 
-/* Contenedor limitador de ancho */
 .login-form-wrapper {
   max-width: 400px;
 }
@@ -1062,6 +1076,7 @@ body.body_quienes_somos.dark-mode.vista-autenticacion {
   color: var(--color-primario);
   text-decoration: none;
   transition: var(--transicion);
+  cursor: pointer;
 }
 
 .enlace-primario:hover {
