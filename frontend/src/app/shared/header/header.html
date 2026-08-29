@@ -4,39 +4,41 @@
             <img [src]="logoSinertech" alt="Logo SinerTech">
             <span>SinerTech</span>
         </a>
-        <ul class="acciones_header">
+        <ul class="acciones_header mt-3">
+            @if (!esDashboard) {
             <li>
-                <a routerLink="/sinertech/landing-page" routerLinkActive="active" ariaCurrentWhenActive="page">
-                    <i class="fa-solid fa-house"></i>
+                <a routerLink="landing-page" routerLinkActive="active" ariaCurrentWhenActive="page">
+                    <i class="bi bi-house-fill"></i>
                     <span>Inicio</span>
                 </a>
             </li>
             <li>
-                <a routerLink="/sinertech/quienes-somos" routerLinkActive="active" ariaCurrentWhenActive="page">
-                    <i class="fa-solid fa-users"></i>
+                <a routerLink="quienes-somos" routerLinkActive="active" ariaCurrentWhenActive="page">
+                    <i class="bi bi-people-fill"></i>
                     <span>Quiénes Somos</span>
                 </a>
             </li>
             @if (!estaAutenticado) {
                 <li>
-                    <a routerLink="/login">
-                        <i class="fa-solid fa-right-to-bracket"></i>
+                    <a routerLink="login">
+                        <i class="bi bi-box-arrow-in-right"></i>
                         <span>Login</span>
                     </a>
                 </li>
             }
             @if (!estaAutenticado) {
                 <li>
-                    <a routerLink="/registro">
-                        <i class="fa-solid fa-user-plus"></i>
+                    <a routerLink="registro">
+                        <i class="bi bi-person-plus-fill"></i>
                         <span>Registro</span>
                     </a>
                 </li>
             }
+            }
             @if (estaAutenticado) {
             <li>
                 <a class="cerrar_sesion" (click)="cerrarSesion()" routerLink="/sinertech/landing-page">
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <i class="bi bi-box-arrow-right"></i>
                     Cerrar Sesión
                 </a>
             </li>
