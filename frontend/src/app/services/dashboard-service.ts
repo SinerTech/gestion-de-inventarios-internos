@@ -56,7 +56,75 @@ export class DashboardService {
                     descripcion: 'Buscar productos y consultar el estado actual del inventario.',
                     link: '/sinertech/dashboard-supervisor/control-stock'
                     }
-                ]
+                ],
+                botonesFiltro: [
+                    'todos',
+                    'activo',
+                    'inactivo',
+                    'suspendido'
+                ],
+                encabezadosTabla: [
+                    'ID',
+                    'SKU',
+                    'Producto',
+                    'Categoría',
+                    'Proveedor',
+                    'Precio Unitario',
+                    'Stock',
+                    'Estado',
+                    'Último Ingreso'
+                ],
+                productos: [
+                    {
+                        id: '001',
+                        sku: 'PROD-001',
+                        nombre: 'Producto 1',
+                        categoria: 'Categoría 1',
+                        proveedor: 'Proveedor 1',
+                        precioUnitario: '$1500',
+                        stock: 50,
+                        estado: 'Activo',
+                        claseEstado: 'bg-success',
+                        ultimoIngreso: '05/04/2026'
+                    },
+                    {
+                        id: '002',
+                        sku: 'PROD-002',
+                        nombre: 'Producto 2',
+                        categoria: 'Categoría 1',
+                        proveedor: 'Proveedor 1',
+                        precioUnitario: '$1750',
+                        stock: 33,
+                        estado: 'Activo',
+                        claseEstado: 'bg-success',
+                        ultimoIngreso: '05/04/2026'
+                    },
+                    {
+                        id: '003',
+                        sku: 'PROD-003',
+                        nombre: 'Producto 3',
+                        categoria: 'Categoría 2',
+                        proveedor: 'Proveedor 5',
+                        precioUnitario: '$5500',
+                        stock: 0,
+                        estado: 'Inactivo',
+                        claseEstado: 'bg-danger',
+                        ultimoIngreso: '22/12/2025'
+                    },
+                    {
+                        id: '004',
+                        sku: 'PROD-004',
+                        nombre: 'Producto 4',
+                        categoria: 'Categoría 3',
+                        proveedor: 'Proveedor 3',
+                        precioUnitario: '$2050',
+                        stock: 64,
+                        estado: 'Suspendido',
+                        claseEstado: 'bg-warning',
+                        ultimoIngreso: '09/05/2026'
+                    }
+                ],
+                accionesTabla: []
             }
         } else if (tipoDashboard === 'administrador') {
             this.configuracionDashboard = 
@@ -80,6 +148,64 @@ export class DashboardService {
                 ],
                 accesosDirectos: [
                     // accesos del administrador
+                ],
+                productos: [
+                    {
+                        id: '001',
+                        sku: 'PROD-001',
+                        nombre: 'Producto 1',
+                        categoria: 'Categoría 1',
+                        proveedor: 'Proveedor 1',
+                        precioUnitario: '$1500',
+                        stock: 50,
+                        estado: 'Activo',
+                        claseEstado: 'bg-success',
+                        ultimoIngreso: '05/04/2026'
+                    },
+                    {
+                        id: '002',
+                        sku: 'PROD-002',
+                        nombre: 'Producto 2',
+                        categoria: 'Categoría 1',
+                        proveedor: 'Proveedor 1',
+                        precioUnitario: '$1750',
+                        stock: 33,
+                        estado: 'Activo',
+                        claseEstado: 'bg-success',
+                        ultimoIngreso: '05/04/2026'
+                    },
+                    {
+                        id: '003',
+                        sku: 'PROD-003',
+                        nombre: 'Producto 3',
+                        categoria: 'Categoría 2',
+                        proveedor: 'Proveedor 5',
+                        precioUnitario: '$5500',
+                        stock: 0,
+                        estado: 'Inactivo',
+                        claseEstado: 'bg-danger',
+                        ultimoIngreso: '22/12/2025'
+                    },
+                    {
+                        id: '004',
+                        sku: 'PROD-004',
+                        nombre: 'Producto 4',
+                        categoria: 'Categoría 3',
+                        proveedor: 'Proveedor 3',
+                        precioUnitario: '$2050',
+                        stock: 64,
+                        estado: 'Suspendido',
+                        claseEstado: 'bg-warning',
+                        ultimoIngreso: '09/05/2026'
+                    }
+                ],
+                accionesTabla: [
+                    {
+                        icono: 'bi bi-pencil-fill',
+                    },
+                    {
+                        icono: 'bi bi-trash-fill',
+                    }
                 ]
             }
         }
