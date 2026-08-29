@@ -1,0 +1,57 @@
+<section class="container-fluid login-section login-fondo">
+    <div class="row g-0 w-100 h-100 align-items-stretch">
+        <div class="col-md-7 d-none d-md-block p-0">
+            <img class="login-bg-image bg-img-login" src="auth-imagen/deposito-2.PNG" alt="">
+        </div>
+        <div class="col-md-5 seccion_hero login-form-col">
+            <div class="w-100 mx-auto login-form-wrapper">
+                <h1 class="text-center mb-4">Iniciar Sesión</h1>
+                <form class="form_panel_admin" [formGroup]="formularioLogin" (ngSubmit)="ingresar()">
+                    <div class="row"> <!-- Rol -->
+                        <div class="col-md-6 mb-3 text-start"> 
+                            <label class="form-label" for="login_rol"> Seleccionar Rol </label> 
+                            <select class="form-select" id="login_rol" formControlName="rol">
+                                <option value="">Seleccionar</option>
+                                <option value="admin">Administrador</option>
+                                <option value="supervisor">Supervisor</option>
+                                <option value="operario">Vendedor</option>
+                            </select> 
+                            @if (Rol?.invalid && Rol?.touched) { 
+                                <div class="invalid-feedback"> Seleccioná un rol. </div>
+                            } 
+                        </div> 
+                        <div class="col-md-10 alert alert-info d-flex align-items-center" role="alert"> 
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                            <div class="texto-informativo"> Selecciona tu rol asignado correctamente. </div>
+                        </div> 
+                        <div class="col-md-12 mb-3 text-start"> 
+                            <label for="email" class="form-label"> Email </label>
+                            <input class="form-control" type="email" id="email" formControlName="email"> 
+                            @if (Email?.errors?.['required'] && Email?.touched) { 
+                                <div class="invalid-feedback"> El email es obligatorio. </div> 
+                            } 
+                            @if (Email?.errors?.['email'] && Email?.touched) { 
+                                <div class="invalid-feedback"> Ingresá un email válido. </div> 
+                            } 
+                        </div> 
+                        <div class="col-md-12 mb-3 text-start"> 
+                            <label for="password" class="form-label"> Contraseña</label> 
+                            <input class="form-control" type="password" id="password" formControlName="password"> 
+                            @if (Password?.invalid && Password?.touched) { 
+                                <div class="invalid-feedback"> La contraseña es obligatoria. </div> 
+                            }
+                        </div>
+                        <div class="acciones_crud mt-2"> 
+                            <button type="submit" class="w-100"> Ingresar </button> 
+                        </div>
+                    </div>
+                </form>
+                <div class="text-center mt-4"> 
+                    <small class="texto-secundario"> ¿No tenés cuenta? 
+                        <a routerLink="/registro" class="enlace-primario"> Registrate </a> 
+                    </small> 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
