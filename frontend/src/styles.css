@@ -685,6 +685,9 @@ a.active {
   padding: 25px;
 }
 
+
+
+
 /* ================================================= */
 /* ==================== ELEMENTOS ================== */
 /* ================================================= */
@@ -775,20 +778,85 @@ a.active {
   transition: var(--transition);
 }
 
+.inicio_dashboard_admin {
+  position: relative;
+  overflow: hidden;
+}
+
+.inicio_dashboard_admin::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background-color: var(--color-primario);
+}
+
 .inicio_dashboard_admin h1 {
-  margin-bottom: 15px;
-  font-size: 2rem;
+  margin: 0 0 25px 0;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--color-primario);
 }
 
 .inicio_dashboard_admin h2,
 .seccion_panel_admin h2 {
-  margin-bottom: 20px;
+  margin: 0 0 15px 0;
+  font-size: 1.4rem;
+  font-weight: 600;
   color: var(--color-texto);
 }
 
 .inicio_dashboard_admin p {
+  margin: 0;
   line-height: 1.7;
   color: var(--color-texto-secundario);
+}
+
+.inicio_dashboard_admin article {
+  margin-bottom: 30px;
+  padding: 25px;
+  border-radius: 16px;
+  background-color: var(--color-fondo);
+  border: 1px solid var(--color-borde);
+}
+
+.seccion_panel_admin {
+  margin-bottom: 0;
+  padding: 28px;
+}
+
+.seccion_panel_admin h2 {
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.seccion_panel_admin h3 {
+  margin: 0;
+  padding: 18px 0 8px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-primario);
+  transition: var(--transition);
+}
+
+.seccion_panel_admin h3 i {
+  width: 28px;
+  margin-right: 8px;
+  text-align: center;
+  color: var(--color-primario);
+}
+
+.seccion_panel_admin p {
+  margin: 0 0 8px 36px;
+  line-height: 1.6;
+  color: var(--color-texto-secundario);
+}
+
+.seccion_panel_admin h3:hover {
+  transform: translateX(4px);
+  color: var(--color-primario);
 }
 
 /* ================================================= */
