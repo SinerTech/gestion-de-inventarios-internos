@@ -8,6 +8,8 @@ import { InicioDashboard } from './shared/inicio-dashboard/inicio-dashboard';
 import { Pagina404 } from './pages/pagina-404/pagina-404';
 import { Login } from './auth/login/login';
 import { Registro } from './auth/registro/registro';
+import { DashboardVendedor } from './pages/dashboard/dashboard-vendedor/dashboard-vendedor';
+import { ResumenVenta } from './pages/dashboard/dashboard-vendedor/resumen-venta/resumen-venta';
 
 
 export const routes: Routes = [
@@ -25,6 +27,14 @@ export const routes: Routes = [
                     {path: 'control-stock', component: ControlStock, data: {tipoDashboard: 'supervisor'}}
                     ]
                 },
+            {path: "dashboard-vendedor", component: DashboardVendedor,
+                children: [
+                    { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full'},
+                    {path: 'inicio-dashboard', component: InicioDashboard, data: {tipoDashboard: 'vendedor'}},
+                    {path: 'control-stock', component: ControlStock, data: {tipoDashboard: 'vendedor'}},
+                    {path: 'resumen-venta', component: ResumenVenta}
+                ]
+            }
         ]
     },
     {path: "**", component: Pagina404}
