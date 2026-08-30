@@ -135,19 +135,57 @@ export class DashboardService {
                             'Desde este panel podrás registrar, modificar y administrar productos, ' +
                             'además de visualizar el stock disponible.',
                 accionesDisponibles: [
-                    'Gestionar usuarios.',
-                    'Administrar productos.',
-                    'Consultar información general del sistema.'
+                    'Administrar el inventario.',
+                    'Dar de alta o baja a productos.',
+                    'Consultar información del inventario.'
                 ],
                 informacionSistema: [
                     {
                     icono: 'bi-person-vcard-fill',
                     etiqueta: 'Rol actual',
                     valor: 'Administrador'
+                    },
+                    {
+                    icono: 'bi-box-seam-fill',
+                    etiqueta: 'Módulo',
+                    valor: 'Administración del Inventario'
+                    },
+                    {
+                    icono: 'bi-binoculars-fill',
+                    etiqueta: 'Acceso',
+                    valor: 'Panel de Administración'
                     }
                 ],
                 accesosDirectos: [
-                    // accesos del administrador
+                    {
+                        icono: 'bi-box-seam-fill',
+                        etiqueta: 'Gestionar Productos',
+                        descripcion: 'Crear, consultar, modificar y eliminar productos del inventario.',
+                        link: '/sinertech/dashboard-admin/registro-producto'
+                    },
+                    {
+                        icono: 'bi-boxes',
+                        etiqueta: 'Visualizar Stock',
+                        descripcion: 'Consultar los productos disponibles y el estado actual del inventario.',
+                        link: '/sinertech/dashboard-admin/control-stock'
+                    }
+                ],
+                botonesFiltro: [
+                    'todos',
+                    'activo',
+                    'inactivo',
+                    'suspendido'
+                ],
+                encabezadosTabla: [
+                    'ID',
+                    'SKU',
+                    'Producto',
+                    'Categoría',
+                    'Proveedor',
+                    'Precio Unitario',
+                    'Stock',
+                    'Estado',
+                    'Último Ingreso'
                 ],
                 productos: [
                     {
