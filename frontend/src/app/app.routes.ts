@@ -10,6 +10,8 @@ import { Login } from './auth/login/login';
 import { Registro } from './auth/registro/registro';
 import { DashboardAdmin } from './pages/dashboard/dashboard-admin/dashboard-admin';
 import { RegistroProducto } from './pages/dashboard/dashboard-admin/registro-producto/registro-producto';
+import { DashboardVendedor } from './pages/dashboard/dashboard-vendedor/dashboard-vendedor';
+import { ResumenVenta } from './pages/dashboard/dashboard-vendedor/resumen-venta/resumen-venta';
 
 
 export const routes: Routes = [
@@ -35,6 +37,14 @@ export const routes: Routes = [
                     {path: 'control-stock', component: ControlStock, data: {tipoDashboard: 'administrador'}}
                     ]
                 },
+            {path: "dashboard-vendedor", component: DashboardVendedor,
+                children: [
+                    { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full'},
+                    {path: 'inicio-dashboard', component: InicioDashboard, data: {tipoDashboard: 'vendedor'}},
+                    {path: 'control-stock', component: ControlStock, data: {tipoDashboard: 'vendedor'}},
+                    {path: 'resumen-venta', component: ResumenVenta}
+                ]
+            }
         ]
     },
     {path: "**", component: Pagina404}

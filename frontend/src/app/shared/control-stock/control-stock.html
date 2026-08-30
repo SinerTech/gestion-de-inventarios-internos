@@ -1,6 +1,8 @@
 <section class="seccion_panel_admin">
     <h2>Control General de Stock</h2>
-    <form class="form_panel_admin">
+    <form 
+        class="form_panel_admin"
+        (submit)="buscarProducto($event)">
         <div class="row">
             <div class="col-md-8">
                 <label for="buscar_producto" class="form-label">
@@ -11,7 +13,8 @@
                     name="buscar_producto"
                     id="buscar_producto"
                     placeholder="Buscar producto"
-                    class="form-control">
+                    class="form-control"
+                    (input)="actualizarBusqueda($event)">
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label">&nbsp;</label>
@@ -45,7 +48,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (producto of configuracionActual.productos; track producto.id) {
+                        @for (producto of productosFiltrados; track producto.id) {
                             <tr class="border-bottom border-secondary">
                                 <th scope="row">
                                     {{producto.id}}
