@@ -8,13 +8,13 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-registrar-producto',
+  selector: 'app-registro-producto',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './registrar-producto.html',
-  styleUrl: './registrar-producto.css',
+  templateUrl: './registro-producto.html',
+  styleUrl: './registro-producto.css',
 })
-export class RegistrarProducto {
+export class RegistroProducto {
   productoForm;
 
   constructor(private fb: FormBuilder) {
