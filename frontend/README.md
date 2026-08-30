@@ -1,59 +1,68 @@
-# Frontend
+# SinerTech - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.5.
+## Frontend del sistema de gestión de inventarios internos SinerTech, desarrollado con Angular.
 
-## Development server
+### Tecnologías utilizadas
+    • Angular
+    • TypeScript
+    • HTML
+    • CSS
+    • Bootstrap
+    • Bootstrap Icons
+    • Versiones utilizadas durante el desarrollo
 
-To start a local development server, run:
+### El proyecto fue desarrollado utilizando las siguientes versiones:
 
-```bash
-ng serve
-```
+    • Node.js: 24.17.0
+    • npm: 11.13.0
+    • Angular CLI: 22.1.5
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Se recomienda utilizar versiones compatibles para mantener un entorno de desarrollo consistente.
 
-## Code scaffolding
+### Requisitos previos
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Antes de ejecutar el proyecto es necesario contar con:
 
-```bash
-ng generate component component-name
-```
+    • Node.js
+    • npm
+    • Git
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Para verificar las versiones instaladas:
 
-```bash
-ng generate --help
-```
+    node -v
+    npm -v
 
-## Building
+## Instalación
+1. Clonar el repositorio
+    git clone https://github.com/SinerTech/gestion-de-inventarios-internos.git
+2. Ingresar al directorio del proyecto
+    cd gestion-de-inventarios-internos
+3. Ingresar a la carpeta del frontend
+    cd frontend
+4. Instalar las dependencias
+    npm install
 
-To build the project run:
+Este comando instalará las dependencias definidas en los archivos package.json y package-lock.json.
 
-```bash
-ng build
-```
+No es necesario instalar manualmente Angular, Bootstrap u otras dependencias del proyecto.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Ejecución
 
-## Running unit tests
+Desde la carpeta frontend, ejecutar:
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+    ng serve -o
 
-```bash
-ng test
-```
+También puede ejecutarse utilizando:
 
-## Running end-to-end tests
+    npx ng serve -o
 
-For end-to-end (e2e) testing, run:
+Una vez iniciado el servidor de desarrollo, el proyecto estará disponible en:
 
-```bash
-ng e2e
-```
+http://localhost:4200/
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Consideraciones importantes
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    • No ejecutar ng new, ya que el proyecto Angular ya se encuentra creado.
+    • No subir la carpeta node_modules/ al repositorio.
+    • La carpeta node_modules/ se genera automáticamente al ejecutar:
+    • npm install
