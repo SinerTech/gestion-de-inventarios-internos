@@ -12,6 +12,7 @@ import { DashboardAdmin } from './pages/dashboard/dashboard-admin/dashboard-admi
 import { RegistroProducto } from './pages/dashboard/dashboard-admin/registro-producto/registro-producto';
 import { DashboardVendedor } from './pages/dashboard/dashboard-vendedor/dashboard-vendedor';
 import { ResumenVenta } from './pages/dashboard/dashboard-vendedor/resumen-venta/resumen-venta';
+import { QuienesSomos } from './pages/quienes-somos/quienes-somos';
 
 
 export const routes: Routes = [
@@ -20,6 +21,7 @@ export const routes: Routes = [
     {path: "registro", component: Registro},
     {path: "sinertech", component: MainLayout,
         children: [
+            {path: "quienes-somos" , component: QuienesSomos},
             {path: "dashboard-supervisor", component: DashboardSupervisor,
                 children: [
                     { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full'},
