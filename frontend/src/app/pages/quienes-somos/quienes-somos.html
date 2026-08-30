@@ -78,92 +78,65 @@
 
   <div class="grilla_equipo grilla_equipo_lideres">
 
-    <!-- PRODUCT OWNER -->
-    <article class="card_miembro" id="member-nicolas">
+  @for (integrante of integrantes.slice(0, 2); track integrante.id) {
+
+    <article class="card_miembro" [id]="integrante.id">
+
       <div class="foto_miembro">
-        <img src="equipo/carlos.png" alt="Nicolás Romano" width="200" height="200" loading="lazy">
+        <img
+          [src]="integrante.imagen"
+          [alt]="integrante.alt"
+          loading="lazy">
       </div>
+
       <div class="info_miembro">
-        <h3>Nicolás Romano</h3>
-        <p class="rol_miembro">Product Owner</p>
+        <h3>{{ integrante.nombre }}</h3>
+
+        <p class="rol_miembro">
+          {{ integrante.rol }}
+        </p>
+
         <p class="bio_miembro">
-          Responsable de definir la visión del producto y
-          priorizar el backlog para maximizar el valor
-          entregado al cliente.
+          {{ integrante.bio }}
         </p>
       </div>
+
     </article>
 
-    <!-- SCRUM MASTER -->
-    <article class="card_miembro" id="member-tobias">
-      <div class="foto_miembro">
-        <img src="equipo/mateo.png" alt="Tobías Ruffino" width="200" height="200" loading="lazy">
-      </div>
-      <div class="info_miembro">
-        <h3>Tobías Ruffino</h3>
-        <p class="rol_miembro">Scrum Master</p>
-        <p class="bio_miembro">
-          Facilitador ágil que guía al equipo en la
-          adopción de Scrum, eliminando impedimentos
-          y fomentando la mejora continua.
-        </p>
-      </div>
-    </article>
+  }
 
-  </div>
+</div>
 
   <!-- FILA INFERIOR: DESARROLLADORES -->
 
   <div class="grilla_equipo grilla_equipo_devs">
 
-    <!-- DESARROLLADORA 1 -->
-    <article class="card_miembro" id="member-ana">
+  @for (integrante of integrantes.slice(2); track integrante.id) {
+
+    <article class="card_miembro" [id]="integrante.id">
+
       <div class="foto_miembro">
-        <img src="equipo/valentina.png" alt="Ana Paula Hartl" width="200" height="200" loading="lazy">
+        <img
+          [src]="integrante.imagen"
+          [alt]="integrante.alt"
+          loading="lazy">
       </div>
+
       <div class="info_miembro">
-        <h3>Ana Paula Hartl</h3>
-        <p class="rol_miembro">Desarrolladora</p>
+        <h3>{{ integrante.nombre }}</h3>
+
+        <p class="rol_miembro">
+          {{ integrante.rol }}
+        </p>
+
         <p class="bio_miembro">
-          Responsable del diseño visual y estilos de la plataforma mediante CSS,
-          participando también en el desarrollo del HTML para crear una interfaz
-          moderna, atractiva y adaptable a los usuarios.
+          {{ integrante.bio }}
         </p>
       </div>
+
     </article>
 
-    <!-- DESARROLLADOR 2 -->
-    <article class="card_miembro" id="member-lucas">
-      <div class="foto_miembro">
-        <img src="equipo/franco.png" alt="Lucas Gómez Ponce" width="200" height="200" loading="lazy">
-      </div>
-      <div class="info_miembro">
-        <h3>Lucas Gómez Ponce</h3>
-        <p class="rol_miembro">Desarrollador</p>
-        <p class="bio_miembro">
-          Encargado de la elaboración de diagramas y modelado visual
-          del sistema, participando también en el desarrollo del HTML
-          para asegurar una estructura moderna y bien organizada de
-          la aplicación.
-        </p>
-      </div>
-    </article>
+  }
 
-    <!-- DESARROLLADOR 3 -->
-    <article class="card_miembro" id="member-franco">
-      <div class="foto_miembro">
-        <img src="equipo/diego.png" alt="Franco Quispe" width="200" height="200" loading="lazy">
-      </div>
-      <div class="info_miembro">
-        <h3>Franco Quispe</h3>
-        <p class="rol_miembro">Desarrollador</p>
-        <p class="bio_miembro">
-          Responsable de la documentación y estructuración de los casos
-          de uso del sistema, colaborando además en el desarrollo del HTML
-          para garantizar una interfaz clara, organizada y funcional.
-        </p>
-      </div>
-    </article>
-
-  </div>
+</div>
 </section>
