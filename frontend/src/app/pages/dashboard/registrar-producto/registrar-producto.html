@@ -1,0 +1,481 @@
+<section class="seccion_panel_admin" id="crud_productos">
+
+    <h2>Registrar Producto</h2>
+
+    <form class="form_panel_admin" [formGroup]="productoForm" (ngSubmit)="registrarProducto()" novalidate>
+
+        <!-- ================================================= -->
+        <!-- SKU -->
+        <!-- ================================================= -->
+
+        <label for="producto_sku">
+            SKU
+        </label>
+
+        <input type="text" id="producto_sku" formControlName="sku" placeholder="Ej: MON-001" required minlength="3"
+            maxlength="20" pattern="[A-Za-z0-9-]+">
+
+        @if (
+        productoForm.controls.sku.touched &&
+        productoForm.controls.sku.hasError('required')
+        ) {
+        <small>
+            El SKU es obligatorio.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.sku.touched &&
+        productoForm.controls.sku.hasError('minlength')
+        ) {
+        <small>
+            El SKU debe tener al menos 3 caracteres.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.sku.touched &&
+        productoForm.controls.sku.hasError('maxlength')
+        ) {
+        <small>
+            El SKU no puede superar los 20 caracteres.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.sku.touched &&
+        productoForm.controls.sku.hasError('pattern')
+        ) {
+        <small>
+            El SKU solo puede contener letras, números y guiones.
+        </small>
+        }
+
+
+        <!-- ================================================= -->
+        <!-- NOMBRE -->
+        <!-- ================================================= -->
+
+        <label for="producto_nombre">
+            Nombre del Producto
+        </label>
+
+        <input type="text" id="producto_nombre" formControlName="nombre" placeholder="Ej: Monitor Gamer" required
+            minlength="3" maxlength="50">
+
+        @if (
+        productoForm.controls.nombre.touched &&
+        productoForm.controls.nombre.hasError('required')
+        ) {
+        <small>
+            El nombre del producto es obligatorio.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.nombre.touched &&
+        productoForm.controls.nombre.hasError('minlength')
+        ) {
+        <small>
+            El nombre debe tener al menos 3 caracteres.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.nombre.touched &&
+        productoForm.controls.nombre.hasError('maxlength')
+        ) {
+        <small>
+            El nombre no puede superar los 50 caracteres.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.nombre.touched &&
+        productoForm.controls.nombre.hasError('nombreInvalido')
+        ) {
+        <small>
+            El nombre debe contener al menos una letra.
+        </small>
+        }
+
+
+        <!-- ================================================= -->
+        <!-- CATEGORÍA -->
+        <!-- ================================================= -->
+
+        <label for="producto_categoria">
+            Categoría
+        </label>
+
+        <input type="text" id="producto_categoria" formControlName="categoria" placeholder="Ej: Tecnología" required
+            minlength="3" maxlength="30">
+
+        @if (
+        productoForm.controls.categoria.touched &&
+        productoForm.controls.categoria.hasError('required')
+        ) {
+        <small>
+            La categoría es obligatoria.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.categoria.touched &&
+        productoForm.controls.categoria.hasError('minlength')
+        ) {
+        <small>
+            La categoría debe tener al menos 3 caracteres.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.categoria.touched &&
+        productoForm.controls.categoria.hasError('maxlength')
+        ) {
+        <small>
+            La categoría no puede superar los 30 caracteres.
+        </small>
+        }
+
+
+        <!-- ================================================= -->
+        <!-- STOCK -->
+        <!-- ================================================= -->
+
+        <label for="producto_stock">
+            Stock
+        </label>
+
+        <input type="number" id="producto_stock" formControlName="stock" placeholder="0" min="0" max="100000" required>
+
+        @if (
+        productoForm.controls.stock.touched &&
+        productoForm.controls.stock.hasError('required')
+        ) {
+        <small>
+            El stock es obligatorio.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.stock.touched &&
+        productoForm.controls.stock.hasError('min')
+        ) {
+        <small>
+            El stock no puede ser negativo.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.stock.touched &&
+        productoForm.controls.stock.hasError('max')
+        ) {
+        <small>
+            El stock no puede superar las 100000 unidades.
+        </small>
+        }
+
+
+        <!-- ================================================= -->
+        <!-- PRECIO -->
+        <!-- ================================================= -->
+
+        <label for="producto_precio">
+            Precio
+        </label>
+
+        <input type="number" id="producto_precio" formControlName="precio" placeholder="$0" min="0.01" max="999999999"
+            step="0.01" required>
+
+        @if (
+        productoForm.controls.precio.touched &&
+        productoForm.controls.precio.hasError('required')
+        ) {
+        <small>
+            El precio es obligatorio.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.precio.touched &&
+        productoForm.controls.precio.hasError('min')
+        ) {
+        <small>
+            El precio debe ser mayor a $0.
+        </small>
+        }
+
+        @if (
+        productoForm.controls.precio.touched &&
+        productoForm.controls.precio.hasError('max')
+        ) {
+        <small>
+            El precio no puede superar $999.999.999.
+        </small>
+        }
+
+
+        <!-- ================================================= -->
+        <!-- ESTADO -->
+        <!-- ================================================= -->
+
+        <label for="producto_estado">
+            Estado
+        </label>
+
+        <select id="producto_estado" formControlName="estado" required>
+
+            <option value="activo">
+                Activo
+            </option>
+
+            <option value="inactivo">
+                Inactivo
+            </option>
+
+            <option value="suspendido">
+                Suspendido
+            </option>
+
+        </select>
+
+
+        <!-- ================================================= -->
+        <!-- PROVEEDOR -->
+        <!-- ================================================= -->
+
+        <div formGroupName="proveedor">
+
+            <label for="producto_proveedor">
+                Proveedor
+            </label>
+
+            <select id="producto_proveedor" formControlName="proveedorExistente" required>
+
+                <option value="">
+                    Seleccione un proveedor
+                </option>
+
+                <option value="nuevo">
+                    Nuevo proveedor
+                </option>
+
+                <option value="Proveedor 1">
+                    Proveedor 1
+                </option>
+
+                <option value="Proveedor 2">
+                    Proveedor 2
+                </option>
+
+                <option value="Proveedor 3">
+                    Proveedor 3
+                </option>
+
+
+            </select>
+
+            @if (
+            productoForm.controls.proveedor.controls.proveedorExistente.touched &&
+            productoForm.controls.proveedor.controls.proveedorExistente.hasError('required')
+            ) {
+            <small>
+                Debe seleccionar un proveedor.
+            </small>
+            }
+
+
+            <!-- ================================================= -->
+            <!-- NUEVO PROVEEDOR -->
+            <!-- ================================================= -->
+
+            @if (
+            productoForm.controls.proveedor.controls.proveedorExistente.value === 'nuevo'
+            ) {
+
+            <div class="nuevo_proveedor" formGroupName="nuevoProveedor">
+
+                <h3>
+                    Datos del nuevo proveedor
+                </h3>
+
+
+                <!-- RAZÓN SOCIAL -->
+
+                <label for="proveedor_razon_social">
+                    Razón Social
+                </label>
+
+                <input type="text" id="proveedor_razon_social" formControlName="razonSocial"
+                    placeholder="Ej: Tecnología Córdoba S.A." required minlength="3" maxlength="100">
+
+                @if (
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.touched &&
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.hasError('required')
+                ) {
+                <small>
+                    La razón social es obligatoria.
+                </small>
+                }
+
+                @if (
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.touched &&
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.hasError('minlength')
+                ) {
+                <small>
+                    La razón social debe tener al menos 3 caracteres.
+                </small>
+                }
+
+                @if (
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.touched &&
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.hasError('maxlength')
+                ) {
+                <small>
+                    La razón social no puede superar los 100 caracteres.
+                </small>
+                }
+
+
+                <!-- CUIT -->
+
+                <label for="proveedor_cuit">
+                    CUIT
+                </label>
+
+                <input type="text" id="proveedor_cuit" formControlName="cuit" placeholder="Ej: 30-12345678-9" required
+                    pattern="[0-9]{2}-[0-9]{8}-[0-9]{1}">
+
+                @if (
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.touched &&
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.hasError('required')
+                ) {
+                <small>
+                    El CUIT es obligatorio.
+                </small>
+                }
+
+                @if (
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.touched &&
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.hasError('pattern')
+                ) {
+                <small>
+                    El CUIT debe tener el formato 30-12345678-9.
+                </small>
+                }
+
+                @if (
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.touched &&
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.hasError('cuitInvalido')
+                ) {
+                <small>
+                    El CUIT ingresado no tiene un formato válido.
+                </small>
+                }
+
+
+                <!-- TELÉFONO -->
+
+                <label for="proveedor_telefono">
+                    Teléfono
+                </label>
+
+                <input type="tel" id="proveedor_telefono" formControlName="telefono" placeholder="Ej: 3515551234"
+                    required pattern="[0-9+\-\s()]{8,20}">
+
+                @if (
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.telefono.touched &&
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.telefono.hasError('required')
+                ) {
+                <small>
+                    El teléfono es obligatorio.
+                </small>
+                }
+
+                @if (
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.telefono.touched &&
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.telefono.hasError('pattern')
+                ) {
+                <small>
+                    Ingrese un número de teléfono válido.
+                </small>
+                }
+
+
+                <!-- EMAIL -->
+
+                <label for="proveedor_email">
+                    Email
+                </label>
+
+                <input type="email" id="proveedor_email" formControlName="email" placeholder="Ej: contacto@empresa.com"
+                    required>
+
+                @if (
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.email.touched &&
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.email.hasError('required')
+                ) {
+                <small>
+                    El email es obligatorio.
+                </small>
+                }
+
+                @if (
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.email.touched &&
+                productoForm.controls.proveedor.controls.nuevoProveedor.controls.email.hasError('email')
+                ) {
+                <small>
+                    Ingrese un email válido.
+                </small>
+                }
+
+            </div>
+
+            }
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- BOTONES -->
+        <!-- ================================================= -->
+
+        <div class="acciones_crud">
+
+            <button type="submit">
+
+                <i class="fa-solid fa-plus"></i>
+                Crear
+
+            </button>
+
+
+            <button type="button" (click)="editarProducto()">
+
+                <i class="fa-solid fa-pen"></i>
+                Editar
+
+            </button>
+
+
+            <button type="button" (click)="eliminarProducto()">
+
+                <i class="fa-solid fa-trash"></i>
+                Eliminar
+
+            </button>
+
+
+            <button type="button" (click)="limpiarFormulario()">
+
+                <i class="fa-solid fa-rotate"></i>
+                Limpiar
+
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
