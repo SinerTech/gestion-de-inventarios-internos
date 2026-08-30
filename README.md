@@ -1,52 +1,103 @@
 # Gestión de Inventarios Internos
 
-Sistema desarrollado para optimizar la gestión del inventario interno de una organización, permitiendo el control de stock, reducción de errores y mejora en los procesos administrativos.
+Sistema web desarrollado por el equipo **SinerTech** para optimizar la gestión del inventario interno de una organización, centralizando la información de productos, movimientos de stock y usuarios para mejorar la eficiencia operativa y facilitar la administración.
 
 ## 📌 Objetivo
 
-Centralizar la información del inventario para mejorar la eficiencia operativa, reducir pérdidas y facilitar la toma de decisiones.
+Desarrollar una solución tecnológica que permita centralizar y organizar la gestión del inventario interno de una organización, facilitando el control de stock, el registro de movimientos y la administración de la información relacionada con productos.
 
 ## ⚙️ Funcionalidades principales
 
-- Registro y gestión de productos
-- Control de stock
-- Visualización del inventario
-- Gestión de usuarios
-- Alertas de stock
-- Interfaz administrativa
+Actualmente, el sistema contempla las siguientes funcionalidades:
 
-## ▶️ Ejecución del sistema (maqueta visual)
+* Gestión y visualización de productos
+* Consulta y control del stock disponible
+* Registro de ingresos de stock
+* Registro de ajustes de stock
+* Gestión de ventas
 
-1. Descargar o clonar el repositorio
-2. Ingresar a la carpeta `frontend`
-3. Ejecutar con Live Server desde Visual Studio Code el archivo `index.html`
-4. La maqueta se visualizará automáticamente en el navegador web
+> Las funcionalidades se encuentran en desarrollo y pueden ampliarse o modificarse durante las siguientes etapas del proyecto.
 
+## ▶️ Ejecución del sistema
+
+### Frontend
+
+El frontend del proyecto está desarrollado utilizando **Angular**.
+
+Para ejecutar la aplicación:
+
+1. Clonar o descargar el repositorio.
+2. Ingresar a la carpeta `frontend`.
+3. Instalar las dependencias del proyecto:
+
+npm install
+
+4. Ejecutar la aplicación:
+
+ng serve -o
+
+5. Abrir en el navegador la dirección indicada por Angular, normalmente:
+
+http://localhost:4200
 
 ## 🧱 Estructura del proyecto
 
-- **backend/** → lógica del servidor, gestión de datos y base de datos  
-- **frontend/** → interfaz de usuario  
-- **maqueta/** → prototipos y diseño visual del sistema  
+gestion-de-inventarios-internos/
+│
+├── backend/
+│   └── Lógica del servidor, servicios y acceso a datos
+│
+├── frontend/
+│   └── Aplicación web desarrollada con Angular
+│
+└── maqueta/
+    └── Prototipos y recursos correspondientes a las primeras etapas
+        de diseño visual del sistema
 
-## 🛠️ Tecnologías (en progreso)
+## 🛠️ Tecnologías
 
-- Backend: ""
-- Frontend: HTML5, CSS3
-- Base de datos: ""
+### Frontend
+
+* Angular
+* TypeScript
+* HTML5
+* CSS3
+* Bootstrap
+* Bootstrap Icons
+
+### Backend
+
+* Proximamente
+
+### Base de datos
+
+* Proximamente
+
+### Herramientas de desarrollo
+
+* Visual Studio Code
+* Git
+* GitHub
+* Trello
+
+> El backend y la integración con la base de datos se desarrollaran proximamente.
 
 ## 🚧 Estado del proyecto
 
-- Actualmente el proyecto se encuentra en etapa de diseño y desarrollo de maqueta funcional.
+El proyecto se encuentra actualmente en **etapa de desarrollo**.
+
+Durante las primeras etapas se trabajó sobre una maqueta visual del sistema, que posteriormente fue migrada a una aplicación web desarrollada con **Angular y TypeScript**.
+
+Actualmente se continúa con el desarrollo de los componentes del frontend y la definición de la arquitectura del sistema.
 
 ## 👥 Equipo
 
-- Franco Abel Quispe
-- Ruffino Tobias Joel
-- Ana Paula Hartl
-- Lucas Guillermo Gomez Ponce
-- Ariel Nicolás Romano
+* Franco Abel Quispe
+* Ruffino Tobias Joel
+* Ana Paula Hartl
+* Lucas Guillermo Gomez Ponce
+* Ariel Nicolás Romano
 
 ## 📚 Contexto
 
-Proyecto desarrollado por el equipo SinerTech para el modulo FullStack.
+Proyecto desarrollado por el equipo **SinerTech** en el marco del módulo **FullStack**.
