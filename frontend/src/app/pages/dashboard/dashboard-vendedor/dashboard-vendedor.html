@@ -1,0 +1,47 @@
+<aside class="acceso_panel_admin">
+    <div class="opcion_panel_admin">
+        <span>Panel Principal</span>
+
+        <nav>
+            <ul>
+                <li>
+                    <a
+                        routerLink="/sinertech/dashboard-vendedor/inicio-dashboard"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        ariaCurrentWhenActive="page">
+
+                        <i class="bi bi-house-fill"></i>
+                        Inicio
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        routerLink="/sinertech/dashboard-vendedor/control-stock"
+                        routerLinkActive="active"
+                        ariaCurrentWhenActive="page">
+
+                        <i class="bi bi-boxes"></i>
+                        Control de Stock
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        routerLink="/sinertech/dashboard-vendedor/resumen-venta"
+                        routerLinkActive="active"
+                        ariaCurrentWhenActive="page">
+
+                        <i class="bi bi-cart-check-fill"></i>
+                        Resumen de Venta
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<main class="panel_control_admin">
+    <router-outlet></router-outlet>
+</main>

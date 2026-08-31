@@ -1,0 +1,98 @@
+<section class="seccion_panel_admin">
+    <h2>Control General de Stock</h2>
+    <form 
+        class="form_panel_admin"
+        (submit)="buscarProducto($event)">
+        <div class="row">
+            <div class="col-md-8">
+                <label for="buscar_producto" class="form-label">
+                    Buscar Producto
+                </label>
+                <input
+                    type="search"
+                    name="buscar_producto"
+                    id="buscar_producto"
+                    placeholder="Buscar producto"
+                    class="form-control"
+                    (input)="actualizarBusqueda($event)">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="form-label">&nbsp;</label>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    Buscar
+                </button>
+            </div>
+            <div class="acciones_crud">
+                @for (boton of configuracionActual.botonesFiltro; track boton) {
+                    <button type="button" class="btn btn-secondary">{{boton}}</button>
+                }
+            </div>
+        </div>
+    </form>
+    <h2 class="mt-5">Productos</h2>
+    <div class="row">
+        <div class="col-12">
+            <div class="overflow-hidden">
+                <table class="table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="border-bottom border-white">
+                            @for (encabezado of configuracionActual.encabezadosTabla; track encabezado) {
+                                <th scope="col">
+                                    {{encabezado}}
+                                </th>
+                            }
+                            @if (configuracionActual.accionesTabla.length > 0) {
+                                <th scope="col">Acciones</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (producto of productosFiltrados; track producto.id) {
+                            <tr class="border-bottom border-secondary">
+                                <th scope="row">
+                                    {{producto.id}}
+                                </th>
+                                <td>
+                                    {{producto.sku}}
+                                </td>
+                                <td>
+                                    {{producto.nombre}}
+                                </td>
+                                <td>
+                                    {{producto.categoria}}
+                                </td>
+                                <td>
+                                    {{producto.proveedor}}
+                                </td>
+                                <td>
+                                    {{producto.precioUnitario}}
+                                </td>
+                                <td>
+                                    {{producto.stock}}
+                                </td>
+                                <td>
+                                    <span class="badge" [class]="producto.claseEstado">
+                                        {{producto.estado}}
+                                    </span>
+                                </td>
+                                <td>
+                                    {{producto.ultimoIngreso}}
+                                </td>
+                                @if (configuracionActual.accionesTabla.length > 0) {
+                                    <td class="d-flex flex-row gap-2">
+                                        @for (accion of configuracionActual.accionesTabla; track accion.etiqueta) {
+                                            <button type="button">
+                                                <i [class]="accion.icono"></i>
+                                            </button>
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

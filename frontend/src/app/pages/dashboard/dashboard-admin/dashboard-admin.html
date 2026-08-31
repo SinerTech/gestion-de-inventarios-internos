@@ -1,0 +1,49 @@
+<div class="dashboard-admin">
+
+    <!-- SIDEBAR FIJO -->
+
+    <aside class="acceso_panel_admin">
+
+        <div class="opcion_panel_admin">
+
+            <span>Panel Principal</span>
+
+            <ul>
+
+                <li>
+                    <a routerLink="/sinertech/dashboard-admin/inicio-dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ariaCurrentWhenActive="page">
+                        <i class="bi bi-house-fill"></i>
+                        Inicio
+                    </a>
+                </li>
+
+                <li>
+                    <a routerLink="/sinertech/dashboard-admin/registro-producto" routerLinkActive="active" ariaCurrentWhenActive="page">
+                        <i class="bi bi-plus-circle-fill"></i>
+                        Registrar Producto
+                    </a>
+                </li>
+
+                <li>
+                    <a routerLink="/sinertech/dashboard-admin/control-stock" routerLinkActive="active" ariaCurrentWhenActive="page">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        Control Stock
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTENIDO QUE CAMBIA -->
+
+    <main class="panel_control_admin">
+
+        <router-outlet></router-outlet>
+
+    </main>
+
+</div>
