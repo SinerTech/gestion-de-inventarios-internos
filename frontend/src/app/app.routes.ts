@@ -6,7 +6,7 @@ import { AjusteStock } from './pages/dashboard/dashboard-supervisor/ajuste-stock
 import { ControlStock } from './shared/control-stock/control-stock';
 import { InicioDashboard } from './shared/inicio-dashboard/inicio-dashboard';
 import { Pagina404 } from './pages/pagina-404/pagina-404';
-import { Home } from './pages/home/home';
+import { LandingPage } from './pages/landing-page/landing-page';
 import { Login } from './auth/login/login';
 import { Registro } from './auth/registro/registro';
 import { DashboardAdmin } from './pages/dashboard/dashboard-admin/dashboard-admin';
@@ -22,11 +22,8 @@ export const routes: Routes = [
     {path: "registro", component: Registro},
     {path: "sinertech", component: MainLayout,
         children: [
-<<<<<<< HEAD
-=======
             {path: "quienes-somos" , component: QuienesSomos},
->>>>>>> develop
-            {path: "landing-page", component: Home},
+            {path: "landing-page", component: LandingPage},
             {path: "dashboard-supervisor", component: DashboardSupervisor,
                 children: [
                     { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full'},

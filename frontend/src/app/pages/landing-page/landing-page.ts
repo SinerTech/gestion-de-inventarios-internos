@@ -4,10 +4,10 @@ import { RouterLink } from '@angular/router';
 @Component({
   imports: [RouterLink],
   selector: 'app-home',
-  styleUrl: './home.css',
-  templateUrl: './home.html',
+  styleUrl: './landing-page.css',
+  templateUrl: './landing-page.html',
 })
-export class Home {
+export class LandingPage {
   titulo = 'Gestión Inteligente de Inventarios';
   descripcion =
     'Optimiza el control de stock de tu empresa mediante una plataforma moderna, segura y eficiente. Centraliza tu inventario en tiempo real, automatiza las alertas de reposición y toma decisiones estratégicas basadas en datos precisos. La solución definitiva para reducir costos operativos, evitar quiebres de stock y potenciar el crecimiento de tu negocio.';
