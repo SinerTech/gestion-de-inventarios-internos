@@ -246,6 +246,105 @@ export class DashboardService {
                     }
                 ]
             }
+        } else if  (tipoDashboard === 'vendedor') {
+            this.configuracionDashboard = {
+                nombre: 'Vendedor',
+                rol: 'Vendedor',
+                descripcion: 'Gestioná tus ventas y consultá el estado del inventario de forma centralizada. ',
+                accionesDisponibles: [ 
+                    'Gestionar ventas.',
+                    'Consultar información del inventario.',
+                    'Consultar el resumen de una transacion'
+                ],
+                informacionSistema: [
+                    {
+                        icono: 'bi-person-vcard-fill',
+                        etiqueta: 'Rol actual',
+                        valor: 'Vendedor'
+                    },
+                    {
+                        icono: 'bi-cart-check-fill',
+                        etiqueta: 'Módulo',
+                        valor: 'Gestión de Ventas'
+                    },
+                    {
+                        icono: 'bi-shop',
+                        etiqueta: 'Acceso',
+                        valor: 'Panel de Ventas'
+                    }
+                ],
+
+                accesosDirectos: [
+                    {
+                        icono: 'bi-boxes',
+                        etiqueta: 'Control de Stock',
+                        descripcion: 'Consultar el estado actual del inventario.',
+                        link: '/sinertech/dashboard-vendedor/control-stock'
+                    },
+                    {
+                        icono: 'bi-cart-check-fill',
+                        etiqueta: 'Resumen de Venta',
+                        descripcion: 'Consultar el resumen de una transaccion de venta.',
+                        link: '/sinertech/dashboard-vendedor/resumen-venta'
+                    }
+                ],
+                botonesFiltro: [
+                    'todos',
+                    'activo',
+                    'inactivo',
+                    'suspendido'
+                ],
+                encabezadosTabla: [
+                    'ID',
+                    'SKU',
+                    'Producto',
+                    'Categoría',
+                    'Proveedor',
+                    'Precio Unitario',
+                    'Stock',
+                    'Estado',
+                    'Último Ingreso'
+                ],
+                productos: [
+                    {
+                        id: '001',
+                        sku: 'PROD-001',
+                        nombre: 'Teclado Mecánico',
+                        categoria: 'Periféricos',
+                        proveedor: 'SinerTech',
+                        precioUnitario: '$25000',
+                        stock: 15,
+                        estado: 'Activo',
+                        claseEstado: 'bg-success',
+                        ultimoIngreso: '05/04/2026'
+                    },
+                    {
+                        id: '002',
+                        sku: 'PROD-002',
+                        nombre: 'Mouse Gamer',
+                        categoria: 'Periféricos',
+                        proveedor: 'SinerTech',
+                        precioUnitario: '$18500',
+                        stock: 8,
+                        estado: 'Activo',
+                        claseEstado: 'bg-success',
+                        ultimoIngreso: '12/04/2026'
+                    },
+                    {
+                        id: '003',
+                        sku: 'PROD-003',
+                        nombre: 'Monitor LED',
+                        categoria: 'Monitores',
+                        proveedor: 'SinerTech',
+                        precioUnitario: '$120000',
+                        stock: 3,
+                        estado: 'Activo',
+                        claseEstado: 'bg-warning',
+                        ultimoIngreso: '20/04/2026'
+                    }
+                ],
+                accionesTabla: []
+            };
         }
         return this.configuracionDashboard;
     }

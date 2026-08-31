@@ -1,0 +1,142 @@
+<section class="seccion_hero" id="hero">
+  <span class="badge_hero">
+    <i class="fa-solid fa-rocket"></i>
+    Nuestro Equipo
+  </span>
+
+  <h1>Quiénes <span>Somos</span></h1>
+
+  <p class="descripcion_hero">
+    Somos un equipo apasionado por la tecnología, la innovación y la
+    transformación digital. En <strong>SinerTech</strong> desarrollamos
+    soluciones de gestión de inventario que ayudan a las organizaciones a
+    optimizar sus procesos, mejorar el control de stock y tomar decisiones
+    más eficientes.
+  </p>
+
+  <div class="logo_hero">
+    <img src="logo/logo_icon.png" alt="SinerTech ícono">
+  </div>
+</section>
+
+<!-- =========================
+     MISION / VISION / VALORES
+========================== -->
+
+<section class="seccion_info" id="mission-vision-values">
+  <h2>Misión, Visión y Valores</h2>
+
+  <div class="grilla_valores">
+    <article class="card_valor">
+      <span class="icono_card_valor">
+        <i class="bi bi-bullseye"></i>
+      </span>
+      <h3>Misión</h3>
+      <p>
+        Desarrollar soluciones tecnológicas accesibles e innovadoras
+        que impulsen el crecimiento de las organizaciones.
+      </p>
+    </article>
+
+    <article class="card_valor">
+      <span class="icono_card_valor">
+        <i class="bi bi-binoculars"></i>
+      </span>
+      <h3>Visión</h3>
+      <p>
+        Ser referentes en transformación digital en Latinoamérica,
+        creando impacto real a través de la tecnología.
+      </p>
+    </article>
+
+    <article class="card_valor">
+      <span class="icono_card_valor">
+        <i class="bi bi-people-fill"></i>
+      </span>
+      <h3>Valores</h3>
+      <p>
+        Colaboración, excelencia, creatividad e integridad son los
+        pilares que guían cada proyecto que emprendemos.
+      </p>
+    </article>
+  </div>
+</section>
+
+<!-- =========================
+     NUESTRO EQUIPO
+========================== -->
+
+<section class="seccion_equipo" id="team">
+  <h2>Nuestro Equipo</h2>
+
+  <p class="subtitulo_equipo">
+    Las personas detrás de cada línea de código, diseño y estrategia
+    que da vida a SinerTech.
+  </p>
+
+  <!-- FILA SUPERIOR: LÍDERES (Product Owner & Scrum Master) -->
+
+  <div class="grilla_equipo grilla_equipo_lideres">
+
+  @for (integrante of integrantes.slice(0, 2); track integrante.id) {
+
+    <article class="card_miembro" [id]="integrante.id">
+
+      <div class="foto_miembro">
+        <img
+          [src]="integrante.imagen"
+          [alt]="integrante.alt"
+          loading="lazy">
+      </div>
+
+      <div class="info_miembro">
+        <h3>{{ integrante.nombre }}</h3>
+
+        <p class="rol_miembro">
+          {{ integrante.rol }}
+        </p>
+
+        <p class="bio_miembro">
+          {{ integrante.bio }}
+        </p>
+      </div>
+
+    </article>
+
+  }
+
+</div>
+
+  <!-- FILA INFERIOR: DESARROLLADORES -->
+
+  <div class="grilla_equipo grilla_equipo_devs">
+
+  @for (integrante of integrantes.slice(2); track integrante.id) {
+
+    <article class="card_miembro" [id]="integrante.id">
+
+      <div class="foto_miembro">
+        <img
+          [src]="integrante.imagen"
+          [alt]="integrante.alt"
+          loading="lazy">
+      </div>
+
+      <div class="info_miembro">
+        <h3>{{ integrante.nombre }}</h3>
+
+        <p class="rol_miembro">
+          {{ integrante.rol }}
+        </p>
+
+        <p class="bio_miembro">
+          {{ integrante.bio }}
+        </p>
+      </div>
+
+    </article>
+
+  }
+
+</div>
+</section>

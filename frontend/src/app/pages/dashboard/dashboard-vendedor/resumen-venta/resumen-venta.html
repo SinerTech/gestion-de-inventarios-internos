@@ -1,0 +1,185 @@
+<section class="seccion_panel_admin">
+
+    <h2>Registrar Venta</h2>
+
+    <form
+        class="form_panel_admin"
+        [formGroup]="ventaForm"
+        (ngSubmit)="finalizarTransaccion()">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="producto_venta">
+                        Producto
+                    </label>
+                    <select
+                        id="producto_venta"
+                        class="form-control"
+                        formControlName="producto">
+                        <option value="">
+                            Seleccionar producto
+                        </option>
+                        @for (producto of productos; track producto.valor) {
+                            <option [value]="producto.valor">
+                                {{ producto.nombre }}
+                            </option>
+                        }
+                    </select>
+                    @if (
+                        ventaForm.controls.producto.invalid &&
+                        ventaForm.controls.producto.touched
+                    ) {
+                        <small class="text-danger">
+                            Debe seleccionar un producto.
+                        </small>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <label for="cantidad_venta">
+                        Cantidad
+                    </label>
+                    <input
+                        type="number"
+                        id="cantidad_venta"
+                        class="form-control"
+                        min="1"
+                        formControlName="cantidad">
+                    @if (
+                        ventaForm.controls.cantidad.invalid &&
+                        ventaForm.controls.cantidad.touched
+                    ) {
+                        <small class="text-danger">
+                            La cantidad debe ser mayor a 0.
+                        </small>
+                    }
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <label for="cliente_venta">
+                        Cliente
+                    </label>
+                    <input
+                        type="text"
+                        id="cliente_venta"
+                        class="form-control"
+                        placeholder="Nombre del cliente"
+                        formControlName="cliente">
+                    @if (
+                        ventaForm.controls.cliente.invalid &&
+                        ventaForm.controls.cliente.touched
+                    ) {
+                        <small class="text-danger">
+                            El nombre del cliente es obligatorio.
+                        </small>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <label for="metodo_pago">
+                        Método de Pago
+                    </label>
+                    <select
+                        id="metodo_pago"
+                        class="form-control"
+                        formControlName="metodoPago">
+                        <option value="">
+                            Seleccionar
+                        </option>
+                        <option value="Efectivo">
+                            Efectivo
+                        </option>
+                        <option value="Débito">
+                            Tarjeta Débito
+                        </option>
+                        <option value="Crédito">
+                            Tarjeta Crédito
+                        </option>
+                        <option value="Código QR">
+                            Código QR
+                        </option>
+                        <option value="Transferencia">
+                            Transferencia
+                        </option>
+                    </select>
+                    @if (
+                        ventaForm.controls.metodoPago.invalid &&
+                        ventaForm.controls.metodoPago.touched
+                    ) {
+                        <small class="text-danger">
+                            Debe seleccionar un método de pago.
+                        </small>
+                    }
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <label for="observaciones">
+                        Observaciones
+                    </label>
+                    <textarea
+                        id="observaciones"
+                        class="form-control"
+                        placeholder="Agregar comentario"
+                        formControlName="observaciones">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="acciones_crud mt-4">
+            <button
+                type="submit"
+                class="btn btn-primary">
+                <i class="fa-solid fa-check"></i>
+                Finalizar Transacción
+            </button>
+        </div>
+    </form>
+    @if (ventaFinalizada) {
+        <div class="mt-5">
+            <h2>Resumen de Venta</h2>
+            <div class="form_panel_admin">
+                <p>
+                    <strong>Cliente:</strong>
+                    {{ ventaForm.value.cliente }}
+                </p>
+                <p>
+                    <strong>Producto:</strong>
+                    {{ productoSeleccionado }}
+                </p>
+                <p>
+                    <strong>Precio Unitario:</strong>
+                    ${{ precioUnitario }}
+                </p>
+                <p>
+                    <strong>Cantidad:</strong>
+                    {{ cantidadVendida }}
+                </p>
+
+                <hr>
+                
+                <p>
+                    <strong>Subtotal:</strong>
+                    ${{ subtotal }}
+                </p>
+                <p>
+                    <strong>IVA (21%):</strong>
+                    ${{ iva }}
+                </p>
+                <p>
+                    <strong>Total:</strong>
+                    ${{ total }}
+                </p>
+                <p>
+                    <strong>Método de Pago:</strong>
+                    {{ metodoPagoSeleccionado }}
+                </p>
+                @if (ventaForm.value.observaciones) {
+                    <p>
+                        <strong>Observaciones:</strong>
+                        {{ ventaForm.value.observaciones }}
+                    </p>
+                }
+            </div>
+        </div>
+    }
+</section>
