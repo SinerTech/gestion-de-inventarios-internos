@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { DashboardService } from '../../services/dashboard-service';
+import { DashboardService } from '../../services/dashboard/dashboard-service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
