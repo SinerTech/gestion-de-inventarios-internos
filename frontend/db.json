@@ -4,7 +4,7 @@
         {
             "idProducto": 1,
             "sku": "PROD-001",
-            "nombre": "Producto 1",
+            "nombreProducto": "Producto 1",
             "idCategoria": 1,
             "idProveedor": 1,
             "precioUnitario": 1500,
@@ -15,7 +15,7 @@
         {
             "idProducto": 2,
             "sku": "PROD-002",
-            "nombre": "Producto 2",
+            "nombreProducto": "Producto 2",
             "idCategoria": 1,
             "idProveedor": 1,
             "precioUnitario": 1750,
@@ -37,7 +37,7 @@
         {
             "idProducto": 4,
             "sku": "PROD-004",
-            "nombre": "Producto 4",
+            "nombreProducto": "Producto 4",
             "idCategoria": 3,
             "idProveedor": 3,
             "precioUnitario": 2050,
