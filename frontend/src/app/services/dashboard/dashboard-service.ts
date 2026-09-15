@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Dashboards } from '../../models/dashboard.models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DashboardService {
-    configuracionDashboard: any;
-    // Implementar la obtención de la configuración del dashboard con HTTPClient desde JSON server.
-    // obtenerConfiguracion()
-    // El nombre del usuario mostrado en la vista debe provenir del usuario logueado,
-    // no de la configuración del dashboard.
+    url = "http://localhost:3000/dashboards"
+    configuracionDashboard!: Dashboards;
+    private httpClient = inject(HttpClient)
+    
+    obtenerConfiguracion():Observable<Dashboards> {
+        return this.httpClient.get<Dashboards>(this.url)
+    }
 };
