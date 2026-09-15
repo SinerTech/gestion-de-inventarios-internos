@@ -5,7 +5,3 @@ export interface Proveedor {
     telefonoProveedor: string;
     emailProveedor: string;
 }
-
-export interface Proveedores {
-    proveedores: Proveedor[];
-}

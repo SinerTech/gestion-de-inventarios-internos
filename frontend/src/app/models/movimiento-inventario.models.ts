@@ -10,7 +10,3 @@ export interface MovimientoInventario {
     observaciones: string;
     numeroLoteFactura: string;
 }
-
-export interface MovimientosInventario {
-    movimientosInventario: MovimientoInventario[];
-}

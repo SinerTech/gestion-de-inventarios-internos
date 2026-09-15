@@ -5,7 +5,3 @@ export interface Cliente {
     telefonoCliente: string;
     emailCliente: string;
 }
-
-export interface Clientes {
-    clientes: Cliente[];
-}

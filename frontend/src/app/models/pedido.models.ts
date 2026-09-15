@@ -7,7 +7,3 @@ export interface Pedido {
     observaciones: string;
     total: number;
 }
-
-export interface Pedidos {
-    pedidos: Pedido[];
-}

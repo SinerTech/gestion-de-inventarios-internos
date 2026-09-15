@@ -10,7 +10,3 @@ export interface UsuarioLogueado {
     nombreUsuario: string;
     idRol: number;
 }
-
-export interface Usuarios {
-    usuarios: Usuario[];
-}

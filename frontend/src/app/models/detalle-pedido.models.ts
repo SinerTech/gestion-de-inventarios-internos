@@ -5,7 +5,3 @@ export interface DetallePedido {
     cantidad: number;
     precioUnitario: number;
 }
-
-export interface DetallesPedido {
-    detallesPedido: DetallePedido[];
-}
