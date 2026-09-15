@@ -8,7 +8,7 @@
             "idCategoria": 1,
             "idProveedor": 1,
             "precioUnitario": 1500,
-            "stock": 50,
+            "cantidadExistente": 50,
             "estado": "Activo",
             "ultimoIngreso": "2026-04-05T14:05:55"
         },
@@ -19,18 +19,18 @@
             "idCategoria": 1,
             "idProveedor": 1,
             "precioUnitario": 1750,
-            "stock": 33,
+            "cantidadExistente": 33,
             "estado": "Activo",
             "ultimoIngreso": "2026-04-07T16:15:35"
         },
         {
             "idProducto": 3,
             "sku": "PROD-003",
-            "nombre": "Producto 3",
+            "nombreProducto": "Producto 3",
             "idCategoria": 2,
             "idProveedor": 5,
             "precioUnitario": 5500,
-            "stock": 0,
+            "cantidadExistente": 0,
             "estado": "Inactivo",
             "ultimoIngreso": "2026-04-28T11:10:55"
         },
@@ -41,7 +41,7 @@
             "idCategoria": 3,
             "idProveedor": 3,
             "precioUnitario": 2050,
-            "stock": 64,
+            "cantidadExistente": 64,
             "estado": "Suspendido",
             "ultimoIngreso": "2026-05-03T09:05:55"
         }
