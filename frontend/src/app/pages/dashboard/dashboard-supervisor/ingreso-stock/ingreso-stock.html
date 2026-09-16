@@ -1,16 +1,14 @@
 <section class="seccion_panel_admin" id="ingresos">
     <h2>Registrar Ingresos</h2>
-    <form class="form_panel_admin" [formGroup]="formularioIngreso" (ngSubmit)="registrarIngreso()">
+    <form class="form_panel_admin" [formGroup]="formularioIngreso" (ngSubmit)="onEnviar()">
         <div class="row g-3">
             <div class="col-md-6">
                 <label for="ingreso_producto" class="form-label">Producto</label>
-                <select class="form-select" id="ingreso_producto" formControlName="producto">
+                <select class="form-select" id="ingreso_producto" formControlName="idProducto">
                     <option value="">Seleccionar</option>
-                    <option value="producto_1">Producto 1</option>
-                    <option value="producto_2">Producto 2</option>
-                    <option value="producto_3">Producto 3</option>
-                    <option value="producto_4">Producto 4</option>
-                    <option value="producto_5">Producto 5</option>
+                    @for (producto of listaProductos; track producto.id) {
+                    <option [value]="producto.id">{{ producto.nombreProducto }}</option>
+                    }
                 </select>
                 @if (
                     formularioIngreso.get('producto')?.invalid &&
@@ -21,7 +19,7 @@
             </div>
             <div class="col-md-6">
                 <label for="ingreso_cantidad" class="form-label">Cantidad</label>
-                <input type="number" class="form-control" id="ingreso_cantidad" formControlName="cantidad">
+                <input type="number" class="form-control" id="ingreso_cantidad" formControlName="cantidadMovimiento">
                 @if (
                     formularioIngreso.get('cantidad')?.invalid &&
                     formularioIngreso.get('cantidad')?.touched
@@ -31,11 +29,11 @@
             </div>
             <div class="col-md-6">
                 <label for="ingreso_proveedor" class="form-label">Proveedor</label>
-                <select class="form-select" id="ingreso_proveedor" formControlName="proveedor">
+                <select class="form-select" id="ingreso_proveedor" formControlName="idProveedor">
                     <option value="">Seleccionar</option>
-                    <option value="proveedor_1">Proveedor 1</option>
-                    <option value="proveedor_2">Proveedor 2</option>
-                    <option value="proveedor_3">Proveedor 3</option>
+                    @for (proveedor of listaProveedores; track proveedor.id) {
+                    <option [value]="proveedor.id">{{ proveedor.razonSocial }}</option>
+                    }
                 </select>
                 @if (
                     formularioIngreso.get('proveedor')?.invalid &&
@@ -45,22 +43,8 @@
                 }
             </div>
             <div class="col-md-6">
-                <label for="ingreso_supervisor" class="form-label">Supervisor</label>
-                <select class="form-select" id="ingreso_supervisor" formControlName="supervisor">
-                    <option value="">Seleccionar</option>
-                    <option value="supervisor_1">Supervisor 1</option>
-                    <option value="supervisor_2">Supervisor 2</option>
-                </select>
-                @if (
-                    formularioIngreso.get('supervisor')?.invalid &&
-                    formularioIngreso.get('supervisor')?.touched
-                ) {
-                    <div class="text-danger">Debe seleccionar un supervisor.</div>
-                }
-            </div>
-            <div class="col-md-6">
                 <label for="ingreso_lote_factura" class="form-label">Número de Lote / Factura</label>
-                <input type="text" class="form-control" id="ingreso_lote_factura" formControlName="loteFactura">
+                <input type="text" class="form-control" id="ingreso_lote_factura" formControlName="numeroLoteFactura">
                 @if (
                     formularioIngreso.get('loteFactura')?.invalid &&
                     formularioIngreso.get('loteFactura')?.touched
@@ -72,11 +56,11 @@
             </div>
             <div class="col-md-6">
                 <label for="ingreso_motivo" class="form-label">Motivo</label>
-                <select class="form-select" id="ingreso_motivo" formControlName="motivo">
+                <select class="form-select" id="ingreso_motivo" formControlName="idMotivo">
                     <option value="">Seleccionar</option>
-                    <option value="compra">Compra a proveedor</option>
-                    <option value="devolucion">Devolución</option>
-                    <option value="ajuste">Ajuste de inventario</option>
+                    @for (motivo of listaMotivos; track motivo.id) {
+                    <option [value]="motivo.id">{{ motivo.nombreMotivo }}</option>
+                    }
                 </select>
                 @if (
                     formularioIngreso.get('motivo')?.invalid &&
