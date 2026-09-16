@@ -1,313 +1,352 @@
 {
-    "usuarios": [],
-    "productos": [
-        {
-            "idProducto": 1,
-            "sku": "PROD-001",
-            "nombreProducto": "Producto 1",
-            "idCategoria": 1,
-            "idProveedor": 1,
-            "precioUnitario": 1500,
-            "cantidadExistente": 50,
-            "estado": "Activo",
-            "ultimoIngreso": "2026-04-05T14:05:55"
-        },
-        {
-            "idProducto": 2,
-            "sku": "PROD-002",
-            "nombreProducto": "Producto 2",
-            "idCategoria": 1,
-            "idProveedor": 1,
-            "precioUnitario": 1750,
-            "cantidadExistente": 33,
-            "estado": "Activo",
-            "ultimoIngreso": "2026-04-07T16:15:35"
-        },
-        {
-            "idProducto": 3,
-            "sku": "PROD-003",
-            "nombreProducto": "Producto 3",
-            "idCategoria": 2,
-            "idProveedor": 5,
-            "precioUnitario": 5500,
-            "cantidadExistente": 0,
-            "estado": "Inactivo",
-            "ultimoIngreso": "2026-04-28T11:10:55"
-        },
-        {
-            "idProducto": 4,
-            "sku": "PROD-004",
-            "nombreProducto": "Producto 4",
-            "idCategoria": 3,
-            "idProveedor": 3,
-            "precioUnitario": 2050,
-            "cantidadExistente": 64,
-            "estado": "Suspendido",
-            "ultimoIngreso": "2026-05-03T09:05:55"
-        }
-    ],
-    "categorias": [
-        { "idCategoria": 1, "nombreCategoria": "Categoría 1" },
-        { "idCategoria": 2, "nombreCategoria": "Categoría 2" },
-        { "idCategoria": 3, "nombreCategoria": "Categoría 3" }
-    ],
-    "proveedores": [
-        {
-            "idProveedor": 1,
-            "razonSocial": "Proveedor 1",
-            "cuit": "20-12345678-9",
-            "telefonoProveedor": "011-1234-5678",
-            "emailProveedor": "contacto@proveedor1.com"
-        },
-        {
-            "idProveedor": 3,
-            "razonSocial": "Proveedor 3",
-            "cuit": "20-34567890-1",
-            "telefonoProveedor": "011-3456-7890",
-            "emailProveedor": "contacto@proveedor3.com"
-        },
-        {
-            "idProveedor": 5,
-            "razonSocial": "Proveedor 5",
-            "cuit": "20-56789012-3",
-            "telefonoProveedor": "011-5678-9012",
-            "emailProveedor": "contacto@proveedor5.com"
-        }
-    ],
-    "roles": [
-        {"idRol": 1, "nombreRol": "administrador"},
-        {"idRol": 2, "nombreRol": "supervisor"},
-        {"idRol": 3, "nombreRol": "vendedor"}
-    ],
-    "dashboards": {
-        "administrador": {
-            "rol": "Administrador",
-            "descripcion": "Gestioná la información de los productos y consultá el estado del inventario de forma centralizada. Desde este panel podrás registrar, modificar y administrar productos, además de visualizar el stock disponible.",
-            "accionesDisponibles": [
-                "Administrar el inventario.",
-                "Dar de alta o baja a productos.",
-                "Consultar información del inventario."
-            ],
-            "informacionSistema": [
-                {
-                    "icono": "bi-person-vcard-fill",
-                    "etiqueta": "Rol actual",
-                    "valor": "Administrador"
-                },
-                {
-                    "icono": "bi-box-seam-fill",
-                    "etiqueta": "Módulo",
-                    "valor": "Administración del Inventario"
-                },
-                {
-                    "icono": "bi-binoculars-fill",
-                    "etiqueta": "Acceso",
-                    "valor": "Panel de Administración"
-                }
-            ],
-            "accesosDirectos": [
-                {
-                    "icono": "bi-box-seam-fill",
-                    "etiqueta": "Gestionar Productos",
-                    "descripcion": "Crear, consultar, modificar y eliminar productos del inventario.",
-                    "link": "/sinertech/dashboard-admin/registro-producto"
-                },
-                {
-                    "icono": "bi-boxes",
-                    "etiqueta": "Visualizar Stock",
-                    "descripcion": "Consultar los productos disponibles y el estado actual del inventario.",
-                    "link": "/sinertech/dashboard-admin/control-stock"
-                }
-            ],
-            "botonesFiltro": [
-                "todos",
-                "activo",
-                "inactivo",
-                "suspendido"
-            ],
-            "encabezadosTabla": [
-                "ID",
-                "SKU",
-                "Producto",
-                "Categoría",
-                "Proveedor",
-                "Precio Unitario",
-                "Stock",
-                "Estado",
-                "Último Ingreso"
-            ],
-            "accionesTabla": [
-                {
-                    "icono": "bi bi-pencil-fill"
-                },
-                {
-                    "icono": "bi bi-trash-fill"
-                }
-            ]
-        },
-        "supervisor": {
-            "rol": "Supervisor",
-            "descripcion": "Gestioná y supervisá las operaciones de inventario de forma centralizada. Desde este panel podrás supervisar ingresos de mercadería, movimientos de stock y operaciones de control de forma centralizada.",
-            "accionesDisponibles": [
-                "Supervisar ingresos de mercadería.",
-                "Controlar movimientos de stock.",
-                "Consultar información del inventario."
-            ],
-            "informacionSistema": [
-                {
-                    "icono": "bi-person-vcard-fill",
-                    "etiqueta": "Rol actual",
-                    "valor": "Supervisor"
-                },
-                {
-                    "icono": "bi-box-seam-fill",
-                    "etiqueta": "Módulo",
-                    "valor": "Gestión de Inventarios"
-                },
-                {
-                    "icono": "bi-binoculars-fill",
-                    "etiqueta": "Acceso",
-                    "valor": "Panel de Supervisión"
-                }
-            ],
-            "accesosDirectos": [
-                {
-                    "icono": "bi-box-seam-fill",
-                    "etiqueta": "Ingreso de Stock",
-                    "descripcion": "Registrar y consultar ingresos de mercadería en el inventario.",
-                    "link": "/sinertech/dashboard-supervisor/ingreso-stock"
-                },
-                {
-                    "icono": "bi-arrow-left-right",
-                    "etiqueta": "Movimientos",
-                    "descripcion": "Supervisar los movimientos realizados sobre el stock.",
-                    "link": "/sinertech/dashboard-supervisor/ajuste-stock"
-                },
-                {
-                    "icono": "bi-boxes",
-                    "etiqueta": "Visualizar Stock",
-                    "descripcion": "Buscar productos y consultar el estado actual del inventario.",
-                    "link": "/sinertech/dashboard-supervisor/control-stock"
-                }
-            ],
-            "botonesFiltro": [
-                "todos",
-                "activo",
-                "inactivo",
-                "suspendido"
-            ],
-            "encabezadosTabla": [
-                "ID",
-                "SKU",
-                "Producto",
-                "Categoría",
-                "Proveedor",
-                "Precio Unitario",
-                "Stock",
-                "Estado",
-                "Último Ingreso"
-            ],
-            "accionesTabla": []
-        },
-        "vendedor": {
-            "rol": "Vendedor",
-            "descripcion": "Gestioná tus ventas y consultá el estado del inventario de forma centralizada. ",
-            "accionesDisponibles": [
-                "Gestionar ventas.",
-                "Consultar información del inventario.",
-                "Consultar el resumen de una transacion"
-            ],
-            "informacionSistema": [
-                {
-                    "icono": "bi-person-vcard-fill",
-                    "etiqueta": "Rol actual",
-                    "valor": "Vendedor"
-                },
-                {
-                    "icono": "bi-cart-check-fill",
-                    "etiqueta": "Módulo",
-                    "valor": "Gestión de Ventas"
-                },
-                {
-                    "icono": "bi-shop",
-                    "etiqueta": "Acceso",
-                    "valor": "Panel de Ventas"
-                }
-            ],
-            "accesosDirectos": [
-                {
-                    "icono": "bi-boxes",
-                    "etiqueta": "Control de Stock",
-                    "descripcion": "Consultar el estado actual del inventario.",
-                    "link": "/sinertech/dashboard-vendedor/control-stock"
-                },
-                {
-                    "icono": "bi-cart-check-fill",
-                    "etiqueta": "Resumen de Venta",
-                    "descripcion": "Consultar el resumen de una transaccion de venta.",
-                    "link": "/sinertech/dashboard-vendedor/resumen-venta"
-                }
-            ],
-            "botonesFiltro": [
-                "todos",
-                "activo",
-                "inactivo",
-                "suspendido"
-            ],
-            "encabezadosTabla": [
-                "ID",
-                "SKU",
-                "Producto",
-                "Categoría",
-                "Proveedor",
-                "Precio Unitario",
-                "Stock",
-                "Estado",
-                "Último Ingreso"
-            ],
-            "accionesTabla": []
-        }
+  "usuarios": [],
+  "productos": [
+    {
+      "id": "1",
+      "sku": "PROD-001",
+      "nombreProducto": "Producto 1",
+      "idCategoria": "1",
+      "idProveedor": "1",
+      "precioUnitario": 1500,
+      "cantidadExistente": 60,
+      "estado": "Activo",
+      "ultimoIngreso": "2026-09-16T03:42:24.457Z"
     },
-    "quienes-somos": [
+    {
+      "id": "2",
+      "sku": "PROD-002",
+      "nombreProducto": "Producto 2",
+      "idCategoria": "1",
+      "idProveedor": "1",
+      "precioUnitario": 1750,
+      "cantidadExistente": 58,
+      "estado": "Activo",
+      "ultimoIngreso": "2026-09-16T03:43:55.009Z"
+    },
+    {
+      "id": "3",
+      "sku": "PROD-003",
+      "nombreProducto": "Producto 3",
+      "idCategoria": "2",
+      "idProveedor": "5",
+      "precioUnitario": 5500,
+      "cantidadExistente": 0,
+      "estado": "Inactivo",
+      "ultimoIngreso": "2026-04-28T11:10:55"
+    },
+    {
+      "id": "4",
+      "sku": "PROD-004",
+      "nombreProducto": "Producto 4",
+      "idCategoria": "3",
+      "idProveedor": "3",
+      "precioUnitario": 2050,
+      "cantidadExistente": 64,
+      "estado": "Suspendido",
+      "ultimoIngreso": "2026-05-03T09:05:55"
+    }
+  ],
+  "categorias": [
+    {
+      "id": "1",
+      "nombreCategoria": "Categoría 1"
+    },
+    {
+      "id": "2",
+      "nombreCategoria": "Categoría 2"
+    },
+    {
+      "id": "3",
+      "nombreCategoria": "Categoría 3"
+    }
+  ],
+  "proveedores": [
+    {
+      "id": "1",
+      "razonSocial": "Proveedor 1",
+      "cuit": "20-12345678-9",
+      "telefonoProveedor": "011-1234-5678",
+      "emailProveedor": "contacto@proveedor1.com"
+    },
+    {
+      "id": "3",
+      "razonSocial": "Proveedor 3",
+      "cuit": "20-34567890-1",
+      "telefonoProveedor": "011-3456-7890",
+      "emailProveedor": "contacto@proveedor3.com"
+    },
+    {
+      "id": "5",
+      "razonSocial": "Proveedor 5",
+      "cuit": "20-56789012-3",
+      "telefonoProveedor": "011-5678-9012",
+      "emailProveedor": "contacto@proveedor5.com"
+    }
+  ],
+  "roles": [
+    {
+      "id": "1",
+      "nombreRol": "administrador"
+    },
+    {
+      "id": "2",
+      "nombreRol": "supervisor"
+    },
+    {
+      "id": "3",
+      "nombreRol": "vendedor"
+    }
+  ],
+  "tipos-movimiento": [
+    {
+      "id": "1",
+      "nombreTipoMovimiento": "Ingreso"
+    },
+    {
+      "id": "2",
+      "nombreTipoMovimiento": "Ajuste"
+    }
+  ],
+  "motivos": [
+    {
+      "id": "1",
+      "nombreMotivo": "Compra a proveedor"
+    },
+    {
+      "id": "2",
+      "nombreMotivo": "Devolución de cliente"
+    }
+  ],
+  "movimientos-inventario": [],
+  "dashboards": {
+    "administrador": {
+      "rol": "Administrador",
+      "descripcion": "Gestioná la información de los productos y consultá el estado del inventario de forma centralizada. Desde este panel podrás registrar, modificar y administrar productos, además de visualizar el stock disponible.",
+      "accionesDisponibles": [
+        "Administrar el inventario.",
+        "Dar de alta o baja a productos.",
+        "Consultar información del inventario."
+      ],
+      "informacionSistema": [
         {
-            "id": "member-nicolas",
-            "nombre": "Nicolás Romano",
-            "rol": "Product Owner",
-            "imagen": "equipo/carlos.png",
-            "alt": "Nicolás Romano",
-            "bio": "Responsable de definir la visión del producto y priorizar el backlog para maximizar el valor entregado al cliente."
+          "icono": "bi-person-vcard-fill",
+          "etiqueta": "Rol actual",
+          "valor": "Administrador"
         },
         {
-            "id": "member-tobias",
-            "nombre": "Tobías Ruffino",
-            "rol": "Scrum Master",
-            "imagen": "equipo/mateo.png",
-            "alt": "Tobías Ruffino",
-            "bio": "Facilitador ágil que guía al equipo en la adopción de Scrum, eliminando impedimentos y fomentando la mejora continua."
+          "icono": "bi-box-seam-fill",
+          "etiqueta": "Módulo",
+          "valor": "Administración del Inventario"
         },
         {
-            "id": "member-ana",
-            "nombre": "Ana Paula Hartl",
-            "rol": "Desarrolladora",
-            "imagen": "equipo/valentina.png",
-            "alt": "Ana Paula Hartl",
-            "bio": "Responsable del diseño visual y estilos de la plataforma mediante CSS, participando también en el desarrollo del HTML para crear una interfaz moderna, atractiva y adaptable a los usuarios."
-        },
-        {
-            "id": "member-lucas",
-            "nombre": "Lucas Gómez Ponce",
-            "rol": "Desarrollador",
-            "imagen": "equipo/franco.png",
-            "alt": "Lucas Gómez Ponce",
-            "bio": "Encargado de la elaboración de diagramas y modelado visual del sistema, participando también en el desarrollo del HTML para asegurar una estructura moderna y bien organizada de la aplicación."
-        },
-        {
-            "id": "member-franco",
-            "nombre": "Franco Quispe",
-            "rol": "Desarrollador",
-            "imagen": "equipo/diego.png",
-            "alt": "Franco Quispe",
-            "bio": "Responsable de la documentación y estructuración de los casos de uso del sistema, colaborando además en el desarrollo del HTML para garantizar una interfaz clara, organizada y funcional."
+          "icono": "bi-binoculars-fill",
+          "etiqueta": "Acceso",
+          "valor": "Panel de Administración"
         }
-    ]
+      ],
+      "accesosDirectos": [
+        {
+          "icono": "bi-box-seam-fill",
+          "etiqueta": "Gestionar Productos",
+          "descripcion": "Crear, consultar, modificar y eliminar productos del inventario.",
+          "link": "/sinertech/dashboard-admin/registro-producto"
+        },
+        {
+          "icono": "bi-boxes",
+          "etiqueta": "Visualizar Stock",
+          "descripcion": "Consultar los productos disponibles y el estado actual del inventario.",
+          "link": "/sinertech/dashboard-admin/control-stock"
+        }
+      ],
+      "botonesFiltro": [
+        "todos",
+        "activo",
+        "inactivo",
+        "suspendido"
+      ],
+      "encabezadosTabla": [
+        "ID",
+        "SKU",
+        "Producto",
+        "Categoría",
+        "Proveedor",
+        "Precio Unitario",
+        "Stock",
+        "Estado",
+        "Último Ingreso"
+      ],
+      "accionesTabla": [
+        {
+          "icono": "bi bi-pencil-fill"
+        },
+        {
+          "icono": "bi bi-trash-fill"
+        }
+      ]
+    },
+    "supervisor": {
+      "rol": "Supervisor",
+      "descripcion": "Gestioná y supervisá las operaciones de inventario de forma centralizada. Desde este panel podrás supervisar ingresos de mercadería, movimientos de stock y operaciones de control de forma centralizada.",
+      "accionesDisponibles": [
+        "Supervisar ingresos de mercadería.",
+        "Controlar movimientos de stock.",
+        "Consultar información del inventario."
+      ],
+      "informacionSistema": [
+        {
+          "icono": "bi-person-vcard-fill",
+          "etiqueta": "Rol actual",
+          "valor": "Supervisor"
+        },
+        {
+          "icono": "bi-box-seam-fill",
+          "etiqueta": "Módulo",
+          "valor": "Gestión de Inventarios"
+        },
+        {
+          "icono": "bi-binoculars-fill",
+          "etiqueta": "Acceso",
+          "valor": "Panel de Supervisión"
+        }
+      ],
+      "accesosDirectos": [
+        {
+          "icono": "bi-box-seam-fill",
+          "etiqueta": "Ingreso de Stock",
+          "descripcion": "Registrar y consultar ingresos de mercadería en el inventario.",
+          "link": "/sinertech/dashboard-supervisor/ingreso-stock"
+        },
+        {
+          "icono": "bi-arrow-left-right",
+          "etiqueta": "Movimientos",
+          "descripcion": "Supervisar los movimientos realizados sobre el stock.",
+          "link": "/sinertech/dashboard-supervisor/ajuste-stock"
+        },
+        {
+          "icono": "bi-boxes",
+          "etiqueta": "Visualizar Stock",
+          "descripcion": "Buscar productos y consultar el estado actual del inventario.",
+          "link": "/sinertech/dashboard-supervisor/control-stock"
+        }
+      ],
+      "botonesFiltro": [
+        "todos",
+        "activo",
+        "inactivo",
+        "suspendido"
+      ],
+      "encabezadosTabla": [
+        "ID",
+        "SKU",
+        "Producto",
+        "Categoría",
+        "Proveedor",
+        "Precio Unitario",
+        "Stock",
+        "Estado",
+        "Último Ingreso"
+      ],
+      "accionesTabla": []
+    },
+    "vendedor": {
+      "rol": "Vendedor",
+      "descripcion": "Gestioná tus ventas y consultá el estado del inventario de forma centralizada. ",
+      "accionesDisponibles": [
+        "Gestionar ventas.",
+        "Consultar información del inventario.",
+        "Consultar el resumen de una transacion"
+      ],
+      "informacionSistema": [
+        {
+          "icono": "bi-person-vcard-fill",
+          "etiqueta": "Rol actual",
+          "valor": "Vendedor"
+        },
+        {
+          "icono": "bi-cart-check-fill",
+          "etiqueta": "Módulo",
+          "valor": "Gestión de Ventas"
+        },
+        {
+          "icono": "bi-shop",
+          "etiqueta": "Acceso",
+          "valor": "Panel de Ventas"
+        }
+      ],
+      "accesosDirectos": [
+        {
+          "icono": "bi-boxes",
+          "etiqueta": "Control de Stock",
+          "descripcion": "Consultar el estado actual del inventario.",
+          "link": "/sinertech/dashboard-vendedor/control-stock"
+        },
+        {
+          "icono": "bi-cart-check-fill",
+          "etiqueta": "Resumen de Venta",
+          "descripcion": "Consultar el resumen de una transaccion de venta.",
+          "link": "/sinertech/dashboard-vendedor/resumen-venta"
+        }
+      ],
+      "botonesFiltro": [
+        "todos",
+        "activo",
+        "inactivo",
+        "suspendido"
+      ],
+      "encabezadosTabla": [
+        "ID",
+        "SKU",
+        "Producto",
+        "Categoría",
+        "Proveedor",
+        "Precio Unitario",
+        "Stock",
+        "Estado",
+        "Último Ingreso"
+      ],
+      "accionesTabla": []
+    }
+  },
+  "quienes-somos": [
+    {
+      "id": "member-nicolas",
+      "nombre": "Nicolás Romano",
+      "rol": "Product Owner",
+      "imagen": "equipo/carlos.png",
+      "alt": "Nicolás Romano",
+      "bio": "Responsable de definir la visión del producto y priorizar el backlog para maximizar el valor entregado al cliente."
+    },
+    {
+      "id": "member-tobias",
+      "nombre": "Tobías Ruffino",
+      "rol": "Scrum Master",
+      "imagen": "equipo/mateo.png",
+      "alt": "Tobías Ruffino",
+      "bio": "Facilitador ágil que guía al equipo en la adopción de Scrum, eliminando impedimentos y fomentando la mejora continua."
+    },
+    {
+      "id": "member-ana",
+      "nombre": "Ana Paula Hartl",
+      "rol": "Desarrolladora",
+      "imagen": "equipo/valentina.png",
+      "alt": "Ana Paula Hartl",
+      "bio": "Responsable del diseño visual y estilos de la plataforma mediante CSS, participando también en el desarrollo del HTML para crear una interfaz moderna, atractiva y adaptable a los usuarios."
+    },
+    {
+      "id": "member-lucas",
+      "nombre": "Lucas Gómez Ponce",
+      "rol": "Desarrollador",
+      "imagen": "equipo/franco.png",
+      "alt": "Lucas Gómez Ponce",
+      "bio": "Encargado de la elaboración de diagramas y modelado visual del sistema, participando también en el desarrollo del HTML para asegurar una estructura moderna y bien organizada de la aplicación."
+    },
+    {
+      "id": "member-franco",
+      "nombre": "Franco Quispe",
+      "rol": "Desarrollador",
+      "imagen": "equipo/diego.png",
+      "alt": "Franco Quispe",
+      "bio": "Responsable de la documentación y estructuración de los casos de uso del sistema, colaborando además en el desarrollo del HTML para garantizar una interfaz clara, organizada y funcional."
+    }
+  ]
 }
