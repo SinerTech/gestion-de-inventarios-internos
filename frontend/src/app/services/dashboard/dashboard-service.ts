@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Dashboards } from '../../models/dashboard.models';
 
 @Injectable({
@@ -12,6 +12,22 @@ export class DashboardService {
     private httpClient = inject(HttpClient)
     
     obtenerConfiguracion():Observable<Dashboards> {
-        return this.httpClient.get<Dashboards>(this.url)
+        return this.httpClient.get<Dashboards>(this.url).pipe(
+            catchError(this.handleError)
+        )
+    }
+
+    private handleError(error: HttpErrorResponse) {
+        if (error.status === 0) {
+            console.error('Ocurrió un error del lado del cliente:', error.error);
+        } else {
+            console.error(
+                `El backend devolvió el código ${error.status}:`,
+                error.error
+            );
+        }
+        return throwError(
+            () => new Error('Ocurrió un error. Intente nuevamente más tarde.')
+        );
     }
 };
