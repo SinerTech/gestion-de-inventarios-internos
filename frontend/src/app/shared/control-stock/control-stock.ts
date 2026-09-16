@@ -4,9 +4,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Producto } from '../../models/producto.models';
 import { ProductoService } from '../../services/producto/producto-service';
 import { ConfiguracionDashboard } from '../../models/dashboard.models';
+import { Categoria } from '../../models/categoria.models';
+import { Proveedor } from '../../models/proveedor.models';
+import { CategoriaService } from '../../services/categoria/categoria-service';
+import { ProveedorService } from '../../services/proveedor/proveedor-service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
-  imports: [],
+  imports: [CurrencyPipe],
   selector: 'app-control-stock',
   styleUrl: './control-stock.css',
   templateUrl: './control-stock.html',
@@ -14,12 +19,16 @@ import { ConfiguracionDashboard } from '../../models/dashboard.models';
 export class ControlStock implements OnInit {
   listaProductos: Producto[] = [];
   productosFiltrados: Producto[] = [];
+  listaCategorias: Categoria [] = [];
+  listaProveedores: Proveedor [] = [];
   terminoBusqueda = '';
   configuracionActual!: ConfiguracionDashboard;
 
   private servicioDashboard = inject(DashboardService);
   private ruta = inject(ActivatedRoute);
   private productService = inject(ProductoService);
+  private categoriaService = inject(CategoriaService);
+  private proveedorService = inject(ProveedorService);
   private cdr = inject(ChangeDetectorRef);
 
   readonly estadoClases: Record<string, string> = {
@@ -41,8 +50,7 @@ export class ControlStock implements OnInit {
           this.cdr.detectChanges();
           console.info('complete');
         }
-      })
-
+      });
     this.productService.obtenerListaProductos().subscribe({
       next: (data) => {
         console.log(data);
@@ -55,7 +63,45 @@ export class ControlStock implements OnInit {
           this.cdr.detectChanges();
           console.info('complete');
         }
-      })
+      });
+    this.categoriaService.obtenerCategorias().subscribe({
+      next: (data) => {
+        console.log(data);
+        this.listaCategorias = data;
+      },
+      error: (e) => 
+        console.error('Error al cargar categorias', e),
+      complete: () =>{
+          this.cdr.detectChanges();
+          console.info('complete');
+        }
+    });
+    this.proveedorService.obtenerProveedores().subscribe({
+      next: (data) => {
+        console.log(data);
+        this.listaProveedores = data;
+      },
+      error: (e) => 
+        console.error('Error al cargar proveedores', e),
+      complete: () =>{
+          this.cdr.detectChanges();
+          console.info('complete');
+        }
+    });
+  }
+
+  obtenerNombreCategoria(idCategoria: string): string {
+    const categoria = this.listaCategorias.find(
+        categoria => categoria.id === idCategoria
+    );
+    return categoria?.nombreCategoria ?? 'Sin categoría';
+  }
+
+  obtenerRazonSocialProveedor(idProveedor: string): string {
+      const proveedor = this.listaProveedores.find(
+          proveedor => proveedor.id === idProveedor
+      );
+      return proveedor?.razonSocial ?? 'Sin proveedor';
   }
 
   actualizarBusqueda(event: Event): void {
@@ -85,5 +131,16 @@ export class ControlStock implements OnInit {
             .toLowerCase()
             .includes(this.terminoBusqueda)
       );
+  }
+
+  filtrarPorEstado(estado: string): void {
+    if (estado === 'todos') {
+      this.productosFiltrados = [...this.listaProductos];
+      return;
+    }
+
+    this.productosFiltrados = this.listaProductos.filter(
+      producto => producto.estado.toLowerCase() === estado.toLowerCase()
+    );
   }
 }

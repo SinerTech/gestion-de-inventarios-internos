@@ -26,7 +26,7 @@
                 </div>
                 <div class="acciones_crud">
                     @for (boton of configuracionActual.botonesFiltro; track boton) {
-                        <button type="button" class="btn btn-secondary">{{boton}}</button>
+                        <button type="button" class="btn btn-secondary" (click)="filtrarPorEstado(boton)">{{ boton }}</button>
                     }
                 </div>
             </div>
@@ -52,25 +52,25 @@
                             @for (producto of productosFiltrados; track producto.id) {
                                 <tr class="border-bottom border-secondary">
                                     <th scope="row">
-                                        {{producto.id}}
+                                        {{ producto.id }}
                                     </th>
                                     <td>
-                                        {{producto.sku}}
+                                        {{ producto.sku }}
                                     </td>
                                     <td>
-                                        {{producto.nombreProducto}}
+                                        {{ producto.nombreProducto }}
                                     </td>
                                     <td>
-                                        {{producto.idCategoria}}
+                                        {{ obtenerNombreCategoria(producto.idCategoria) }}
                                     </td>
                                     <td>
-                                        {{producto.idProveedor}}
+                                        {{ obtenerRazonSocialProveedor(producto.idProveedor) }}
                                     </td>
                                     <td>
-                                        {{producto.precioUnitario}}
+                                        {{ producto.precioUnitario | currency: 'USD':'symbol':'1.2-2' }}
                                     </td>
                                     <td>
-                                        {{producto.cantidadExistente}}
+                                        {{ producto.cantidadExistente }}
                                     </td>
                                     <td>
                                         <span class="badge" [class]="estadoClases[producto.estado] ?? 'bg-light'">
