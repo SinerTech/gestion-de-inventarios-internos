@@ -72,7 +72,7 @@ export class IngresoStock implements OnInit {
                 this.listaMotivos = data;
             },
             error: (e) =>
-                console.error('Error al cargar productos', e),
+                console.error('Error al cargar motivos', e),
             complete: () => {
                 this.cdr.detectChanges();
                 console.info('complete');
@@ -80,76 +80,81 @@ export class IngresoStock implements OnInit {
         });
     };
 
-    onEnviar(): void {
-    if (this.formularioIngreso.invalid) {
-        this.formularioIngreso.markAllAsTouched();
-        return;
+    get motivosIngresoFiltrados() {
+        const idsIngreso = ['1', '2']
+        return this.listaMotivos.filter(motivo => idsIngreso.includes(motivo.id));
     }
-    this.tiposMovimientoService.obtenerTiposMovimiento().subscribe({
-        next: (data) => {
-            const tipoIngreso = data.find(
-                tipo => tipo.nombreTipoMovimiento === 'Ingreso'
-            );
-            if (!tipoIngreso) {
-                console.error("No se encontró el tipo de movimiento 'Ingreso'");
-                return;
-            }
-            const movimiento: MovimientoInventario = {
-                idProducto: this.formularioIngreso.value.idProducto,
-                cantidadMovimiento: this.formularioIngreso.value.cantidadMovimiento,
-                idProveedor: this.formularioIngreso.value.idProveedor,
-                numeroLoteFactura: this.formularioIngreso.value.numeroLoteFactura,
-                idMotivo: this.formularioIngreso.value.idMotivo,
-                observaciones: this.formularioIngreso.value.observaciones,
-                idUsuario: this.idUsuarioActual,
-                idTipoMovimiento: tipoIngreso.id,
-                fechaHoraMovimiento: new Date().toISOString()
-            };
-            this.movimientoService.registrarMovimiento(movimiento).subscribe({
-                next: () => {
-                    console.log('Movimiento enviado:', movimiento);
-                    console.log('ID del producto en movimiento:', movimiento.idProducto);
-                    console.log('Lista de productos:', this.listaProductos);
-                    const producto = this.listaProductos.find(
-                        producto => producto.id === movimiento.idProducto
-                    );
-                    if (!producto) {
-                        console.error('No se encontró el producto seleccionado.')
-                        return;
-                    }
-                    const productoActualizado: Producto = {
-                        id: producto.id,
-                        sku: producto.sku,
-                        nombreProducto: producto.nombreProducto,
-                        idCategoria: producto.idCategoria,
-                        idProveedor: producto.idProveedor,
-                        precioUnitario: producto.precioUnitario,
-                        cantidadExistente: producto.cantidadExistente + movimiento.cantidadMovimiento,
-                        estado: producto.estado,
-                        ultimoIngreso: movimiento.fechaHoraMovimiento
-                    };
-                    this.productosService.actualizarCantidadExistente(producto.id, productoActualizado).subscribe({
-                        next: (data) => {
-                            console.log('Producto actualizado', data);
-                            this.formularioIngreso.reset();
-                        },
-                        error: (e) => {
-                            console.error('Error al actualizar el producto', e)
-                        }
-                    });
-                },
-                error: (e) => {
-                    console.error('Error al registrar movimiento', e);
-                }
-            });
-        },
-        error: (e) => {
-            console.error('Error al buscar el tipo de movimiento', e);
-        },
-        complete: () => {
-            this.cdr.detectChanges();
-            console.info('complete');
+
+    onEnviarIngreso(): void {
+        if (this.formularioIngreso.invalid) {
+            this.formularioIngreso.markAllAsTouched();
+            return;
         }
-    });
+        this.tiposMovimientoService.obtenerTiposMovimiento().subscribe({
+            next: (data) => {
+                const tipoIngreso = data.find(
+                    tipo => tipo.nombreTipoMovimiento === 'Ingreso'
+                );
+                if (!tipoIngreso) {
+                    console.error("No se encontró el tipo de movimiento 'Ingreso'");
+                    return;
+                }
+                const movimiento: MovimientoInventario = {
+                    idProducto: this.formularioIngreso.value.idProducto,
+                    cantidadMovimiento: this.formularioIngreso.value.cantidadMovimiento,
+                    idProveedor: this.formularioIngreso.value.idProveedor,
+                    numeroLoteFactura: this.formularioIngreso.value.numeroLoteFactura,
+                    idMotivo: this.formularioIngreso.value.idMotivo,
+                    observaciones: this.formularioIngreso.value.observaciones,
+                    idUsuario: this.idUsuarioActual,
+                    idTipoMovimiento: tipoIngreso.id,
+                    fechaHoraMovimiento: new Date().toISOString()
+                };
+                this.movimientoService.registrarMovimiento(movimiento).subscribe({
+                    next: () => {
+                        console.log('Movimiento enviado:', movimiento);
+                        console.log('ID del producto en movimiento:', movimiento.idProducto);
+                        console.log('Lista de productos:', this.listaProductos);
+                        const producto = this.listaProductos.find(
+                            producto => producto.id === movimiento.idProducto
+                        );
+                        if (!producto) {
+                            console.error('No se encontró el producto seleccionado.')
+                            return;
+                        }
+                        const productoActualizado: Producto = {
+                            id: producto.id,
+                            sku: producto.sku,
+                            nombreProducto: producto.nombreProducto,
+                            idCategoria: producto.idCategoria,
+                            idProveedor: producto.idProveedor,
+                            precioUnitario: producto.precioUnitario,
+                            cantidadExistente: producto.cantidadExistente + movimiento.cantidadMovimiento,
+                            estado: producto.estado,
+                            ultimoIngreso: movimiento.fechaHoraMovimiento
+                        };
+                        this.productosService.actualizarCantidadExistente(producto.id, productoActualizado).subscribe({
+                            next: (data) => {
+                                console.log('Producto actualizado', data);
+                                this.formularioIngreso.reset();
+                            },
+                            error: (e) => {
+                                console.error('Error al actualizar el producto', e)
+                            }
+                        });
+                    },
+                    error: (e) => {
+                        console.error('Error al registrar movimiento', e);
+                    }
+                });
+            },
+            error: (e) => {
+                console.error('Error al buscar el tipo de movimiento', e);
+            },
+            complete: () => {
+                this.cdr.detectChanges();
+                console.info('complete');
+            }
+        });
     }   
 }

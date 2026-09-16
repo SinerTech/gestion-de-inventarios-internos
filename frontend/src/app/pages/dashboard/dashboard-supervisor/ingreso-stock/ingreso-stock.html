@@ -1,6 +1,6 @@
 <section class="seccion_panel_admin" id="ingresos">
     <h2>Registrar Ingresos</h2>
-    <form class="form_panel_admin" [formGroup]="formularioIngreso" (ngSubmit)="onEnviar()">
+    <form class="form_panel_admin" [formGroup]="formularioIngreso" (ngSubmit)="onEnviarIngreso()">
         <div class="row g-3">
             <div class="col-md-6">
                 <label for="ingreso_producto" class="form-label">Producto</label>
@@ -11,8 +11,8 @@
                     }
                 </select>
                 @if (
-                    formularioIngreso.get('producto')?.invalid &&
-                    formularioIngreso.get('producto')?.touched
+                    formularioIngreso.get('idProducto')?.invalid &&
+                    formularioIngreso.get('idProducto')?.touched
                 ) {
                     <div class="text-danger">Debe seleccionar un producto.</div>
                 }
@@ -21,8 +21,8 @@
                 <label for="ingreso_cantidad" class="form-label">Cantidad</label>
                 <input type="number" class="form-control" id="ingreso_cantidad" formControlName="cantidadMovimiento">
                 @if (
-                    formularioIngreso.get('cantidad')?.invalid &&
-                    formularioIngreso.get('cantidad')?.touched
+                    formularioIngreso.get('cantidadMovimiento')?.invalid &&
+                    formularioIngreso.get('cantidadMovimiento')?.touched
                 ) {
                     <div class="text-danger">Debe ingresar una cantidad válida.</div>
                 }
@@ -36,8 +36,8 @@
                     }
                 </select>
                 @if (
-                    formularioIngreso.get('proveedor')?.invalid &&
-                    formularioIngreso.get('proveedor')?.touched
+                    formularioIngreso.get('idProveedor')?.invalid &&
+                    formularioIngreso.get('idProveedor')?.touched
                 ) {
                     <div class="text-danger">Debe seleccionar un proveedor.</div>
                 }
@@ -46,8 +46,8 @@
                 <label for="ingreso_lote_factura" class="form-label">Número de Lote / Factura</label>
                 <input type="text" class="form-control" id="ingreso_lote_factura" formControlName="numeroLoteFactura">
                 @if (
-                    formularioIngreso.get('loteFactura')?.invalid &&
-                    formularioIngreso.get('loteFactura')?.touched
+                    formularioIngreso.get('numeroLoteFactura')?.invalid &&
+                    formularioIngreso.get('numeroLoteFactura')?.touched
                 ) {
                     <div class="text-danger">
                         Debe ingresar el número de lote o factura.
@@ -58,13 +58,13 @@
                 <label for="ingreso_motivo" class="form-label">Motivo</label>
                 <select class="form-select" id="ingreso_motivo" formControlName="idMotivo">
                     <option value="">Seleccionar</option>
-                    @for (motivo of listaMotivos; track motivo.id) {
+                    @for (motivo of motivosIngresoFiltrados; track motivo.id) {
                     <option [value]="motivo.id">{{ motivo.nombreMotivo }}</option>
                     }
                 </select>
                 @if (
-                    formularioIngreso.get('motivo')?.invalid &&
-                    formularioIngreso.get('motivo')?.touched
+                    formularioIngreso.get('idMotivo')?.invalid &&
+                    formularioIngreso.get('idMotivo')?.touched
                 ) {
                     <div class="text-danger">
                         Debe seleccionar un motivo.
