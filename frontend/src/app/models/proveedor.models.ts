@@ -1,5 +1,5 @@
 export interface Proveedor {
-    idProveedor: number;
+    id: string;
     razonSocial: string;
     cuit: string;
     telefonoProveedor: string;

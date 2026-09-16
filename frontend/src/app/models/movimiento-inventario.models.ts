@@ -1,10 +1,10 @@
 export interface MovimientoInventario {
-    idMovimiento: number;
-    idProducto: number;
-    idUsuario: number;
-    idProveedor: number;
-    idMotivo: number;
-    idTipoMovimiento: number;
+    id?: string;
+    idProducto: string;
+    idUsuario: string;
+    idProveedor: string;
+    idMotivo: string;
+    idTipoMovimiento: string;
     cantidadMovimiento: number;
     fechaHoraMovimiento: string;
     observaciones: string;

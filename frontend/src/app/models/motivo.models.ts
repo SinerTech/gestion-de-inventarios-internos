@@ -1,4 +1,4 @@
 export interface Motivo {
-    idMotivo: number;
+    id: string;
     nombreMotivo: string;
 }

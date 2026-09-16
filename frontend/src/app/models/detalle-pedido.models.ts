@@ -1,7 +1,7 @@
 export interface DetallePedido {
-    idDetallePedido: number;
-    idPedido: number;
-    idProducto: number;
+    id: string;
+    idPedido: string;
+    idProducto: string;
     cantidad: number;
     precioUnitario: number;
 }

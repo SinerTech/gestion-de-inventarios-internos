@@ -1,7 +1,7 @@
 export interface Pedido {
-    idPedido: number;
-    idCliente: number;
-    idUsuario: number;
+    id: string;
+    idCliente: string;
+    idUsuario: string;
     fechaHoraPedido: string;
     metodoPago: string;
     observaciones: string;

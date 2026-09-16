@@ -1,4 +1,4 @@
 export interface TipoMovimiento {
-    idTipoMovimiento: number;
+    id: string;
     nombreTipoMovimiento: string;
 }
