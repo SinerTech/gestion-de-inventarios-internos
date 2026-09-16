@@ -114,7 +114,27 @@
     },
     {
       "id": "2",
-      "nombreMotivo": "Devolución de cliente"
+      "nombreMotivo": "Devolucion de cliente"
+    },
+    {
+      "id": "3",
+      "nombreMotivo": "Reconteo de inventario"
+    },
+    {
+      "id": "4",
+      "nombreMotivo": "Producto encontrado"
+    },
+    {
+      "id": "5",
+      "nombreMotivo": "Producto dañado"
+    },
+    {
+      "id": "6",
+      "nombreMotivo": "Error de carga"
+    },
+    {
+      "id": "7",
+      "nombreMotivo": "Perdida"
     }
   ],
   "movimientos-inventario": [],
