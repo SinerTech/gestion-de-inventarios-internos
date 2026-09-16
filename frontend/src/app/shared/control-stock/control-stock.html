@@ -49,10 +49,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for (producto of productosFiltrados; track producto.idProducto) {
+                            @for (producto of productosFiltrados; track producto.id) {
                                 <tr class="border-bottom border-secondary">
                                     <th scope="row">
-                                        {{producto.idProducto}}
+                                        {{producto.id}}
                                     </th>
                                     <td>
                                         {{producto.sku}}
