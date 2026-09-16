@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, OnInit } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Producto } from '../../models/producto.models';
 
@@ -12,5 +12,9 @@ export class ProductoService {
     
     obtenerListaProductos():Observable<Producto[]> {
         return this.httpClient.get<Producto[]>(this.url)
+    }
+
+    actualizarCantidadExistente(id: string, producto: Producto): Observable<Producto> {
+        return this.httpClient.put<Producto>(`${this.url}/${id}`, producto)
     }
 }
