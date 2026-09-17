@@ -9,6 +9,8 @@ import { Motivo } from '../../../../models/motivo.models';
 import { MotivoService } from '../../../../services/motivo/motivo-service';
 import { TipoMovimientoService } from '../../../../services/tipo-movimiento/tipo-movimiento-service';
 import { MovimientoInventario } from '../../../../models/movimiento-inventario.models';
+import { ProductoProveedor } from '../../../../models/producto-proveedor';
+import { ProductoProveedorService } from '../../../../services/producto-proveedor/producto-proveedor-service';
 
 @Component({
     imports: [ReactiveFormsModule],
@@ -28,6 +30,7 @@ export class IngresoStock implements OnInit {
     private proveedorService = inject(ProveedorService)
     private motivoService = inject(MotivoService)
     private tiposMovimientoService = inject(TipoMovimientoService)
+    private productoProveedorService = inject(ProductoProveedorService)
     private cdr = inject(ChangeDetectorRef)
 
     formularioIngreso: FormGroup = this.formBuilder.group({
@@ -127,19 +130,30 @@ export class IngresoStock implements OnInit {
                             sku: producto.sku,
                             nombreProducto: producto.nombreProducto,
                             idCategoria: producto.idCategoria,
-                            idProveedor: producto.idProveedor,
                             precioUnitario: producto.precioUnitario,
                             cantidadExistente: producto.cantidadExistente + movimiento.cantidadMovimiento,
                             estado: producto.estado,
                             ultimoIngreso: movimiento.fechaHoraMovimiento
                         };
+                        const productoProveedor: ProductoProveedor = {
+                            idProducto: this.formularioIngreso.value.idProducto,
+                            idProveedor: this.formularioIngreso.value.idProveedor
+                            };
                         this.productosService.actualizarCantidadExistente(producto.id, productoActualizado).subscribe({
-                            next: (data) => {
-                                console.log('Producto actualizado', data);
-                                this.formularioIngreso.reset();
+                            next: () => {
+                                console.log('Producto actualizado');
                             },
                             error: (e) => {
                                 console.error('Error al actualizar el producto', e)
+                            }
+                        });
+                        this.productoProveedorService.registrarRelacion(productoProveedor).subscribe({
+                            next: () => {
+                                console.log('Relacion registrada');
+                                this.formularioIngreso.reset();
+                            },
+                            error: (e) => {
+                                console.error('Error al registrar la relación', e)
                             }
                         });
                     },
