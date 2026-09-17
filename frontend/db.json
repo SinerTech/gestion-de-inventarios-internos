@@ -6,18 +6,16 @@
       "sku": "PROD-001",
       "nombreProducto": "Producto 1",
       "idCategoria": "1",
-      "idProveedor": "1",
       "precioUnitario": 1500,
       "cantidadExistente": 60,
       "estado": "Activo",
-      "ultimoIngreso": "2026-09-16T03:42:24.457Z"
+      "ultimoIngreso": "2026-09-17T00:59:25.532Z"
     },
     {
       "id": "2",
       "sku": "PROD-002",
       "nombreProducto": "Producto 2",
       "idCategoria": "1",
-      "idProveedor": "1",
       "precioUnitario": 1750,
       "cantidadExistente": 58,
       "estado": "Activo",
@@ -28,7 +26,6 @@
       "sku": "PROD-003",
       "nombreProducto": "Producto 3",
       "idCategoria": "2",
-      "idProveedor": "5",
       "precioUnitario": 5500,
       "cantidadExistente": 0,
       "estado": "Inactivo",
@@ -39,11 +36,32 @@
       "sku": "PROD-004",
       "nombreProducto": "Producto 4",
       "idCategoria": "3",
-      "idProveedor": "3",
       "precioUnitario": 2050,
       "cantidadExistente": 64,
       "estado": "Suspendido",
       "ultimoIngreso": "2026-05-03T09:05:55"
+    }
+  ],
+  "productos-proveedores": [
+    {
+      "id": "1",
+      "idProducto": "1",
+      "idProveedor": "1"
+    },
+    {
+      "id": "2",
+      "idProducto": "2",
+      "idProveedor": "1"
+    },
+    {
+      "id": "3",
+      "idProducto": "3",
+      "idProveedor": "5"
+    },
+    {
+      "id": "4",
+      "idProducto": "4",
+      "idProveedor": "3"
     }
   ],
   "categorias": [
