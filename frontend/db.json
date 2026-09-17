@@ -292,7 +292,7 @@
       "accionesDisponibles": [
         "Gestionar ventas.",
         "Consultar información del inventario.",
-        "Consultar el resumen de una transacion"
+        "Consultar el resumen de una transacción"
       ],
       "informacionSistema": [
         {
@@ -321,7 +321,7 @@
         {
           "icono": "bi-cart-check-fill",
           "etiqueta": "Resumen de Venta",
-          "descripcion": "Consultar el resumen de una transaccion de venta.",
+          "descripcion": "Consultar el resumen de una transacción de venta.",
           "link": "/sinertech/dashboard-vendedor/resumen-venta"
         }
       ],

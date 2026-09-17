@@ -1,4 +1,10 @@
-@if (configuracionActual) {
+@if (cargando) {
+    <p role="status">Cargando información del dashboard...</p>
+} @else if (mensajeError) {
+    <div class="alert alert-danger" role="alert">
+        {{mensajeError}}
+    </div>
+} @else if (configuracionActual) {
     <section class="inicio_dashboard_admin" id="inicio_dashboard_supervisor">
         <h1>Sistema de Gestión de Inventarios Internos</h1>
         <article>
@@ -32,7 +38,7 @@
     <div class="row">
         <div class="col-6">
             <section class="seccion_info">
-                <h3>Desde este panel podás</h3>
+                <h3>Desde este panel podrás</h3>
                 <div class="grilla_valores">
                     <ul class="list-unstyled">
                         @for (accion of configuracionActual.accionesDisponibles; track accion) {
@@ -51,7 +57,7 @@
                 <ul class="list-unstyled">
                     @for (info of configuracionActual.informacionSistema; track info.etiqueta) {
                     <li class="p-1">
-                        <i class="bi" [class]=info.icono></i>
+                        <i class="bi" [class]="info.icono"></i>
                         {{info.etiqueta}}: {{info.valor}}
                     </li>
                     }
@@ -64,4 +70,8 @@
             <p>Una gestión eficiente comienza con información organizada.</p>
         </blockquote>
     </section>
+} @else {
+    <div class="alert alert-info" role="status">
+        No hay informacion para mostrar en este Dashboard.
+    </div>
 }

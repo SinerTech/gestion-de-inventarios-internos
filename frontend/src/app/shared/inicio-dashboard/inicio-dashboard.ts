@@ -11,6 +11,9 @@ import { ConfiguracionDashboard } from '../../models/dashboard.models';
 })
 export class InicioDashboard implements OnInit {
   configuracionActual?: ConfiguracionDashboard;
+  cargando = true;
+  mensajeError = '';
+
   private servicioDashboard = inject(DashboardService);
   private ruta = inject(ActivatedRoute);
   private cdr = inject(ChangeDetectorRef)
@@ -20,15 +23,17 @@ export class InicioDashboard implements OnInit {
       this.servicioDashboard.obtenerConfiguracion().subscribe({
         next: (data) => {
           console.log(data);
-          this.configuracionActual = data[tipoDashboard];
+          this.configuracionActual = data?.[tipoDashboard];
+          this.cargando = false;
+          this.cdr.markForCheck();
         },
-        error: (e) =>
-          console.error('Error al cargar la información del sistema', e),
-        complete: () => {
-          this.cdr.detectChanges();
-          console.info('complete');
-        }
-      })
+        error: (e) => {
+          this.mensajeError = 'No se pudo cargar la información del dashboard. Intentá nuevamente mas tarde.';
+          this.cargando = false;
+          console.error('Error al cargar la información del sistema', e);
+          this.cdr.markForCheck();
+        },
+      });
   }
 }
 
