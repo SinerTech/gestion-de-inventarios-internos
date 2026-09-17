@@ -9,6 +9,8 @@ import { Proveedor } from '../../models/proveedor.models';
 import { CategoriaService } from '../../services/categoria/categoria-service';
 import { ProveedorService } from '../../services/proveedor/proveedor-service';
 import { CurrencyPipe } from '@angular/common';
+import { ProductoProveedor } from '../../models/producto-proveedor';
+import { ProductoProveedorService } from '../../services/producto-proveedor/producto-proveedor-service';
 
 @Component({
   imports: [CurrencyPipe],
@@ -19,8 +21,9 @@ import { CurrencyPipe } from '@angular/common';
 export class ControlStock implements OnInit {
   listaProductos: Producto[] = [];
   productosFiltrados: Producto[] = [];
-  listaCategorias: Categoria [] = [];
-  listaProveedores: Proveedor [] = [];
+  listaCategorias: Categoria[] = [];
+  listaProveedores: Proveedor[] = [];
+  listaProductosProveedores: ProductoProveedor[] = []
   terminoBusqueda = '';
   configuracionActual!: ConfiguracionDashboard;
 
@@ -29,6 +32,7 @@ export class ControlStock implements OnInit {
   private productService = inject(ProductoService);
   private categoriaService = inject(CategoriaService);
   private proveedorService = inject(ProveedorService);
+  private productoProveedorService = inject(ProductoProveedorService);
   private cdr = inject(ChangeDetectorRef);
 
   readonly estadoClases: Record<string, string> = {
@@ -88,6 +92,18 @@ export class ControlStock implements OnInit {
           console.info('complete');
         }
     });
+    this.productoProveedorService.obtenerProductosProveedores().subscribe({
+      next: (data) => {
+        console.log(data);
+        this.listaProductosProveedores = data;
+      },
+      error: (e) => 
+        console.error('Error al cargar relaciones productos-proveedores', e),
+      complete: () =>{
+          this.cdr.detectChanges();
+          console.info('complete');
+        }
+    });
   }
 
   obtenerNombreCategoria(idCategoria: string): string {
@@ -142,5 +158,18 @@ export class ControlStock implements OnInit {
     this.productosFiltrados = this.listaProductos.filter(
       producto => producto.estado.toLowerCase() === estado.toLowerCase()
     );
+  }
+
+  obtenerProveedoresProducto(idProducto: string): Proveedor[] {
+  const relaciones = this.listaProductosProveedores.filter(
+    relacion => relacion.idProducto === idProducto
+  );
+  return relaciones
+    .map(relacion =>
+      this.listaProveedores.find(
+        proveedor => proveedor.id === relacion.idProveedor
+      )
+    )
+    .filter((proveedor): proveedor is Proveedor => proveedor !== undefined);
   }
 }

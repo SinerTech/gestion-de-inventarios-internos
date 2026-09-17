@@ -64,7 +64,9 @@
                                         {{ obtenerNombreCategoria(producto.idCategoria) }}
                                     </td>
                                     <td>
-                                        {{ obtenerRazonSocialProveedor(producto.idProveedor) }}
+                                        @for (proveedor of obtenerProveedoresProducto(producto.id); track proveedor.id) {
+                                            <span>{{ proveedor.razonSocial }}</span>
+                                            }
                                     </td>
                                     <td>
                                         {{ producto.precioUnitario | currency: 'USD':'symbol':'1.2-2' }}
