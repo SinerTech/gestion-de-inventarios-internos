@@ -127,7 +127,6 @@ export class AjusteStock implements OnInit {
                         sku: producto.sku,
                         nombreProducto: producto.nombreProducto,
                         idCategoria: producto.idCategoria,
-                        idProveedor: producto.idProveedor,
                         precioUnitario: producto.precioUnitario,
                         cantidadExistente: nuevaCantidad,
                         estado: producto.estado,
