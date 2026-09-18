@@ -1,7 +1,20 @@
 <section class="seccion_panel_admin">
 
     <h2>Registrar Venta</h2>
-
+    @if (cargandoProductos) {
+        <p role="status">Cargando Productos...</p>
+    } @else if (mensajeErrorProductos) {
+        <div class="alert alert-danger" role="alert">
+            {{ mensajeErrorProductos }}
+        </div>
+    } @else if (productos.length === 0) {
+        <p role="status">No hay productos registrados</p>
+    }
+    @if (mensajeErrorVenta) {
+        <div class="alert alert-danger" role="alert">
+            {{ mensajeErrorVenta }}
+        </div>
+    }
     <form
         class="form_panel_admin"
         [formGroup]="ventaForm"
@@ -19,9 +32,11 @@
                         <option value="">
                             Seleccionar producto
                         </option>
-                        @for (producto of productos; track producto.valor) {
-                            <option [value]="producto.valor">
-                                {{ producto.nombre }}
+                        @for (producto of productos; track producto.id) {
+                            <option
+                                [value]="producto.id"
+                                [disabled]="producto.estado !== 'Activo' || producto.cantidadExistente <= 0">
+                                {{ producto.nombreProducto }} - Stock: {{ producto.cantidadExistente }}
                             </option>
                         }
                     </select>
@@ -59,18 +74,24 @@
                     <label for="cliente_venta">
                         Cliente
                     </label>
-                    <input
-                        type="text"
+                    <select
                         id="cliente_venta"
                         class="form-control"
                         placeholder="Nombre del cliente"
                         formControlName="cliente">
+                        <option value="">Seleccionar cliente</option>
+                    @for (cliente of clientes; track cliente.id) {
+                        <option [value]="cliente.id">
+                            {{ cliente.nombreCliente }} {{ cliente.apellidoCliente }}
+                        </option>
+                    }
+                    </select>
                     @if (
                         ventaForm.controls.cliente.invalid &&
                         ventaForm.controls.cliente.touched
                     ) {
                         <small class="text-danger">
-                            El nombre del cliente es obligatorio.
+                            Debe seleccionar un cliente
                         </small>
                     }
                 </div>
@@ -125,13 +146,63 @@
                 </div>
             </div>
         </div>
+        <div class="mt-3">
+            <button
+                type="button"
+                class="btn btn-secondary"
+                [disabled]="guardandoVenta || ventaPendienteRevision || cargandoProductos || !!mensajeErrorProductos"
+                (click)="agregarProducto()">
+                Agregar producto al pedido
+            </button>
+        </div>
+
+        @if (itemsVenta.length > 0) {
+            <div class="table-responsive mt-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio unitario</th>
+                            <th>Subtotal</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of itemsVenta; track item.idProducto) {
+                            <tr>
+                                <td>{{ item.nombreProducto }}</td>
+                                <td>{{ item.cantidad }}</td>
+                                <td>${{ item.precioUnitario }}</td>
+                                <td>${{ item.cantidad * item.precioUnitario }}</td>
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-danger btn-sm"
+                                        [disabled]="guardandoVenta || ventaPendienteRevision"
+                                        (click)="quitarProducto(item.idProducto)">
+                                        Quitar
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <p>
+                    <strong> Subtotal del pedido:</strong>
+                    ${{ subtotalPedido}}
+                </p>
+            </div>
+        }
         <div class="acciones_crud mt-4">
             <button
                 type="submit"
-                class="btn btn-primary">
+                class="btn btn-primary"
+                [disabled]="guardandoVenta || ventaPendienteRevision || cargandoProductos || !!mensajeErrorProductos || productos.length === 0">
                 <i class="fa-solid fa-check"></i>
-                Finalizar Transacción
-            </button>
+                {{ guardandoVenta ? 'Guardando venta...' : 'Finalizar Transacción' }}
+        </button>
         </div>
     </form>
     @if (ventaFinalizada) {
@@ -139,47 +210,61 @@
             <h2>Resumen de Venta</h2>
             <div class="form_panel_admin">
                 <p>
-                    <strong>Cliente:</strong>
-                    {{ ventaForm.value.cliente }}
+                    <strong>Pedido:</strong>
+                    {{ idPedidoVenta }}
                 </p>
                 <p>
-                    <strong>Producto:</strong>
-                    {{ productoSeleccionado }}
+                    <strong> Nombre del Cliente:</strong>
+                    {{ clienteVenta }}
                 </p>
-                <p>
-                    <strong>Precio Unitario:</strong>
-                    ${{ precioUnitario }}
-                </p>
-                <p>
-                    <strong>Cantidad:</strong>
-                    {{ cantidadVendida }}
-                </p>
-
-                <hr>
-                
-                <p>
-                    <strong>Subtotal:</strong>
-                    ${{ subtotal }}
-                </p>
-                <p>
-                    <strong>IVA (21%):</strong>
-                    ${{ iva }}
-                </p>
-                <p>
-                    <strong>Total:</strong>
-                    ${{ total }}
-                </p>
-                <p>
-                    <strong>Método de Pago:</strong>
-                    {{ metodoPagoSeleccionado }}
-                </p>
-                @if (ventaForm.value.observaciones) {
-                    <p>
-                        <strong>Observaciones:</strong>
-                        {{ ventaForm.value.observaciones }}
-                    </p>
-                }
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unitario</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                        @for (item of itemsRecibo; track item.idProducto) {
+                            <tr>
+                                <td>{{ item.nombreProducto }}</td>
+                                <td>{{ item.cantidad }}</td>
+                                <td>{{ item.precioUnitario }}</td>
+                                <td>{{ item.cantidad * item.precioUnitario }}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
+
+            <hr>
+            <p>
+                <strong>Subtotal:</strong>
+                ${{ subtotal }}
+            </p>
+            <p>
+                <strong>IVA (21%):</strong>
+                ${{ iva }}
+            </p>
+            <p>
+                <strong>Total a pagar:</strong>
+                ${{ total }}
+            </p>
+            <p>
+                <strong>Método de Pago:</strong>
+                {{ metodoPagoSeleccionado }}
+            </p>
+
+            @if (observacionesVenta) {
+                <p>
+                    <strong>Observaciones:</strong>
+                    {{ observacionesVenta }}
+                </p>
+            }
         </div>
+    </div>
     }
 </section>

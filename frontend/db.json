@@ -123,6 +123,10 @@
     {
       "id": "2",
       "nombreTipoMovimiento": "Ajuste"
+    },
+    {
+      "id": "3",
+      "nombreTipoMovimiento": "Salida"
     }
   ],
   "motivos": [
@@ -153,9 +157,26 @@
     {
       "id": "7",
       "nombreMotivo": "Perdida"
+    },
+    {
+      "id": "8",
+      "nombreMotivo": "Venta"
     }
   ],
   "movimientos-inventario": [],
+  "clientes": [
+    {
+      "id": "1",
+      "nombreCliente": "Consumidor",
+      "apellidoCliente": "Final",
+      "telefonoCliente": "",
+      "emailCliente": ""
+    }
+  ],
+  "pedidos": [],
+
+  "detalles-pedido": [],
+
   "dashboards": {
     "administrador": {
       "rol": "Administrador",
