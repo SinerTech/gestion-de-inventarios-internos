@@ -12,8 +12,7 @@
             SKU
         </label>
 
-        <input type="text" id="producto_sku" formControlName="sku" placeholder="Ej: MON-001" required minlength="3"
-            maxlength="20" pattern="[A-Za-z0-9-]+">
+        <input type="text" id="producto_sku" formControlName="sku" placeholder="Ej: MON-001">
 
         @if (
         productoForm.controls.sku.touched &&
@@ -60,8 +59,7 @@
             Nombre del Producto
         </label>
 
-        <input type="text" id="producto_nombre" formControlName="nombre" placeholder="Ej: Monitor Gamer" required
-            minlength="3" maxlength="50">
+        <input type="text" id="producto_nombre" formControlName="nombre" placeholder="Ej: Monitor Gamer">
 
         @if (
         productoForm.controls.nombre.touched &&
@@ -108,33 +106,31 @@
             Categoría
         </label>
 
-        <input type="text" id="producto_categoria" formControlName="categoria" placeholder="Ej: Tecnología" required
-            minlength="3" maxlength="30">
+        <select id="producto_categoria" formControlName="categoria">
+
+            <option value="">
+                Seleccione una categoría
+            </option>
+
+            @for (
+            categoria of categorias;
+            track categoria.id
+            ) {
+
+            <option [value]="categoria.id">
+                {{ categoria.nombreCategoria }}
+            </option>
+
+            }
+
+        </select>
 
         @if (
         productoForm.controls.categoria.touched &&
         productoForm.controls.categoria.hasError('required')
         ) {
         <small>
-            La categoría es obligatoria.
-        </small>
-        }
-
-        @if (
-        productoForm.controls.categoria.touched &&
-        productoForm.controls.categoria.hasError('minlength')
-        ) {
-        <small>
-            La categoría debe tener al menos 3 caracteres.
-        </small>
-        }
-
-        @if (
-        productoForm.controls.categoria.touched &&
-        productoForm.controls.categoria.hasError('maxlength')
-        ) {
-        <small>
-            La categoría no puede superar los 30 caracteres.
+            Debe seleccionar una categoría.
         </small>
         }
 
@@ -147,7 +143,7 @@
             Stock
         </label>
 
-        <input type="number" id="producto_stock" formControlName="stock" placeholder="0" min="0" max="100000" required>
+        <input type="number" id="producto_stock" formControlName="stock" placeholder="0" min="0" max="100000">
 
         @if (
         productoForm.controls.stock.touched &&
@@ -186,7 +182,7 @@
         </label>
 
         <input type="number" id="producto_precio" formControlName="precio" placeholder="$0" min="0.01" max="999999999"
-            step="0.01" required>
+            step="0.01">
 
         @if (
         productoForm.controls.precio.touched &&
@@ -224,7 +220,7 @@
             Estado
         </label>
 
-        <select id="producto_estado" formControlName="estado" required>
+        <select id="producto_estado" formControlName="estado">
 
             <option value="activo">
                 Activo
@@ -251,38 +247,43 @@
                 Proveedor
             </label>
 
-            <select id="producto_proveedor" formControlName="proveedorExistente" required>
+            <select id="proveedorExistente" formControlName="proveedorExistente">
 
                 <option value="">
                     Seleccione un proveedor
                 </option>
 
                 <option value="nuevo">
-                    Nuevo proveedor
+                    Registrar nuevo proveedor
                 </option>
 
-                <option value="Proveedor 1">
-                    Proveedor 1
+                @for (
+                proveedor of proveedores;
+                track proveedor.id
+                ) {
+
+                <option [value]="proveedor.id">
+                    {{ proveedor.razonSocial }}
                 </option>
 
-                <option value="Proveedor 2">
-                    Proveedor 2
-                </option>
-
-                <option value="Proveedor 3">
-                    Proveedor 3
-                </option>
-
+                }
 
             </select>
+
+            <p>
+                Proveedores cargados: {{ proveedores.length }}
+            </p>
+
 
             @if (
             productoForm.controls.proveedor.controls.proveedorExistente.touched &&
             productoForm.controls.proveedor.controls.proveedorExistente.hasError('required')
             ) {
+
             <small>
                 Debe seleccionar un proveedor.
             </small>
+
             }
 
 
@@ -301,133 +302,158 @@
                 </h3>
 
 
+                <!-- ================================================= -->
                 <!-- RAZÓN SOCIAL -->
+                <!-- ================================================= -->
 
                 <label for="proveedor_razon_social">
                     Razón Social
                 </label>
 
                 <input type="text" id="proveedor_razon_social" formControlName="razonSocial"
-                    placeholder="Ej: Tecnología Córdoba S.A." required minlength="3" maxlength="100">
+                    placeholder="Ej: Tecnología Córdoba S.A.">
 
                 @if (
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.touched &&
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.hasError('required')
                 ) {
+
                 <small>
                     La razón social es obligatoria.
                 </small>
+
                 }
 
                 @if (
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.touched &&
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.hasError('minlength')
                 ) {
+
                 <small>
                     La razón social debe tener al menos 3 caracteres.
                 </small>
+
                 }
 
                 @if (
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.touched &&
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.razonSocial.hasError('maxlength')
                 ) {
+
                 <small>
                     La razón social no puede superar los 100 caracteres.
                 </small>
+
                 }
 
 
+                <!-- ================================================= -->
                 <!-- CUIT -->
+                <!-- ================================================= -->
 
                 <label for="proveedor_cuit">
                     CUIT
                 </label>
 
-                <input type="text" id="proveedor_cuit" formControlName="cuit" placeholder="Ej: 30-12345678-9" required
-                    pattern="[0-9]{2}-[0-9]{8}-[0-9]{1}">
+                <input type="text" id="proveedor_cuit" formControlName="cuit" placeholder="Ej: 30-12345678-9">
 
                 @if (
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.touched &&
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.hasError('required')
                 ) {
+
                 <small>
                     El CUIT es obligatorio.
                 </small>
+
                 }
 
                 @if (
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.touched &&
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.hasError('pattern')
                 ) {
+
                 <small>
                     El CUIT debe tener el formato 30-12345678-9.
                 </small>
+
                 }
 
                 @if (
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.touched &&
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.cuit.hasError('cuitInvalido')
                 ) {
+
                 <small>
                     El CUIT ingresado no tiene un formato válido.
                 </small>
+
                 }
 
 
+                <!-- ================================================= -->
                 <!-- TELÉFONO -->
+                <!-- ================================================= -->
 
                 <label for="proveedor_telefono">
                     Teléfono
                 </label>
 
-                <input type="tel" id="proveedor_telefono" formControlName="telefono" placeholder="Ej: 3515551234"
-                    required pattern="[0-9+\-\s()]{8,20}">
+                <input type="tel" id="proveedor_telefono" formControlName="telefono" placeholder="Ej: 3515551234">
 
                 @if (
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.telefono.touched &&
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.telefono.hasError('required')
                 ) {
+
                 <small>
                     El teléfono es obligatorio.
                 </small>
+
                 }
 
                 @if (
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.telefono.touched &&
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.telefono.hasError('pattern')
                 ) {
+
                 <small>
                     Ingrese un número de teléfono válido.
                 </small>
+
                 }
 
 
+                <!-- ================================================= -->
                 <!-- EMAIL -->
+                <!-- ================================================= -->
 
                 <label for="proveedor_email">
                     Email
                 </label>
 
-                <input type="email" id="proveedor_email" formControlName="email" placeholder="Ej: contacto@empresa.com"
-                    required>
+                <input type="email" id="proveedor_email" formControlName="email" placeholder="Ej: contacto@empresa.com">
 
                 @if (
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.email.touched &&
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.email.hasError('required')
                 ) {
+
                 <small>
                     El email es obligatorio.
                 </small>
+
                 }
 
                 @if (
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.email.touched &&
                 productoForm.controls.proveedor.controls.nuevoProveedor.controls.email.hasError('email')
                 ) {
+
                 <small>
                     Ingrese un email válido.
                 </small>
+
                 }
 
             </div>
@@ -446,6 +472,7 @@
             <button type="submit">
 
                 <i class="fa-solid fa-plus"></i>
+
                 Crear
 
             </button>
@@ -454,6 +481,7 @@
             <button type="button" (click)="editarProducto()">
 
                 <i class="fa-solid fa-pen"></i>
+
                 Editar
 
             </button>
@@ -462,6 +490,7 @@
             <button type="button" (click)="eliminarProducto()">
 
                 <i class="fa-solid fa-trash"></i>
+
                 Eliminar
 
             </button>
@@ -470,6 +499,7 @@
             <button type="button" (click)="limpiarFormulario()">
 
                 <i class="fa-solid fa-rotate"></i>
+
                 Limpiar
 
             </button>

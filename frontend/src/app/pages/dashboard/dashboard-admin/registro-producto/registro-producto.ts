@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   ReactiveFormsModule,
-  Validators,
-  AbstractControl,
   ValidationErrors,
+  Validators,
 } from '@angular/forms';
+
+import { Categoria } from '../../../../models/categoria.models';
+import { Proveedor } from '../../../../models/proveedor.models';
+import { Producto } from '../../../../models/producto.models';
+import { ProductoProveedor } from '../../../../models/producto-proveedor';
+
+import { CategoriaService } from '../../../../services/categoria/categoria-service';
+import { ProveedorService } from '../../../../services/proveedor/proveedor-service';
+import { ProductoService } from '../../../../services/producto/producto-service';
+import { ProductoProveedorService } from '../../../../services/producto-proveedor/producto-proveedor-service';
 
 @Component({
   selector: 'app-registro-producto',
@@ -14,12 +24,24 @@ import {
   templateUrl: './registro-producto.html',
   styleUrl: './registro-producto.css',
 })
-export class RegistroProducto {
+export class RegistroProducto implements OnInit {
   productoForm;
 
-  constructor(private fb: FormBuilder) {
+  categorias: Categoria[] = [];
+  proveedores: Proveedor[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private categoriaService: CategoriaService,
+    private proveedorService: ProveedorService,
+    private productoService: ProductoService,
+    private productoProveedorService: ProductoProveedorService,
+  ) {
     this.productoForm = this.fb.group({
+      // =====================================================
       // SKU
+      // =====================================================
+
       sku: [
         '',
         [
@@ -30,13 +52,16 @@ export class RegistroProducto {
         ],
       ],
 
+      // =====================================================
       // PRODUCTO
+      // =====================================================
+
       nombre: [
         '',
         [Validators.required, Validators.minLength(3), Validators.maxLength(50), this.nombreValido],
       ],
 
-      categoria: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      categoria: ['', [Validators.required]],
 
       stock: [0, [Validators.required, Validators.min(0), Validators.max(100000)]],
 
@@ -44,11 +69,17 @@ export class RegistroProducto {
 
       estado: ['activo', [Validators.required]],
 
+      // =====================================================
       // PROVEEDOR
+      // =====================================================
+
       proveedor: this.fb.group({
         proveedorExistente: ['', [Validators.required]],
 
+        // ===================================================
         // DATOS DEL NUEVO PROVEEDOR
+        // ===================================================
+
         nuevoProveedor: this.fb.group({
           razonSocial: [''],
 
@@ -61,15 +92,25 @@ export class RegistroProducto {
       }),
     });
 
-    // Detectar cambio de proveedor
+    // =====================================================
+    // DETECTAR CAMBIO DE PROVEEDOR
+    // =====================================================
+
     this.productoForm.controls.proveedor.controls.proveedorExistente.valueChanges.subscribe(
       (valor) => {
         const nuevoProveedor = this.productoForm.controls.proveedor.controls.nuevoProveedor;
 
         const razonSocial = nuevoProveedor.controls.razonSocial;
+
         const cuit = nuevoProveedor.controls.cuit;
+
         const telefono = nuevoProveedor.controls.telefono;
+
         const email = nuevoProveedor.controls.email;
+
+        // =================================================
+        // SI ES UN PROVEEDOR NUEVO
+        // =================================================
 
         if (valor === 'nuevo') {
           razonSocial.setValidators([
@@ -87,7 +128,12 @@ export class RegistroProducto {
           telefono.setValidators([Validators.required, Validators.pattern(/^[0-9+\-\s()]{8,20}$/)]);
 
           email.setValidators([Validators.required, Validators.email]);
-        } else {
+        }
+
+        // =================================================
+        // SI ES UN PROVEEDOR EXISTENTE
+        // =================================================
+        else {
           razonSocial.clearValidators();
           cuit.clearValidators();
           telefono.clearValidators();
@@ -99,7 +145,10 @@ export class RegistroProducto {
           email.reset('');
         }
 
-        // Actualizar validaciones
+        // =================================================
+        // ACTUALIZAR VALIDACIONES
+        // =================================================
+
         razonSocial.updateValueAndValidity();
         cuit.updateValueAndValidity();
         telefono.updateValueAndValidity();
@@ -108,7 +157,19 @@ export class RegistroProducto {
     );
   }
 
-  // VALIDACIÓN PERSONALIZADA DEL NOMBRE
+  // =====================================================
+  // ON INIT
+  // =====================================================
+
+  ngOnInit(): void {
+    this.cargarCategorias();
+
+    this.cargarProveedores();
+  }
+
+  // =====================================================
+  // VALIDACIÓN DEL NOMBRE
+  // =====================================================
 
   nombreValido(control: AbstractControl): ValidationErrors | null {
     const valor = control.value;
@@ -128,7 +189,9 @@ export class RegistroProducto {
     return null;
   }
 
-  // VALIDACIÓN PERSONALIZADA DEL CUIT
+  // =====================================================
+  // VALIDACIÓN DEL CUIT
+  // =====================================================
 
   cuitValido(control: AbstractControl): ValidationErrors | null {
     const valor = control.value;
@@ -148,21 +211,228 @@ export class RegistroProducto {
     return null;
   }
 
-  // CREAR
+  // =====================================================
+  // CARGAR CATEGORÍAS
+  // =====================================================
+
+  cargarCategorias(): void {
+    this.categoriaService.obtenerCategorias().subscribe({
+      next: (categorias) => {
+        this.categorias = categorias;
+
+        console.log('Categorías recibidas:', categorias);
+      },
+
+      error: (error) => {
+        console.error('Error al cargar categorías:', error);
+      },
+    });
+  }
+
+  // =====================================================
+  // CARGAR PROVEEDORES
+  // =====================================================
+
+  cargarProveedores(): void {
+    this.proveedorService.obtenerProveedores().subscribe({
+      next: (proveedores) => {
+        this.proveedores = proveedores;
+
+        console.log('Proveedores recibidos:', proveedores);
+      },
+
+      error: (error) => {
+        console.error('Error al cargar proveedores:', error);
+      },
+    });
+  }
+
+  // =====================================================
+  // REGISTRAR PRODUCTO
+  // =====================================================
 
   registrarProducto(): void {
-    if (this.productoForm.valid) {
-      console.log('Producto creado:', this.productoForm.value);
+    // ---------------------------------------------------
+    // VALIDAR FORMULARIO
+    // ---------------------------------------------------
 
-      alert('Producto creado correctamente');
-
-      this.limpiarFormulario();
-    } else {
+    if (this.productoForm.invalid) {
       this.productoForm.markAllAsTouched();
+
+      return;
+    }
+
+    // ---------------------------------------------------
+    // OBTENER DATOS
+    // ---------------------------------------------------
+
+    const formulario = this.productoForm.getRawValue();
+
+    const proveedorSeleccionado = formulario.proveedor?.proveedorExistente;
+
+    // ---------------------------------------------------
+    // CREAR OBJETO PRODUCTO
+    // ---------------------------------------------------
+
+    const producto: Producto = {
+      id: '',
+
+      sku: formulario.sku ?? '',
+
+      nombreProducto: formulario.nombre ?? '',
+
+      idCategoria: formulario.categoria ?? '',
+
+      precioUnitario: formulario.precio ?? 0,
+
+      cantidadExistente: formulario.stock ?? 0,
+
+      estado: this.convertirEstado(formulario.estado ?? 'activo'),
+
+      ultimoIngreso: new Date().toISOString(),
+    };
+
+    console.log('Producto que se enviará a la API:', producto);
+
+    // =====================================================
+    // PROVEEDOR NUEVO
+    // =====================================================
+
+    if (proveedorSeleccionado === 'nuevo') {
+      const datosNuevoProveedor = formulario.proveedor?.nuevoProveedor;
+
+      const nuevoProveedor: Proveedor = {
+        id: '',
+
+        razonSocial: datosNuevoProveedor?.razonSocial ?? '',
+
+        cuit: datosNuevoProveedor?.cuit ?? '',
+
+        telefonoProveedor: datosNuevoProveedor?.telefono ?? '',
+
+        emailProveedor: datosNuevoProveedor?.email ?? '',
+      };
+
+      console.log('Nuevo proveedor que se enviará a la API:', nuevoProveedor);
+
+      // ---------------------------------------------------
+      // POST /proveedores
+      // ---------------------------------------------------
+
+      this.proveedorService.registrarProveedor(nuevoProveedor).subscribe({
+        next: (proveedorCreado) => {
+          console.log('Proveedor creado por la API:', proveedorCreado);
+
+          // ------------------------------------------------
+          // CREAR PRODUCTO Y RELACIÓN
+          // ------------------------------------------------
+
+          this.crearProductoYRelacion(producto, proveedorCreado.id);
+        },
+
+        error: (error) => {
+          console.error('Error al registrar proveedor:', error);
+
+          alert('No se pudo registrar el proveedor');
+        },
+      });
+
+      return;
+    }
+
+    // =====================================================
+    // PROVEEDOR EXISTENTE
+    // =====================================================
+
+    if (proveedorSeleccionado && proveedorSeleccionado !== 'nuevo') {
+      this.crearProductoYRelacion(producto, proveedorSeleccionado);
+
+      return;
     }
   }
 
+  // =====================================================
+  // CREAR PRODUCTO + RELACIÓN
+  // =====================================================
+
+  private crearProductoYRelacion(producto: Producto, idProveedor: string): void {
+    // ---------------------------------------------------
+    // POST /productos
+    // ---------------------------------------------------
+
+    this.productoService.registrarProducto(producto).subscribe({
+      next: (productoCreado) => {
+        console.log('Producto creado por la API:', productoCreado);
+
+        // ------------------------------------------------
+        // CREAR RELACIÓN
+        // ------------------------------------------------
+
+        const relacion: ProductoProveedor = {
+          idProducto: productoCreado.id,
+
+          idProveedor: idProveedor,
+        };
+
+        console.log('Relación producto-proveedor que se enviará:', relacion);
+
+        // ------------------------------------------------
+        // POST /productos-proveedores
+        // ------------------------------------------------
+
+        this.productoProveedorService.registrarRelacion(relacion).subscribe({
+          next: (relacionCreada) => {
+            console.log('Relación creada por la API:', relacionCreada);
+
+            alert('Producto creado correctamente');
+
+            this.limpiarFormulario();
+
+            // Actualizamos la lista de proveedores
+            // por si acabamos de crear uno nuevo.
+
+            this.cargarProveedores();
+          },
+
+          error: (error) => {
+            console.error('Error al registrar la relación producto-proveedor:', error);
+
+            alert('El producto se creó, pero no se pudo asociar al proveedor');
+          },
+        });
+      },
+
+      error: (error) => {
+        console.error('Error al registrar producto:', error);
+
+        alert('No se pudo registrar el producto');
+      },
+    });
+  }
+
+  // =====================================================
+  // CONVERTIR ESTADO
+  // =====================================================
+
+  convertirEstado(estado: string): 'Activo' | 'Inactivo' | 'Suspendido' {
+    switch (estado) {
+      case 'activo':
+        return 'Activo';
+
+      case 'inactivo':
+        return 'Inactivo';
+
+      case 'suspendido':
+        return 'Suspendido';
+
+      default:
+        return 'Activo';
+    }
+  }
+
+  // =====================================================
   // EDITAR
+  // =====================================================
 
   editarProducto(): void {
     if (this.productoForm.valid) {
@@ -174,7 +444,9 @@ export class RegistroProducto {
     }
   }
 
+  // =====================================================
   // ELIMINAR
+  // =====================================================
 
   eliminarProducto(): void {
     const confirmar = confirm('¿Está seguro de que desea eliminar este producto?');
@@ -188,7 +460,9 @@ export class RegistroProducto {
     }
   }
 
+  // =====================================================
   // LIMPIAR
+  // =====================================================
 
   limpiarFormulario(): void {
     this.productoForm.reset({
@@ -209,8 +483,11 @@ export class RegistroProducto {
 
         nuevoProveedor: {
           razonSocial: '',
+
           cuit: '',
+
           telefono: '',
+
           email: '',
         },
       },
