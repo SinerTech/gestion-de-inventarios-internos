@@ -8,12 +8,12 @@ import { Categoria } from '../../models/categoria.models';
 import { Proveedor } from '../../models/proveedor.models';
 import { CategoriaService } from '../../services/categoria/categoria-service';
 import { ProveedorService } from '../../services/proveedor/proveedor-service';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { ProductoProveedor } from '../../models/producto-proveedor';
 import { ProductoProveedorService } from '../../services/producto-proveedor/producto-proveedor-service';
 
 @Component({
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, DatePipe],
   selector: 'app-control-stock',
   styleUrl: './control-stock.css',
   templateUrl: './control-stock.html',

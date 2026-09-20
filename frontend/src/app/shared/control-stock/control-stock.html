@@ -73,7 +73,7 @@
                                 </span>
                             </td>
                             <td>
-                                {{producto.ultimoIngreso}}
+                                {{producto.ultimoIngreso | date: 'dd/MM/yyyy - hh:mm:ss' }}
                             </td>
                             @if (configuracionActual.accionesTabla.length > 0) {
                             <td class="d-flex flex-row gap-2">
