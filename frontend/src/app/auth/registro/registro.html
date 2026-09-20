@@ -29,9 +29,9 @@
                             <label for="rol" class="form-label">Rol</label>
                             <select class="form-select" id="rol" formControlName="rol">
                                 <option value="">Seleccionar</option>
-                                <option value="admin">Administrador</option>
-                                <option value="supervisor">Supervisor</option>
-                                <option value="operario">Vendedor</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Supervisor</option>
+                                <option value="3">Vendedor</option>
                             </select>
                             @if (Rol?.invalid && Rol?.touched) {
                                 <div class="invalid-feedback">Seleccioná un rol.</div>
