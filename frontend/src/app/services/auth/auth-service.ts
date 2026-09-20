@@ -20,12 +20,19 @@ export class AuthService {
    * Valida las credenciales contra db.json consultando por query params
    */
   login(email: string, pass: string, idRol: string): Observable<Usuario | null> {
-    const url = `${this.apiUrl}/usuarios?emailUsuario=${encodeURIComponent(email)}&password=${encodeURIComponent(pass)}&idRol=${encodeURIComponent(idRol)}`;
+  return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios`).pipe(
+    map((usuarios) => {
+      const usuarioEncontrado = usuarios.find(
+        (u) =>
+          u.emailUsuario.trim().toLowerCase() === email.trim().toLowerCase() &&
+          String(u.password) === String(pass) &&
+          String(u.idRol) === String(idRol)
+      );
 
-    return this.http.get<Usuario[]>(url).pipe(
-      map((usuarios) => (usuarios.length > 0 ? usuarios[0] : null))
-    );
-  }
+      return usuarioEncontrado ?? null;
+    })
+  );
+}
 
   /**
    * Registra un nuevo usuario en la colección de usuarios
