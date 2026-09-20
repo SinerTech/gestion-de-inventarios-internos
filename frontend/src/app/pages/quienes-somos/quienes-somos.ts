@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { QuienesSomosService } from '../../services/quienes-somos/quienes-somos-service';
 
 @Component({
   imports: [],
@@ -7,6 +8,18 @@ import { Component } from '@angular/core';
   templateUrl: './quienes-somos.html',
 })
 export class QuienesSomos {
-  // Implementar la obtención de la lista de miembros del equipo con HTTPClient desde JSON server.
-  // obtenerMiembrosEquipo()
+  integrantes: any;
+  private QuienesSomosService = inject(QuienesSomosService);
+  
+  ngOnInit(): void {
+    this.QuienesSomosService.obtenerMiembrosEquipo().subscribe({
+      next: (data) => {
+        this.integrantes = data;
+      },
+      error: (err) => {
+        console.error('Error al obtener los miembros:', err);
+      }
+    });
+  }
+ 
 }
