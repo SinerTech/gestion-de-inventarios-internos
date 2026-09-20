@@ -46,7 +46,17 @@ export class Login {
       next: (usuario) => {
         if (usuario) {
           localStorage.setItem('usuario_actual', JSON.stringify(usuario));
-          this.router.navigate(['/sinertech/dashboard-supervisor']);
+          switch (String(usuario.idRol)) {
+          case '1':
+            this.router.navigate(['/sinertech/dashboard-admin']);
+            break;
+          case '2':
+            this.router.navigate(['/sinertech/dashboard-supervisor']);
+            break;
+          case '3':
+            this.router.navigate(['/sinertech/dashboard-vendedor']);
+            break;
+        }
         } else {
           alert('Credenciales incorrectas o el rol seleccionado no coincide.');
         }
