@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import {
   AbstractControl,
   FormBuilder,
@@ -30,12 +32,21 @@ export class RegistroProducto implements OnInit {
   categorias: Categoria[] = [];
   proveedores: Proveedor[] = [];
 
+  modoEdicion = false;
+
+  idProductoEditar = '';
+
+  idRelacionProveedorEditar = '';
+
+  ultimoIngresoProductoEditar = '';
+
   constructor(
     private fb: FormBuilder,
     private categoriaService: CategoriaService,
     private proveedorService: ProveedorService,
     private productoService: ProductoService,
     private productoProveedorService: ProductoProveedorService,
+    private route: ActivatedRoute,
   ) {
     this.productoForm = this.fb.group({
       // =====================================================
@@ -76,10 +87,6 @@ export class RegistroProducto implements OnInit {
       proveedor: this.fb.group({
         proveedorExistente: ['', [Validators.required]],
 
-        // ===================================================
-        // DATOS DEL NUEVO PROVEEDOR
-        // ===================================================
-
         nuevoProveedor: this.fb.group({
           razonSocial: [''],
 
@@ -93,7 +100,7 @@ export class RegistroProducto implements OnInit {
     });
 
     // =====================================================
-    // DETECTAR CAMBIO DE PROVEEDOR
+    // CAMBIO DE PROVEEDOR
     // =====================================================
 
     this.productoForm.controls.proveedor.controls.proveedorExistente.valueChanges.subscribe(
@@ -109,7 +116,7 @@ export class RegistroProducto implements OnInit {
         const email = nuevoProveedor.controls.email;
 
         // =================================================
-        // SI ES UN PROVEEDOR NUEVO
+        // PROVEEDOR NUEVO
         // =================================================
 
         if (valor === 'nuevo') {
@@ -131,7 +138,7 @@ export class RegistroProducto implements OnInit {
         }
 
         // =================================================
-        // SI ES UN PROVEEDOR EXISTENTE
+        // PROVEEDOR EXISTENTE
         // =================================================
         else {
           razonSocial.clearValidators();
@@ -165,10 +172,152 @@ export class RegistroProducto implements OnInit {
     this.cargarCategorias();
 
     this.cargarProveedores();
+
+    this.detectarModoEdicion();
   }
 
   // =====================================================
-  // VALIDACIÓN DEL NOMBRE
+  // DETECTAR MODO EDICIÓN
+  // =====================================================
+
+  detectarModoEdicion(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+      this.modoEdicion = true;
+
+      this.idProductoEditar = id;
+
+      console.log('Modo edición activado');
+
+      console.log('ID del producto a editar:', id);
+
+      this.cargarProductoParaEditar(id);
+    } else {
+      this.modoEdicion = false;
+
+      console.log('Modo creación activado');
+    }
+  }
+
+  // =====================================================
+  // CARGAR PRODUCTO PARA EDITAR
+  // =====================================================
+
+  cargarProductoParaEditar(id: string): void {
+    this.productoService.obtenerListaProductos().subscribe({
+      next: (productos) => {
+        const producto = productos.find((producto) => producto.id === id);
+
+        if (!producto) {
+          console.error('No se encontró el producto:', id);
+
+          alert('No se encontró el producto');
+
+          return;
+        }
+
+        console.log('Producto encontrado para editar:', producto);
+
+        // =================================================
+        // GUARDAR ÚLTIMO INGRESO ORIGINAL
+        // =================================================
+
+        this.ultimoIngresoProductoEditar = producto.ultimoIngreso;
+
+        // =================================================
+        // CARGAR DATOS DEL PRODUCTO
+        // =================================================
+
+        this.productoForm.patchValue({
+          sku: producto.sku,
+
+          nombre: producto.nombreProducto,
+
+          categoria: producto.idCategoria,
+
+          stock: producto.cantidadExistente,
+
+          precio: producto.precioUnitario,
+
+          estado: this.convertirEstadoFormulario(producto.estado),
+        });
+
+        // =================================================
+        // BUSCAR RELACIÓN PRODUCTO-PROVEEDOR
+        // =================================================
+
+        this.productoProveedorService.obtenerProductosProveedores().subscribe({
+          next: (relaciones) => {
+            const relacion = relaciones.find((relacion) => relacion.idProducto === id);
+
+            if (!relacion) {
+              console.warn('El producto no tiene un proveedor asociado');
+
+              return;
+            }
+
+            // =================================================
+            // GUARDAR ID DE LA RELACIÓN
+            // =================================================
+
+            this.idRelacionProveedorEditar = relacion.id ?? '';
+
+            console.log('ID de la relación:', this.idRelacionProveedorEditar);
+
+            console.log('Relación encontrada:', relacion);
+
+            // =================================================
+            // CARGAR PROVEEDOR
+            // =================================================
+
+            this.productoForm.patchValue({
+              proveedor: {
+                proveedorExistente: relacion.idProveedor,
+              },
+            });
+
+            console.log('Proveedor cargado:', relacion.idProveedor);
+          },
+
+          error: (error) => {
+            console.error('Error al cargar relación producto-proveedor:', error);
+          },
+        });
+      },
+
+      error: (error) => {
+        console.error('Error al cargar producto para editar:', error);
+
+        alert('No se pudo cargar el producto');
+      },
+    });
+  }
+
+  // =====================================================
+  // CONVERTIR ESTADO PARA FORMULARIO
+  // =====================================================
+
+  convertirEstadoFormulario(
+    estado: 'Activo' | 'Inactivo' | 'Suspendido',
+  ): 'activo' | 'inactivo' | 'suspendido' {
+    switch (estado) {
+      case 'Activo':
+        return 'activo';
+
+      case 'Inactivo':
+        return 'inactivo';
+
+      case 'Suspendido':
+        return 'suspendido';
+
+      default:
+        return 'activo';
+    }
+  }
+
+  // =====================================================
+  // VALIDAR NOMBRE
   // =====================================================
 
   nombreValido(control: AbstractControl): ValidationErrors | null {
@@ -190,7 +339,7 @@ export class RegistroProducto implements OnInit {
   }
 
   // =====================================================
-  // VALIDACIÓN DEL CUIT
+  // VALIDAR CUIT
   // =====================================================
 
   cuitValido(control: AbstractControl): ValidationErrors | null {
@@ -252,27 +401,19 @@ export class RegistroProducto implements OnInit {
   // =====================================================
 
   registrarProducto(): void {
-    // ---------------------------------------------------
-    // VALIDAR FORMULARIO
-    // ---------------------------------------------------
-
     if (this.productoForm.invalid) {
       this.productoForm.markAllAsTouched();
 
       return;
     }
 
-    // ---------------------------------------------------
-    // OBTENER DATOS
-    // ---------------------------------------------------
-
     const formulario = this.productoForm.getRawValue();
 
     const proveedorSeleccionado = formulario.proveedor?.proveedorExistente;
 
-    // ---------------------------------------------------
-    // CREAR OBJETO PRODUCTO
-    // ---------------------------------------------------
+    // =================================================
+    // CREAR PRODUCTO
+    // =================================================
 
     const producto: Producto = {
       id: '',
@@ -294,9 +435,9 @@ export class RegistroProducto implements OnInit {
 
     console.log('Producto que se enviará a la API:', producto);
 
-    // =====================================================
+    // =================================================
     // PROVEEDOR NUEVO
-    // =====================================================
+    // =================================================
 
     if (proveedorSeleccionado === 'nuevo') {
       const datosNuevoProveedor = formulario.proveedor?.nuevoProveedor;
@@ -315,17 +456,9 @@ export class RegistroProducto implements OnInit {
 
       console.log('Nuevo proveedor que se enviará a la API:', nuevoProveedor);
 
-      // ---------------------------------------------------
-      // POST /proveedores
-      // ---------------------------------------------------
-
       this.proveedorService.registrarProveedor(nuevoProveedor).subscribe({
         next: (proveedorCreado) => {
           console.log('Proveedor creado por la API:', proveedorCreado);
-
-          // ------------------------------------------------
-          // CREAR PRODUCTO Y RELACIÓN
-          // ------------------------------------------------
 
           this.crearProductoYRelacion(producto, proveedorCreado.id);
         },
@@ -340,9 +473,9 @@ export class RegistroProducto implements OnInit {
       return;
     }
 
-    // =====================================================
+    // =================================================
     // PROVEEDOR EXISTENTE
-    // =====================================================
+    // =================================================
 
     if (proveedorSeleccionado && proveedorSeleccionado !== 'nuevo') {
       this.crearProductoYRelacion(producto, proveedorSeleccionado);
@@ -356,17 +489,9 @@ export class RegistroProducto implements OnInit {
   // =====================================================
 
   private crearProductoYRelacion(producto: Producto, idProveedor: string): void {
-    // ---------------------------------------------------
-    // POST /productos
-    // ---------------------------------------------------
-
     this.productoService.registrarProducto(producto).subscribe({
       next: (productoCreado) => {
         console.log('Producto creado por la API:', productoCreado);
-
-        // ------------------------------------------------
-        // CREAR RELACIÓN
-        // ------------------------------------------------
 
         const relacion: ProductoProveedor = {
           idProducto: productoCreado.id,
@@ -376,10 +501,6 @@ export class RegistroProducto implements OnInit {
 
         console.log('Relación producto-proveedor que se enviará:', relacion);
 
-        // ------------------------------------------------
-        // POST /productos-proveedores
-        // ------------------------------------------------
-
         this.productoProveedorService.registrarRelacion(relacion).subscribe({
           next: (relacionCreada) => {
             console.log('Relación creada por la API:', relacionCreada);
@@ -387,9 +508,6 @@ export class RegistroProducto implements OnInit {
             alert('Producto creado correctamente');
 
             this.limpiarFormulario();
-
-            // Actualizamos la lista de proveedores
-            // por si acabamos de crear uno nuevo.
 
             this.cargarProveedores();
           },
@@ -411,6 +529,146 @@ export class RegistroProducto implements OnInit {
   }
 
   // =====================================================
+  // EDITAR PRODUCTO
+  // =====================================================
+
+  editarProducto(): void {
+    if (this.productoForm.invalid) {
+      this.productoForm.markAllAsTouched();
+
+      return;
+    }
+
+    const formulario = this.productoForm.getRawValue();
+
+    const proveedorSeleccionado = formulario.proveedor?.proveedorExistente;
+
+    // =================================================
+    // PROVEEDOR NUEVO
+    // =================================================
+
+    if (proveedorSeleccionado === 'nuevo') {
+      const datosNuevoProveedor = formulario.proveedor?.nuevoProveedor;
+
+      const nuevoProveedor: Proveedor = {
+        id: '',
+
+        razonSocial: datosNuevoProveedor?.razonSocial ?? '',
+
+        cuit: datosNuevoProveedor?.cuit ?? '',
+
+        telefonoProveedor: datosNuevoProveedor?.telefono ?? '',
+
+        emailProveedor: datosNuevoProveedor?.email ?? '',
+      };
+
+      console.log('Nuevo proveedor que se enviará mediante POST:', nuevoProveedor);
+
+      this.proveedorService.registrarProveedor(nuevoProveedor).subscribe({
+        next: (proveedorCreado) => {
+          console.log('Nuevo proveedor creado:', proveedorCreado);
+
+          this.actualizarProductoYRelacion(proveedorCreado.id);
+        },
+
+        error: (error) => {
+          console.error('Error al crear nuevo proveedor:', error);
+
+          alert('No se pudo crear el nuevo proveedor');
+        },
+      });
+
+      return;
+    }
+
+    // =================================================
+    // PROVEEDOR EXISTENTE
+    // =================================================
+
+    if (proveedorSeleccionado && proveedorSeleccionado !== 'nuevo') {
+      this.actualizarProductoYRelacion(proveedorSeleccionado);
+    }
+  }
+
+  // =====================================================
+  // ACTUALIZAR PRODUCTO + RELACIÓN
+  // =====================================================
+
+  private actualizarProductoYRelacion(idProveedor: string): void {
+    const formulario = this.productoForm.getRawValue();
+
+    const productoActualizado: Producto = {
+      id: this.idProductoEditar,
+
+      sku: formulario.sku ?? '',
+
+      nombreProducto: formulario.nombre ?? '',
+
+      idCategoria: formulario.categoria ?? '',
+
+      precioUnitario: formulario.precio ?? 0,
+
+      cantidadExistente: formulario.stock ?? 0,
+
+      estado: this.convertirEstado(formulario.estado ?? 'activo'),
+
+      ultimoIngreso: this.ultimoIngresoProductoEditar,
+    };
+
+    console.log('Producto que se enviará mediante PUT:', productoActualizado);
+
+    // =================================================
+    // PUT PRODUCTO
+    // =================================================
+
+    this.productoService.actualizarProducto(this.idProductoEditar, productoActualizado).subscribe({
+      next: (producto) => {
+        console.log('Producto actualizado por la API:', producto);
+
+        // =================================================
+        // CREAR OBJETO DE RELACIÓN
+        // =================================================
+
+        const relacionActualizada: ProductoProveedor = {
+          id: this.idRelacionProveedorEditar,
+
+          idProducto: this.idProductoEditar,
+
+          idProveedor: idProveedor,
+        };
+
+        console.log('Relación que se enviará mediante PUT:', relacionActualizada);
+
+        // =================================================
+        // PUT RELACIÓN
+        // =================================================
+
+        this.productoProveedorService
+          .actualizarRelacion(this.idRelacionProveedorEditar, relacionActualizada)
+          .subscribe({
+            next: (relacion) => {
+              console.log('Relación actualizada por la API:', relacion);
+
+              alert('Producto y proveedor actualizados correctamente');
+            },
+
+            error: (error) => {
+              console.error('Error al actualizar la relación:', error);
+
+              alert('El producto se actualizó, pero no se pudo actualizar el proveedor');
+            },
+          });
+      },
+
+      error: (error) => {
+        console.error('Error al actualizar producto:', error);
+
+        alert('No se pudo actualizar el producto');
+      },
+    });
+  }
+
+  // =====================================================
   // CONVERTIR ESTADO
   // =====================================================
 
@@ -427,20 +685,6 @@ export class RegistroProducto implements OnInit {
 
       default:
         return 'Activo';
-    }
-  }
-
-  // =====================================================
-  // EDITAR
-  // =====================================================
-
-  editarProducto(): void {
-    if (this.productoForm.valid) {
-      console.log('Producto editado:', this.productoForm.value);
-
-      alert('Producto editado correctamente');
-    } else {
-      this.productoForm.markAllAsTouched();
     }
   }
 

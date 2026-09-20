@@ -32,6 +32,12 @@ export class ProductoService {
       .pipe(catchError(this.handleError));
   }
 
+  actualizarProducto(id: string, producto: Producto): Observable<Producto> {
+    return this.httpClient
+      .put<Producto>(`${this.url}/${id}`, producto)
+      .pipe(catchError(this.handleError));
+  }
+
   // =====================================================
   // REGISTRAR PRODUCTO
   // =====================================================

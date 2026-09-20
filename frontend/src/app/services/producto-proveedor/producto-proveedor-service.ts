@@ -32,6 +32,12 @@ export class ProductoProveedorService {
       .pipe(catchError(this.handleError));
   }
 
+  actualizarRelacion(id: string, relacion: ProductoProveedor): Observable<ProductoProveedor> {
+    return this.httpClient
+      .put<ProductoProveedor>(`${this.url}/${id}`, relacion)
+      .pipe(catchError(this.handleError));
+  }
+
   // =====================================================
   // MANEJO DE ERRORES
   // =====================================================
