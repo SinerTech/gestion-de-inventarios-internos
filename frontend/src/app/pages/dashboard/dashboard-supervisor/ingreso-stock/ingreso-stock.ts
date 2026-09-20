@@ -11,6 +11,7 @@ import { TipoMovimientoService } from '../../../../services/tipo-movimiento/tipo
 import { MovimientoInventario } from '../../../../models/movimiento-inventario.models';
 import { ProductoProveedor } from '../../../../models/producto-proveedor';
 import { ProductoProveedorService } from '../../../../services/producto-proveedor/producto-proveedor-service';
+import { AuthService } from '../../../../services/auth/auth-service';
 
 @Component({
     imports: [ReactiveFormsModule],
@@ -22,7 +23,6 @@ export class IngresoStock implements OnInit {
     listaProductos: Producto[] = []
     listaProveedores: Proveedor[] = []
     listaMotivos: Motivo[] = []
-    private idUsuarioActual = "1"
 
     private formBuilder = inject(FormBuilder)
     private movimientoService = inject(MovimientoInventarioService)
@@ -32,6 +32,7 @@ export class IngresoStock implements OnInit {
     private tiposMovimientoService = inject(TipoMovimientoService)
     private productoProveedorService = inject(ProductoProveedorService)
     private cdr = inject(ChangeDetectorRef)
+    private authService = inject(AuthService)
 
     formularioIngreso: FormGroup = this.formBuilder.group({
             idProducto: ['', Validators.required],
@@ -102,6 +103,11 @@ export class IngresoStock implements OnInit {
                     console.error("No se encontró el tipo de movimiento 'Ingreso'");
                     return;
                 }
+                const usuarioActual = this.authService.obtenerUsuarioActual();
+                if (!usuarioActual) {
+                    console.error('No hay un usuario logueado');
+                    return;
+                }
                 const movimiento: MovimientoInventario = {
                     idProducto: this.formularioIngreso.value.idProducto,
                     cantidadMovimiento: this.formularioIngreso.value.cantidadMovimiento,
@@ -109,7 +115,7 @@ export class IngresoStock implements OnInit {
                     numeroLoteFactura: this.formularioIngreso.value.numeroLoteFactura,
                     idMotivo: this.formularioIngreso.value.idMotivo,
                     observaciones: this.formularioIngreso.value.observaciones,
-                    idUsuario: this.idUsuarioActual,
+                    idUsuario: usuarioActual.id,
                     idTipoMovimiento: tipoIngreso.id,
                     fechaHoraMovimiento: new Date().toISOString()
                 };

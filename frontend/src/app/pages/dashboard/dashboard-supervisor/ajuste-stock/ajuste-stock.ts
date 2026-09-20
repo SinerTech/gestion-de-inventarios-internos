@@ -8,6 +8,7 @@ import { ProductoService } from '../../../../services/producto/producto-service'
 import { MotivoService } from '../../../../services/motivo/motivo-service';
 import { TipoMovimientoService } from '../../../../services/tipo-movimiento/tipo-movimiento-service';
 import { MovimientoInventario } from '../../../../models/movimiento-inventario.models';
+import { AuthService } from '../../../../services/auth/auth-service';
 
 
 @Component({
@@ -21,7 +22,6 @@ export class AjusteStock implements OnInit {
     listaProductos: Producto[] = []
     listaProveedores: Proveedor[] = []
     listaMotivos: Motivo[] = []
-    private idUsuarioActual = "1"
 
     private formBuilder = inject(FormBuilder)
     private movimientoService = inject(MovimientoInventarioService)
@@ -29,6 +29,7 @@ export class AjusteStock implements OnInit {
     private motivoService = inject(MotivoService)
     private tiposMovimientoService = inject(TipoMovimientoService)
     private cdr = inject(ChangeDetectorRef)
+    private authService = inject(AuthService)
 
     formularioAjuste: FormGroup = this.formBuilder.group({
             idProducto: ['', Validators.required],
@@ -94,12 +95,17 @@ export class AjusteStock implements OnInit {
                 console.error('No se encontro el tipo de Ajuste');
                 return;
             }
+            const usuarioActual = this.authService.obtenerUsuarioActual();
+            if (!usuarioActual) {
+                console.error('No hay un usuario logueado');
+                return;
+            }
             const movimiento: MovimientoInventario = {
                 idProducto: this.formularioAjuste.value.idProducto,
                 cantidadMovimiento: this.formularioAjuste.value.cantidadMovimiento,
                 idMotivo: this.formularioAjuste.value.idMotivo,
                 observaciones: this.formularioAjuste.value.observaciones,
-                idUsuario: this.idUsuarioActual,
+                idUsuario: usuarioActual.id,
                 idTipoMovimiento: tipoAjuste.id,
                 fechaHoraMovimiento: new Date().toISOString()
             };

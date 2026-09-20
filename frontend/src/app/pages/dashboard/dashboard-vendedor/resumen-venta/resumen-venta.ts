@@ -24,6 +24,7 @@ import { MovimientoInventario } from '../../../../models/movimiento-inventario.m
 import { MovimientoInventarioService } from '../../../../services/movimiento-inventario/movimiento-inventario-service';
 import { TipoMovimientoService } from '../../../../services/tipo-movimiento/tipo-movimiento-service'
 import { MotivoService } from '../../../../services/motivo/motivo-service';
+import { AuthService } from '../../../../services/auth/auth-service';
 
 interface ItemVenta {
   idProducto: string;
@@ -84,8 +85,7 @@ export class ResumenVenta implements OnInit {
   private motivoService = inject(MotivoService);
   private cdr = inject(ChangeDetectorRef);
   private clienteService = inject(ClienteService);
-
-  private idUsuarioActual = '1'; // usuario ficticio
+  private authService = inject(AuthService)
 
 
   ngOnInit(): void {
@@ -245,6 +245,12 @@ finalizarTransaccion(): void {
     return;
   }
 
+  const usuarioActual = this.authService.obtenerUsuarioActual();
+  if (!usuarioActual) {
+    this.mensajeErrorVenta = 'No hay un usuario autenticado.';
+    return;
+  }
+
   const items = this.itemsVenta.map(item => ({ ...item }));
 
   if (items.some(item =>
@@ -323,7 +329,7 @@ finalizarTransaccion(): void {
 
       const pedido: Omit<Pedido, 'id'> = {
         idCliente: cliente.id,
-        idUsuario: this.idUsuarioActual,
+        idUsuario: usuarioActual.id,
         fechaHoraPedido: fechaHora,
         metodoPago: datosVenta.metodoPago ?? '',
         observaciones: datosVenta.observaciones ?? '',
@@ -358,7 +364,7 @@ finalizarTransaccion(): void {
                 switchMap(() => {
                   const movimiento: MovimientoInventario = {
                     idProducto: item.idProducto,
-                    idUsuario: this.idUsuarioActual,
+                    idUsuario: usuarioActual.id,
                     idTipoMovimiento: tipoSalida.id,
                     idMotivo: motivoVenta.id,
                     cantidadMovimiento: item.cantidad,
