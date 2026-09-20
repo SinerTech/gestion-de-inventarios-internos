@@ -32,12 +32,20 @@ export class AuthService {
       return usuarioEncontrado ?? null;
     })
   );
-}
+  }
 
   /**
    * Registra un nuevo usuario en la colección de usuarios
    */
   registro(nuevoUsuario: Omit<Usuario, 'id'>): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.apiUrl}/usuarios`, nuevoUsuario);
+  }
+
+  obtenerUsuarioActual(): Usuario | null {
+  const usuario = localStorage.getItem('usuario_actual');
+  if (!usuario) {
+    return null;
+  }
+  return JSON.parse(usuario) as Usuario;
   }
 }
