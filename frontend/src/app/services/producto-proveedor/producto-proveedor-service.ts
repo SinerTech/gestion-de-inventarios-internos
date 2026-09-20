@@ -32,10 +32,22 @@ export class ProductoProveedorService {
       .pipe(catchError(this.handleError));
   }
 
+  // =====================================================
+  // ACTUALIZAR RELACIÓN
+  // =====================================================
+
   actualizarRelacion(id: string, relacion: ProductoProveedor): Observable<ProductoProveedor> {
     return this.httpClient
       .put<ProductoProveedor>(`${this.url}/${id}`, relacion)
       .pipe(catchError(this.handleError));
+  }
+
+  // =====================================================
+  // ELIMINAR RELACIÓN
+  // =====================================================
+
+  eliminarRelacion(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${id}`).pipe(catchError(this.handleError));
   }
 
   // =====================================================

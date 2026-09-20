@@ -47,6 +47,14 @@ export class ProductoService {
   }
 
   // =====================================================
+  // ELIMINAR PRODUCTO
+  // =====================================================
+
+  eliminarProducto(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${id}`).pipe(catchError(this.handleError));
+  }
+
+  // =====================================================
   // MANEJO DE ERRORES
   // =====================================================
 

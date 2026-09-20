@@ -1,8 +1,16 @@
 <section class="seccion_panel_admin" id="crud_productos">
 
-    <h2>Registrar Producto</h2>
+    <!-- ================================================= -->
+    <!-- TÍTULO DINÁMICO -->
+    <!-- ================================================= -->
 
-    <form class="form_panel_admin" [formGroup]="productoForm" (ngSubmit)="registrarProducto()" novalidate>
+    <h2>
+        {{ modoEdicion ? 'Modificar Producto' : 'Registrar Producto' }}
+    </h2>
+
+
+    <form class="form_panel_admin" [formGroup]="productoForm"
+        (ngSubmit)="modoEdicion ? editarProducto() : registrarProducto()" novalidate>
 
         <!-- ================================================= -->
         <!-- SKU -->
@@ -243,7 +251,7 @@
 
         <div formGroupName="proveedor">
 
-            <label for="producto_proveedor">
+            <label for="proveedorExistente">
                 Proveedor
             </label>
 
@@ -469,32 +477,32 @@
 
         <div class="acciones_crud">
 
+            <!-- ============================================== -->
+            <!-- BOTÓN CREAR / MODIFICAR -->
+            <!-- ============================================== -->
+
             <button type="submit">
+
+                @if (modoEdicion) {
+
+                <i class="fa-solid fa-pen"></i>
+
+                Modificar
+
+                } @else {
 
                 <i class="fa-solid fa-plus"></i>
 
                 Crear
 
-            </button>
-
-
-            <button type="button" (click)="editarProducto()">
-
-                <i class="fa-solid fa-pen"></i>
-
-                Editar
+                }
 
             </button>
 
 
-            <button type="button" (click)="eliminarProducto()">
-
-                <i class="fa-solid fa-trash"></i>
-
-                Eliminar
-
-            </button>
-
+            <!-- ============================================== -->
+            <!-- LIMPIAR -->
+            <!-- ============================================== -->
 
             <button type="button" (click)="limpiarFormulario()">
 
