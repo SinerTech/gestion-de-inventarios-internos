@@ -1,5 +1,27 @@
-{
-  "usuarios": [],
+{ 
+  "usuarios": [
+    {
+      "id": "1",
+      "nombreUsuario": "Franco",
+      "idRol": "1",
+      "emailUsuario": "franco@test.com",
+      "password": "123"
+    }
+  ],
+  "roles": [
+    {
+      "id": "1",
+      "nombreRol": "administrador"
+    },
+    {
+      "id": "2",
+      "nombreRol": "supervisor"
+    },
+    {
+      "id": "3",
+      "nombreRol": "vendedor"
+    }
+  ],
   "productos": [
     {
       "id": "1",
@@ -101,34 +123,7 @@
       "emailProveedor": "contacto@proveedor5.com"
     }
   ],
-  "roles": [
-    {
-      "id": "1",
-      "nombreRol": "administrador"
-    },
-    {
-      "id": "2",
-      "nombreRol": "supervisor"
-    },
-    {
-      "id": "3",
-      "nombreRol": "vendedor"
-    }
-  ],
-  "tipos-movimiento": [
-    {
-      "id": "1",
-      "nombreTipoMovimiento": "Ingreso"
-    },
-    {
-      "id": "2",
-      "nombreTipoMovimiento": "Ajuste"
-    },
-    {
-      "id": "3",
-      "nombreTipoMovimiento": "Salida"
-    }
-  ],
+  
   "motivos": [
     {
       "id": "1",
@@ -408,4 +403,4 @@
       "bio": "Responsable de la documentación y estructuración de los casos de uso del sistema, colaborando además en el desarrollo del HTML para garantizar una interfaz clara, organizada y funcional."
     }
   ]
-}
+}  
