@@ -1,4 +1,4 @@
-{ 
+{
   "usuarios": [
     {
       "id": "1",
@@ -6,6 +6,13 @@
       "idRol": "1",
       "emailUsuario": "franco@test.com",
       "password": "123"
+    },
+    {
+      "nombreUsuario": "Nicolas Romano",
+      "idRol": "2",
+      "emailUsuario": "nico@example.com",
+      "password": "HJ456asd",
+      "id": "T4jVcnMofuo"
     }
   ],
   "roles": [
@@ -123,7 +130,20 @@
       "emailProveedor": "contacto@proveedor5.com"
     }
   ],
-  
+  "tipos-movimiento": [
+    {
+      "id": "1",
+      "nombreTipoMovimiento": "Ingreso"
+    },
+    {
+      "id": "2",
+      "nombreTipoMovimiento": "Ajuste"
+    },
+    {
+      "id": "3",
+      "nombreTipoMovimiento": "Salida"
+    }
+  ],
   "motivos": [
     {
       "id": "1",
