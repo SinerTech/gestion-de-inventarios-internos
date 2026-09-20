@@ -17,39 +17,64 @@ import { QuienesSomos } from './pages/quienes-somos/quienes-somos';
 
 
 export const routes: Routes = [
-    {path: "", redirectTo: "sinertech/landing-page", pathMatch: 'full'},
-    {path: "login", component: Login},
-    {path: "registro", component: Registro},
-    {path: "sinertech", component: MainLayout,
+  { path: '', redirectTo: 'sinertech/landing-page', pathMatch: 'full' },
+  { path: 'login', component: Login },
+  { path: 'registro', component: Registro },
+  {
+    path: 'sinertech',
+    component: MainLayout,
+    children: [
+      { path: 'quienes-somos', component: QuienesSomos },
+      { path: 'landing-page', component: LandingPage },
+      {
+        path: 'dashboard-supervisor',
+        component: DashboardSupervisor,
         children: [
-            {path: "quienes-somos" , component: QuienesSomos},
-            {path: "landing-page", component: LandingPage},
-            {path: "dashboard-supervisor", component: DashboardSupervisor,
-                children: [
-                    { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full'},
-                    {path: 'inicio-dashboard', component: InicioDashboard, data: {tipoDashboard: 'supervisor'}},
-                    {path: 'ingreso-stock', component: IngresoStock},
-                    {path: 'ajuste-stock', component: AjusteStock},
-                    {path: 'control-stock', component: ControlStock, data: {tipoDashboard: 'supervisor'}}
-                    ]
-                },
-            {path: "dashboard-admin", component: DashboardAdmin,
-                children: [
-                    { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full'},
-                    {path: 'inicio-dashboard', component: InicioDashboard, data: {tipoDashboard: 'administrador'}},
-                    {path: 'registro-producto', component: RegistroProducto},
-                    {path: 'control-stock', component: ControlStock, data: {tipoDashboard: 'administrador'}}
-                    ]
-                },
-            {path: "dashboard-vendedor", component: DashboardVendedor,
-                children: [
-                    { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full'},
-                    {path: 'inicio-dashboard', component: InicioDashboard, data: {tipoDashboard: 'vendedor'}},
-                    {path: 'control-stock', component: ControlStock, data: {tipoDashboard: 'vendedor'}},
-                    {path: 'resumen-venta', component: ResumenVenta}
-                ]
-            }
-        ]
-    },
-    {path: "**", component: Pagina404}
-    ]
+          { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full' },
+          {
+            path: 'inicio-dashboard',
+            component: InicioDashboard,
+            data: { tipoDashboard: 'supervisor' },
+          },
+          { path: 'ingreso-stock', component: IngresoStock },
+          { path: 'ajuste-stock', component: AjusteStock },
+          { path: 'control-stock', component: ControlStock, data: { tipoDashboard: 'supervisor' } },
+        ],
+      },
+      {
+        path: 'dashboard-admin',
+        component: DashboardAdmin,
+        children: [
+          { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full' },
+          {
+            path: 'inicio-dashboard',
+            component: InicioDashboard,
+            data: { tipoDashboard: 'administrador' },
+          },
+          { path: 'registro-producto', component: RegistroProducto },
+          { path: 'registro-producto/:id', component: RegistroProducto },
+          {
+            path: 'control-stock',
+            component: ControlStock,
+            data: { tipoDashboard: 'administrador' },
+          },
+        ],
+      },
+      {
+        path: 'dashboard-vendedor',
+        component: DashboardVendedor,
+        children: [
+          { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full' },
+          {
+            path: 'inicio-dashboard',
+            component: InicioDashboard,
+            data: { tipoDashboard: 'vendedor' },
+          },
+          { path: 'control-stock', component: ControlStock, data: { tipoDashboard: 'vendedor' } },
+          { path: 'resumen-venta', component: ResumenVenta },
+        ],
+      },
+    ],
+  },
+  { path: '**', component: Pagina404 },
+];

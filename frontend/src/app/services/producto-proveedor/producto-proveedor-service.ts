@@ -1,38 +1,66 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { inject, Injectable, Service } from '@angular/core';
+
+import { inject, Injectable } from '@angular/core';
+
 import { catchError, Observable, throwError } from 'rxjs';
+
 import { ProductoProveedor } from '../../models/producto-proveedor';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductoProveedorService {
-    url = "http://localhost:3000/productos-proveedores"
-    private httpClient = inject(HttpClient)
+  private url = 'http://localhost:3000/productos-proveedores';
 
-    obtenerProductosProveedores():Observable<ProductoProveedor[]> {
-        return this.httpClient.get<ProductoProveedor[]>(this.url).pipe(
-            catchError(this.handleError)
-        )
+  private httpClient = inject(HttpClient);
+
+  // =====================================================
+  // OBTENER RELACIONES
+  // =====================================================
+
+  obtenerProductosProveedores(): Observable<ProductoProveedor[]> {
+    return this.httpClient.get<ProductoProveedor[]>(this.url).pipe(catchError(this.handleError));
+  }
+
+  // =====================================================
+  // REGISTRAR RELACIÓN
+  // =====================================================
+
+  registrarRelacion(relacion: ProductoProveedor): Observable<ProductoProveedor> {
+    return this.httpClient
+      .post<ProductoProveedor>(this.url, relacion)
+      .pipe(catchError(this.handleError));
+  }
+
+  // =====================================================
+  // ACTUALIZAR RELACIÓN
+  // =====================================================
+
+  actualizarRelacion(id: string, relacion: ProductoProveedor): Observable<ProductoProveedor> {
+    return this.httpClient
+      .put<ProductoProveedor>(`${this.url}/${id}`, relacion)
+      .pipe(catchError(this.handleError));
+  }
+
+  // =====================================================
+  // ELIMINAR RELACIÓN
+  // =====================================================
+
+  eliminarRelacion(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${id}`).pipe(catchError(this.handleError));
+  }
+
+  // =====================================================
+  // MANEJO DE ERRORES
+  // =====================================================
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.error('Ocurrió un error del lado del cliente:', error.error);
+    } else {
+      console.error(`El backend devolvió el código ${error.status}:`, error.error);
     }
 
-    registrarRelacion(relacion: ProductoProveedor):Observable<ProductoProveedor> {
-        return this.httpClient.post<ProductoProveedor>(this.url, relacion).pipe(
-            catchError(this.handleError)
-        );
-    }
-
-    private handleError(error: HttpErrorResponse) {
-        if (error.status === 0) {
-            console.error('Ocurrió un error del lado del cliente:', error.error);
-        } else {
-            console.error(
-                `El backend devolvió el código ${error.status}:`,
-                error.error
-            );
-        }
-        return throwError(
-            () => new Error('Ocurrió un error. Intente nuevamente más tarde.')
-        );
-    }
+    return throwError(() => new Error('Ocurrió un error. Intente nuevamente más tarde.'));
+  }
 }
