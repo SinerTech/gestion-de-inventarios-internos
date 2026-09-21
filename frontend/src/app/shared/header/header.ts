@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { AuthService } from '../../services/auth/auth-service';
 
 @Component({
   imports: [RouterLink, RouterLinkActive],
@@ -8,17 +9,19 @@ import { Router, RouterLink, RouterLinkActive } from "@angular/router";
   templateUrl: './header.html',
 })
 export class Header {
-  logoSinertech: string = "logo/logo_icon.png";
-  // Estas funciones se reemplazaran a futuro, actualmente ofrecen solo simulación
-  // Simulación dinamica del componente
-  // Cambiar a true para observar el boton Cerrar Sesión en dashboards y probarlo dinamicamente
-  estaAutenticado: boolean = false;
+  private readonly authService = inject(AuthService);
+  private router = inject(Router)
+
+  logoSinertech: string = 'logo/logo_icon.png';
+
+  get estaAutenticado(): boolean {
+    return this.authService.estaLogueado();
+  }
   cerrarSesion(): void {
-    this.estaAutenticado=!this.estaAutenticado
-    alert("Cerrando Sesión")
-  };
-  constructor(private router: Router) {}
+    localStorage.removeItem('usuario_actual');
+    this.router.navigate(['/sinertech/landing-page']);
+  }
   get esDashboard(): boolean {
-      return this.router.url.includes('dashboard');
+    return this.router.url.includes('dashboard');
   }
 }
