@@ -14,6 +14,7 @@ import { RegistroProducto } from './pages/dashboard/dashboard-admin/registro-pro
 import { DashboardVendedor } from './pages/dashboard/dashboard-vendedor/dashboard-vendedor';
 import { ResumenVenta } from './pages/dashboard/dashboard-vendedor/resumen-venta/resumen-venta';
 import { QuienesSomos } from './pages/quienes-somos/quienes-somos';
+import { authGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -29,6 +30,8 @@ export const routes: Routes = [
       {
         path: 'dashboard-supervisor',
         component: DashboardSupervisor,
+        canActivate: [authGuard],
+        data: { rolesPermitidos: ['2'] },
         children: [
           { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full' },
           {
@@ -44,6 +47,8 @@ export const routes: Routes = [
       {
         path: 'dashboard-admin',
         component: DashboardAdmin,
+        canActivate: [authGuard],
+        data: { rolesPermitidos: ['1'] },
         children: [
           { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full' },
           {
@@ -63,6 +68,8 @@ export const routes: Routes = [
       {
         path: 'dashboard-vendedor',
         component: DashboardVendedor,
+        canActivate: [authGuard],
+        data: { rolesPermitidos: ['3'] },
         children: [
           { path: '', redirectTo: 'inicio-dashboard', pathMatch: 'full' },
           {

@@ -46,6 +46,26 @@ export class AuthService {
   if (!usuario) {
     return null;
   }
-  return JSON.parse(usuario) as Usuario;
+    return JSON.parse(usuario) as Usuario;
+  }
+  
+  estaLogueado(): boolean {
+    return this.obtenerUsuarioActual() !== null;
+  }
+
+  obtenerRutaDashboard(usuario: Usuario): string {
+  switch (String(usuario.idRol)) {
+    case '1':
+      return '/sinertech/dashboard-admin';
+
+    case '2':
+      return '/sinertech/dashboard-supervisor';
+
+    case '3':
+      return '/sinertech/dashboard-vendedor';
+
+    default:
+      return '/login';
+    }
   }
 }
