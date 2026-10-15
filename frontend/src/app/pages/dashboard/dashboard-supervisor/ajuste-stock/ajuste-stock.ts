@@ -1,15 +1,11 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Producto } from '../../../../models/producto.models';
-import { Proveedor } from '../../../../models/proveedor.models';
 import { Motivo } from '../../../../models/motivo.models';
 import { MovimientoInventarioService } from '../../../../services/movimiento-inventario/movimiento-inventario-service';
 import { ProductoService } from '../../../../services/producto/producto-service';
 import { MotivoService } from '../../../../services/motivo/motivo-service';
-import { TipoMovimientoService } from '../../../../services/tipo-movimiento/tipo-movimiento-service';
-import { MovimientoInventario } from '../../../../models/movimiento-inventario.models';
 import { AuthService } from '../../../../services/auth/auth-service';
-
 
 @Component({
     imports: [ReactiveFormsModule],
@@ -17,68 +13,77 @@ import { AuthService } from '../../../../services/auth/auth-service';
     styleUrl: './ajuste-stock.css',
     templateUrl: './ajuste-stock.html',
 })
-
 export class AjusteStock implements OnInit {
-    listaProductos: Producto[] = []
-    listaProveedores: Proveedor[] = []
-    listaMotivos: Motivo[] = []
+    listaProductos: Producto[] = [];
+    listaMotivos: Motivo[] = [];
 
-    private formBuilder = inject(FormBuilder)
-    private movimientoService = inject(MovimientoInventarioService)
-    private productosService = inject(ProductoService)
-    private motivoService = inject(MotivoService)
-    private tiposMovimientoService = inject(TipoMovimientoService)
+    private formBuilder = inject(FormBuilder);
+    private movimientoService = inject(MovimientoInventarioService);
+    private productosService = inject(ProductoService);
+    private motivoService = inject(MotivoService);
+    private authService = inject(AuthService);
     private cdr = inject(ChangeDetectorRef)
-    private authService = inject(AuthService)
 
     formularioAjuste: FormGroup = this.formBuilder.group({
-            idProducto: ['', Validators.required],
-            tipoAjuste: ['', Validators.required],
-            idMotivo: ['', Validators.required],
-            cantidadMovimiento: ['', [Validators.required, Validators.min(1)]],
-            observaciones: ['']
-        });
+        idProducto: ['', Validators.required],
+        tipoAjuste: ['', Validators.required],
+        idMotivo: ['', Validators.required],
+        cantidadMovimiento: ['', [Validators.required, Validators.min(1), Validators.max(200)]],
+        observaciones: ['']
+    });
 
     ngOnInit(): void {
         this.productosService.obtenerListaProductos().subscribe({
-            next: (data) => {
-                console.log(data);
+            next: data => {
                 this.listaProductos = data;
-            },
-            error: (e) => 
-                console.error('Error al cargar productos', e),
-            complete: () => {
                 this.cdr.detectChanges();
-                console.info('complete');
+            },
+            error: e => {
+                console.error('Error al cargar productos', e);
+                this.cdr.detectChanges();
             }
         });
+
         this.motivoService.obtenerMotivos().subscribe({
-            next: (data) => {
-                console.log(data);
-                this.listaMotivos = data; 
-            },
-            error: (e) =>
-                console.error('Error al cargar motivos'),
-            complete: () => {
+            next: data => {
+                this.listaMotivos = data;
                 this.cdr.detectChanges();
-                console.info('complete')
+            },
+            error: e => {
+                console.error('Error al cargar motivos', e);
+                this.cdr.detectChanges();
             }
+        });
+
+        this.formularioAjuste.get('tipoAjuste')?.valueChanges.subscribe(() => {
+            // Evita conservar un motivo incompatible con el tipo elegido.
+            this.formularioAjuste.get('idMotivo')?.reset('');
         });
     }
 
-    get motivosAjusteFiltrados() {
+    get motivosAjusteFiltrados(): Motivo[] {
         const tipo = this.formularioAjuste.get('tipoAjuste')?.value;
-        const idsAjustePositivo = ['3', '4'];
-        const idsAjusteNegativo = ['5', '6', '7']
 
-        if (tipo === 'ajuste_positivo') {
-            return this.listaMotivos.filter(motivo => idsAjustePositivo.includes(motivo.id));
-        } else if (tipo === 'ajuste_negativo') {
-            return this.listaMotivos.filter(
-                motivo => idsAjusteNegativo.includes(motivo.id)
-            );
-        }
-        return [];
+        const motivosPositivos = [
+            'Reconteo de inventario',
+            'Producto encontrado',
+        ];
+        const motivosNegativos = [
+            'Producto dañado',
+            'Error de carga',
+            'Perdida'
+        ];
+
+        const nombres = tipo === 'ajuste_positivo'
+            ? motivosPositivos
+            : tipo === 'ajuste_negativo'
+                ? motivosNegativos
+                : [];
+
+        return this.listaMotivos.filter(motivo =>
+            nombres.includes(motivo.nombreMotivo)
+        );
+        
     }
 
     onEnviarAjuste(): void {
@@ -86,79 +91,45 @@ export class AjusteStock implements OnInit {
             this.formularioAjuste.markAllAsTouched();
             return;
         }
-        this.tiposMovimientoService.obtenerTiposMovimiento().subscribe({
-            next: (data) => {
-                const tipoAjuste = data.find(
-                    tipo => tipo.nombreTipoMovimiento === "Ajuste"
-                )
-            if (!tipoAjuste) {
-                console.error('No se encontro el tipo de Ajuste');
-                return;
-            }
-            const usuarioActual = this.authService.obtenerUsuarioActual();
-            if (!usuarioActual) {
-                console.error('No hay un usuario logueado');
-                return;
-            }
-            const movimiento: MovimientoInventario = {
-                idProducto: this.formularioAjuste.value.idProducto,
-                cantidadMovimiento: this.formularioAjuste.value.cantidadMovimiento,
-                idMotivo: this.formularioAjuste.value.idMotivo,
-                observaciones: this.formularioAjuste.value.observaciones,
-                idUsuario: usuarioActual.id,
-                idTipoMovimiento: tipoAjuste.id,
-                fechaHoraMovimiento: new Date().toISOString()
-            };
-            this.movimientoService.registrarMovimiento(movimiento).subscribe({
-                next: () => {
-                    console.log('Movimiento enviado:', movimiento);
-                    console.log('ID del producto en movimiento:', movimiento.idProducto);
-                    console.log('Lista de productos:', this.listaProductos);
-                    const producto = this.listaProductos.find(
-                        producto => producto.id === movimiento.idProducto
-                    );
-                    if (!producto) {
-                        console.error('No se encontro el producto seleccionado');
-                        return;
-                    }
-                    const tipoAjuste = this.formularioAjuste.value.tipoAjuste;
-                    const cantidad = this.formularioAjuste.value.cantidadMovimiento;
-                    const nuevaCantidad = 
-                        tipoAjuste === 'ajuste_positivo' 
-                            ? producto.cantidadExistente + cantidad
-                            : producto.cantidadExistente - cantidad;
 
-                    const productoActualizado: Producto = {
-                        id: producto.id,
-                        sku: producto.sku,
-                        nombreProducto: producto.nombreProducto,
-                        idCategoria: producto.idCategoria,
-                        precioUnitario: producto.precioUnitario,
-                        cantidadExistente: nuevaCantidad,
-                        estado: producto.estado,
-                        ultimoIngreso: movimiento.fechaHoraMovimiento
-                    };
-                    this.productosService.actualizarCantidadExistente(producto.id, productoActualizado).subscribe({
-                        next: () => {
-                            console.log('Producto actualizado');
-                            this.formularioAjuste.reset();
-                        },
-                        error: (e) => {
-                            console.error('Error al actualizar el producto', e)
-                        }
-                    });
-                },
-                error: (e) => {
-                    console.error('Error al registrar movimiento', e);
-                }
+        const usuarioActual = this.authService.obtenerUsuarioActual();
+
+        if (!usuarioActual) {
+            console.error('No hay un usuario logueado.');
+            return;
+        }
+
+        const datos = this.formularioAjuste.getRawValue();
+
+        // Comprobación adicional para no enviar un motivo incompatible.
+        const motivoValido = this.motivosAjusteFiltrados.some(
+            motivo => String(motivo.id) === String(datos.idMotivo)
+        );
+
+        if (!motivoValido) {
+            this.formularioAjuste.get('idMotivo')?.setErrors({
+                motivoInvalido: true
             });
+            this.formularioAjuste.get('idMotivo')?.markAsTouched();
+            return;
+        }
+
+        this.movimientoService.registrarAjuste({
+            id_producto: Number(datos.idProducto),
+            cantidad_movimiento: Number(datos.cantidadMovimiento),
+            id_motivo: Number(datos.idMotivo),
+            id_usuario: Number(usuarioActual.id),
+            observaciones: datos.observaciones ?? ''
+        }).subscribe({
+            next: respuesta => {
+                console.log(respuesta.mensaje);
+                this.formularioAjuste.reset();
             },
-            error: (e) => {
-                console.error('Error al buscar el tipo de movimiento', e)
-            },
-            complete: () => {
-                console.info('complete');
-                this.cdr.detectChanges();
+            error: error => {
+                console.error(
+                    'No se pudo registrar el ajuste.',
+                    error.error ?? error
+                );
             }
         });
     }
