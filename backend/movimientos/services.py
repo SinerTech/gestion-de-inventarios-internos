@@ -3,28 +3,50 @@ from django.utils import timezone
 from .models import MovimientoInventario, TipoMovimiento
 from inventario.services import actualizar_stock
 
+
+def _obtener_tipo_movimiento(nombre):
+    try:
+        return TipoMovimiento.objects.get(nombre_tipo_movimiento__iexact=nombre)
+    except TipoMovimiento.DoesNotExist:
+        raise ValueError(f"El tipo de movimiento '{nombre}' no existe en la base de datos.")
+
+
+def _registrar_movimiento(data, tipo_nombre, operacion):
+    producto = data['id_producto']
+
+    campos = {
+        'id_producto': producto,
+        'id_usuario': data['id_usuario'],
+        'id_motivo': data['id_motivo'],
+        'id_tipo_movimiento': _obtener_tipo_movimiento(tipo_nombre),
+        'cantidad_movimiento': data['cantidad_movimiento'],
+        'fecha_hora_movimiento': timezone.now(),
+        'observaciones': data.get('observaciones') or '',
+    }
+
+    if tipo_nombre == 'Ingreso':
+        campos['id_proveedor'] = data.get('id_proveedor')
+        campos['numero_lote_factura'] = data.get('numero_lote_factura') or None
+
+    MovimientoInventario.objects.create(**campos)
+
+    return actualizar_stock(producto.pk, data['cantidad_movimiento'], operacion)
+
+
 @transaction.atomic
 def registrar_ingreso(data):
-    producto = data['id_producto']
-    
-    try:
-        tipo_ingreso = TipoMovimiento.objects.get(nombre_tipo_movimiento__iexact='Ingreso')
-    except TipoMovimiento.DoesNotExist:
-        raise ValueError("El tipo de movimiento 'Ingreso' no existe en la base de datos.")
-    
-    movimiento = MovimientoInventario.objects.create(
-        id_producto = producto,
-        id_usuario = data['id_usuario'],
-        id_proveedor = data['id_proveedor'],
-        id_motivo = data['id_motivo'],
-        id_tipo_movimiento = tipo_ingreso,
-        cantidad_movimiento = data['cantidad_movimiento'],
-        fecha_hora_movimiento = timezone.now(),
-        observaciones = data.get('observaciones', ''),
-        numero_lote_factura = data['numero_lote_factura']
-    )
-    
-    producto_actualizado = actualizar_stock(producto.pk, data['cantidad_movimiento'])
-    
-    return producto_actualizado
-    
+    return _registrar_movimiento(data, tipo_nombre='Ingreso', operacion='sumar')
+
+
+@transaction.atomic
+def registrar_ajuste(data):
+    motivo = data['id_motivo'].nombre_motivo
+
+    if motivo == 'Producto encontrado':
+        operacion = 'sumar'
+    elif motivo in ('Producto dañado', 'Error de carga', 'Perdida'):
+        operacion = 'restar'
+    else:
+        raise ValueError("El motivo no corresponde a un ajuste de inventario.")
+
+    return _registrar_movimiento(data, tipo_nombre='Ajuste', operacion=operacion)
