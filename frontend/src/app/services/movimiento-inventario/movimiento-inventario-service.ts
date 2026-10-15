@@ -3,36 +3,59 @@ import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { MovimientoInventario } from '../../models/movimiento-inventario.models';
 
+export interface MovimientoStockRequest {
+    id_producto: number;
+    cantidad_movimiento: number;
+    id_motivo: number;
+    id_usuario: number;
+    observaciones?: string;
+}
+
+export interface IngresoRequest extends MovimientoStockRequest {
+    id_proveedor?: number | null;
+    numero_lote_factura?: string | null;
+}
+
+export interface RespuestaMovimiento {
+    mensaje: string;
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class MovimientoInventarioService {
-    url = "http://localhost:3000/movimientos-inventario"
-    private httpClient = inject(HttpClient)
+    private readonly baseUrl = 'http://localhost:8000/api/v1/';
 
-    obtenerMovimientosInventario():Observable<MovimientoInventario[]> {
-        return this.httpClient.get<MovimientoInventario[]>(this.url).pipe(
+    private readonly urlIngresos = `${this.baseUrl}ingresos/`;
+    private readonly urlAjustes = `${this.baseUrl}ajustes/`;
+
+    private httpClient = inject(HttpClient);
+
+    registrarIngreso(datos: IngresoRequest): Observable<RespuestaMovimiento> {
+        return this.httpClient.post<RespuestaMovimiento>(this.urlIngresos, datos).pipe(
             catchError(this.handleError)
-        )
+        );
     }
 
-    registrarMovimiento(movimiento: MovimientoInventario):Observable<MovimientoInventario> {
-        return this.httpClient.post<MovimientoInventario>(this.url, movimiento).pipe(
+    registrarAjuste(datos: MovimientoStockRequest): Observable<RespuestaMovimiento> {
+        return this.httpClient.post<RespuestaMovimiento>(this.urlAjustes, datos).pipe(
             catchError(this.handleError)
+        );
+    }
+
+    registrarMovimiento(
+    movimiento: MovimientoInventario
+    ): Observable<MovimientoInventario> {
+    return this.httpClient
+        .post<MovimientoInventario>(
+        'http://localhost:3000/movimientos-inventario',
+        movimiento
         )
+        .pipe(catchError(this.handleError));
     }
 
     private handleError(error: HttpErrorResponse) {
-        if (error.status === 0) {
-            console.error('Ocurrió un error del lado del cliente:', error.error);
-        } else {
-            console.error(
-                `El backend devolvió el código ${error.status}:`,
-                error.error
-            );
-        }
-        return throwError(
-            () => new Error('Ocurrió un error. Intente nuevamente más tarde.')
-        );
+        console.error('Error en la API de movimientos:', error.status, error.error);
+        return throwError(() => error);
     }
 }
