@@ -42,7 +42,7 @@ def registrar_ingreso(data):
 def registrar_ajuste(data):
     motivo = data['id_motivo'].nombre_motivo
 
-    if motivo == 'Producto encontrado':
+    if motivo in ('Producto encontrado', 'Reconteo de inventario'):
         operacion = 'sumar'
     elif motivo in ('Producto dañado', 'Error de carga', 'Perdida'):
         operacion = 'restar'

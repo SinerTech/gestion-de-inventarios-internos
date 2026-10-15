@@ -7,7 +7,7 @@ MOTIVOS_POR_TIPO  = {
         'Devolucion de cliente'
     ],
     'ajuste': [
-        'Reconteo de inventario'
+        'Reconteo de inventario',
         'Producto encontrado',
         'Producto dañado',
         'Error de carga',
