@@ -12,7 +12,7 @@ import { ProductoApi } from '../../models/producto-api.models';
   providedIn: 'root',
 })
 export class ProductoService {
-  private url = 'http://localhost:3000/productos';
+  private url = 'http://localhost:8000/api/v1/productos/';
 
   private httpClient = inject(HttpClient);
   
