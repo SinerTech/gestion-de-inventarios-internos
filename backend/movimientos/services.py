@@ -50,3 +50,11 @@ def registrar_ajuste(data):
         raise ValueError("El motivo no corresponde a un ajuste de inventario.")
 
     return _registrar_movimiento(data, tipo_nombre='Ajuste', operacion=operacion)
+
+@transaction.atomic
+def registrar_salida(data):
+    return _registrar_movimiento(
+        data,
+        tipo_nombre='Salida',
+        operacion='restar'
+    )

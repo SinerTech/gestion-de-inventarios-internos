@@ -12,18 +12,12 @@ import {
   Validators
 } from '@angular/forms';
 
-import { Pedido } from '../../../../models/pedido.models';
 import { PedidoService } from '../../../../services/pedido/pedido-service';
-import { DetallePedidoService } from '../../../../services/detalle-pedido/detalle-pedido-service';
 import { Cliente } from '../../../../models/cliente.models';
 import { ClienteService } from '../../../../services/cliente/cliente-service';
 import {ProductoService } from '../../../../services/producto/producto-service';
 import {Producto} from '../../../../models/producto.models';
-import { forkJoin, switchMap, finalize, from, concatMap, toArray } from 'rxjs';
-import { MovimientoInventario } from '../../../../models/movimiento-inventario.models';
-import { MovimientoInventarioService } from '../../../../services/movimiento-inventario/movimiento-inventario-service';
-import { TipoMovimientoService } from '../../../../services/tipo-movimiento/tipo-movimiento-service'
-import { MotivoService } from '../../../../services/motivo/motivo-service';
+import { forkJoin } from 'rxjs';
 import { AuthService } from '../../../../services/auth/auth-service';
 
 interface ItemVenta {
@@ -78,11 +72,7 @@ export class ResumenVenta implements OnInit {
   observacionesVenta = '';
 
   private pedidoService = inject(PedidoService);
-  private detallePedidoService = inject(DetallePedidoService);
   private productoService = inject(ProductoService);
-  private movimientoService = inject(MovimientoInventarioService);
-  private tipoMovimientoService = inject(TipoMovimientoService);
-  private motivoService = inject(MotivoService);
   private cdr = inject(ChangeDetectorRef);
   private clienteService = inject(ClienteService);
   private authService = inject(AuthService)
@@ -240,12 +230,12 @@ finalizarTransaccion(): void {
   }
 
   if (this.itemsVenta.length === 0) {
-    this.mensajeErrorVenta =
-      'Agregá al menos un producto al pedido.';
+    this.mensajeErrorVenta = 'Agregá al menos un producto al pedido.';
     return;
   }
 
   const usuarioActual = this.authService.obtenerUsuarioActual();
+
   if (!usuarioActual) {
     this.mensajeErrorVenta = 'No hay un usuario autenticado.';
     return;
@@ -257,164 +247,60 @@ finalizarTransaccion(): void {
     !Number.isInteger(item.cantidad) ||
     item.cantidad < 1 ||
     !Number.isFinite(item.precioUnitario) ||
-    item.precioUnitario < 0
+    item.precioUnitario <= 0 ||
+    !Number.isInteger(Number(item.idProducto)) ||
+    Number(item.idProducto) <= 0
   )) {
     this.mensajeErrorVenta =
-      'Revisá las cantidades y los precios del pedido.';
+      'Revisá los productos, las cantidades y los precios.';
     return;
   }
 
-  const subtotal = items.reduce(
-    (suma, item) => suma + item.cantidad * item.precioUnitario,
-    0
-  );
+  const idCliente = Number(cliente.id);
+  const idUsuario = Number(usuarioActual.id);
 
-  const iva = Math.round(subtotal * 0.21 * 100) / 100;
-  const total = Math.round((subtotal + iva) * 100) / 100;
+  if (
+    !Number.isInteger(idCliente) || idCliente <= 0 ||
+    !Number.isInteger(idUsuario) || idUsuario <= 0
+  ) {
+    this.mensajeErrorVenta =
+      'El cliente o el usuario no tiene un ID numérico válido para Django.';
+    return;
+  }
+
   const fechaHora = new Date().toISOString();
 
-  let guardadoIniciado = false;
-  let idPedidoCreado = '';
+  const venta = {
+    id_cliente: idCliente,
+    id_usuario: idUsuario,
+    fecha_hora_pedido: fechaHora,
+    metodo_pago: datosVenta.metodoPago ?? '',
+    observaciones: datosVenta.observaciones ?? '',
+    detalles: items.map(item => ({
+      id_producto: Number(item.idProducto),
+      cantidad: item.cantidad,
+      precio_unitario: item.precioUnitario
+    }))
+  };
 
   this.guardandoVenta = true;
   this.ventaForm.disable();
 
-  forkJoin({
-    productos: this.productoService.obtenerListaProductos(),
-    tipos: this.tipoMovimientoService.obtenerTiposMovimiento(),
-    motivos: this.motivoService.obtenerMotivos()
-  }).pipe(
-    switchMap(({ productos, tipos, motivos }) => {
-      this.productos = productos;
-
-      const tipoSalida = tipos.find(
-        tipo => tipo.nombreTipoMovimiento === 'Salida'
-      );
-
-      const motivoVenta = motivos.find(
-        motivo => motivo.nombreMotivo === 'Venta'
-      );
-
-      if (!tipoSalida || !motivoVenta) {
-        throw new Error(
-          'Falta configurar el tipo Salida o el motivo Venta.'
-        );
-      }
-
-      const productosActualizados = items.map(item => {
-        const producto = productos.find(
-          producto => producto.id === item.idProducto
-        );
-
-        if (!producto || producto.estado !== 'Activo') {
-          throw new Error(
-            'El producto ' + item.nombreProducto +
-            ' ya no está disponible.'
-          );
-        }
-
-        if (item.cantidad > producto.cantidadExistente) {
-          throw new Error(
-            'Stock insuficiente para ' + item.nombreProducto +
-            '. Disponible: ' + producto.cantidadExistente
-          );
-        }
-
-        return {
-          ...producto,
-          cantidadExistente:
-            producto.cantidadExistente - item.cantidad
-        };
-      });
-
-      const pedido: Omit<Pedido, 'id'> = {
-        idCliente: cliente.id,
-        idUsuario: usuarioActual.id,
-        fechaHoraPedido: fechaHora,
-        metodoPago: datosVenta.metodoPago ?? '',
-        observaciones: datosVenta.observaciones ?? '',
-        total
-      };
-
-      guardadoIniciado = true;
-
-      return this.pedidoService.registrarPedido(pedido).pipe(
-        switchMap(pedidoGuardado => {
-          if (!pedidoGuardado.id) {
-            throw new Error(
-              'La API no devolvió el ID del pedido.'
-            );
-          }
-
-          idPedidoCreado = pedidoGuardado.id;
-
-          return from(items).pipe(
-            concatMap(item => {
-              const productoActualizado =
-                productosActualizados.find(
-                  producto => producto.id === item.idProducto
-                )!;
-
-              return this.detallePedidoService.registrarDetalle({
-                idPedido: pedidoGuardado.id,
-                idProducto: item.idProducto,
-                cantidad: item.cantidad,
-                precioUnitario: item.precioUnitario
-              }).pipe(
-                switchMap(() => {
-                  const movimiento: MovimientoInventario = {
-                    idProducto: item.idProducto,
-                    idUsuario: usuarioActual.id,
-                    idTipoMovimiento: tipoSalida.id,
-                    idMotivo: motivoVenta.id,
-                    cantidadMovimiento: item.cantidad,
-                    fechaHoraMovimiento: fechaHora,
-                    observaciones: datosVenta.observaciones ?? ''
-                  };
-
-                  return this.movimientoService
-                    .registrarMovimiento(movimiento);
-                }),
-                switchMap(() =>
-                  this.productoService.actualizarCantidadExistente(
-                    item.idProducto,
-                    productoActualizado
-                  )
-                )
-              );
-            }),
-            toArray()
-          );
-        })
-      );
-    }),
-    finalize(() => {
-      this.guardandoVenta = false;
-
-      if (!this.ventaPendienteRevision) {
-        this.ventaForm.enable();
-      }
-
-      this.cdr.markForCheck();
-    })
-  ).subscribe({
-    next: (productosGuardados) => {
-      this.productos = this.productos.map(producto =>
-        productosGuardados.find(
-          actualizado => actualizado.id === producto.id
-        ) ?? producto
-      );
-
-      this.idPedidoVenta = idPedidoCreado;
+  this.pedidoService.registrarVenta(venta).subscribe({
+    next: (respuesta) => {
+      this.idPedidoVenta = String(respuesta.id_pedido);
       this.itemsRecibo = items;
+
       this.clienteVenta =
         cliente.nombreCliente + ' ' + cliente.apellidoCliente;
+
       this.observacionesVenta = datosVenta.observaciones ?? '';
       this.metodoPagoSeleccionado = datosVenta.metodoPago ?? '';
 
-      this.subtotal = subtotal;
-      this.iva = iva;
-      this.total = total;
+      // El total guardado y calculado por Django es la fuente de verdad.
+      this.subtotal = respuesta.total;
+      this.iva = 0;
+      this.total = respuesta.total;
 
       this.itemsVenta = [];
 
@@ -427,23 +313,25 @@ finalizarTransaccion(): void {
       });
 
       this.ventaFinalizada = true;
+      this.guardandoVenta = false;
+      this.ventaForm.enable();
+      this.cdr.markForCheck();
     },
     error: (error) => {
-      if (guardadoIniciado) {
-        this.ventaPendienteRevision = true;
+      this.guardandoVenta = false;
 
-        this.mensajeErrorVenta =
-          'No se pudo completar el guardado del pedido. ' +
-          'Puede haber registros o cambios de stock . ' +
-          'Revisá la base antes de volver a enviarlo.';
-      } else {
-        this.mensajeErrorVenta =
-          error instanceof Error
-            ? error.message
-            : 'No se pu verificar los datos del pedido.';
-      }
+      this.mensajeErrorVenta =
+        error instanceof Error
+          ? error.message
+          : 'No se pudo registrar la venta en Django.';
 
-      console.error('Error al guardar el pedido:', error);
+      // Evitamos reintentar automáticamente una petición cuyo resultado
+      // podría ser incierto hasta comprobar si Django guardó el pedido.
+      this.ventaPendienteRevision = true;
+      this.ventaForm.disable();
+
+      console.error('Error al registrar la venta en Django:', error);
+      this.cdr.markForCheck();
     }
   });
 }
