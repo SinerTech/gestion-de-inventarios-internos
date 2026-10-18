@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { DashboardService } from '../../services/dashboard/dashboard-service';
+import { ContenidoService } from '../../services/contenido/contenido-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from '../../models/producto.models';
 import { ProductoService } from '../../services/producto/producto-service';
@@ -29,8 +29,7 @@ export class ControlStock implements OnInit {
 
   configuracionActual!: ConfiguracionDashboard;
 
-  private servicioDashboard = inject(DashboardService);
-  private ruta = inject(ActivatedRoute);
+  private contenidoService = inject(ContenidoService);  private ruta = inject(ActivatedRoute);
   private router = inject(Router);
 
   private productService = inject(ProductoService);
@@ -53,20 +52,18 @@ export class ControlStock implements OnInit {
     // CONFIGURACIÓN DEL DASHBOARD
     // ==========================================
 
-    this.servicioDashboard.obtenerConfiguracion().subscribe({
+    this.contenidoService.obtenerDashboard(tipoDashboard).subscribe({
       next: (data) => {
         console.log(data);
-
-        this.configuracionActual = data[tipoDashboard];
-      },
-
-      error: (e) => console.error('Error al cargar información de configuración del dashboard', e),
-
-      complete: () => {
+        this.configuracionActual = data;
         this.cdr.detectChanges();
+     },
 
-        console.info('complete');
-      },
+      error: (e) => 
+        console.error(
+         'Error al cargar información de configuración del dashboard',
+         e,
+       ),
     });
 
     // ==========================================
