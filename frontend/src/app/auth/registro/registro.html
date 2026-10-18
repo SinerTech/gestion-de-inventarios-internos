@@ -7,15 +7,22 @@
             <div class="w-100 mx-auto login-form-wrapper">
                 <h1 class="text-center mb-4">Crear Cuenta</h1>
                 <form class="form_panel_admin" [formGroup]="formularioRegistro" (ngSubmit)="registrarse()">
-                    <div class="row">
-                        <div class="col-md-12 mb-2 text-start">
-                            <label for="nombre" class="form-label"> Nombre completo </label>
+                    <div class="row g-2">
+                        <div class="col-12 col-md-6 text-start">
+                            <label for="nombre" class="form-label"> Nombre </label>
                             <input class="form-control" type="text" id="nombre" formControlName="nombre">
                             @if (Nombre?.invalid && Nombre?.touched) {
                                 <div class="invalid-feedback"> El nombre es obligatorio.</div>
                             }
                         </div>
-                        <div class="col-md-7 mb-2 text-start">
+                        <div class="col-12 col-md-6 text-start">
+                            <label for="nombre" class="form-label"> Apellido </label>
+                            <input class="form-control" type="text" id="apellido" formControlName="apellido">
+                            @if (Nombre?.invalid && Nombre?.touched) {
+                                <div class="invalid-feedback"> El Apellido es obligatorio.</div>
+                            }
+                        </div>
+                        <div class="col-12 text-start">
                             <label for="email" class="form-label"> Email </label>
                             <input class="form-control" type="email" id="email" formControlName="email">
                             @if (Email?.errors?.['required'] && Email?.touched) {
@@ -25,26 +32,14 @@
                                 <div class="invalid-feedback">Ingresá un email válido.</div>
                             }
                         </div>
-                        <div class="col-md-5 mb-2 text-start">
-                            <label for="rol" class="form-label">Rol</label>
-                            <select class="form-select" id="rol" formControlName="rol">
-                                <option value="">Seleccionar</option>
-                                <option value="1">Administrador</option>
-                                <option value="2">Supervisor</option>
-                                <option value="3">Vendedor</option>
-                            </select>
-                            @if (Rol?.invalid && Rol?.touched) {
-                                <div class="invalid-feedback">Seleccioná un rol.</div>
-                            }
-                        </div>
-                        <div class="col-md-12 mb-2 text-start">
+                        <div class="col-12 col-md-6 mb-2 text-start">
                             <label for="password" class="form-label">Contraseña</label>
                             <input class="form-control" type="password" id="password" formControlName="password">
                             @if (Password?.invalid && Password?.touched) {
                                 <div class="invalid-feedback">La contraseña es obligatoria.</div>
                             }
                         </div>
-                        <div class="col-md-12 mb-3 text-start">
+                        <div class="col-12 col-md-6 mb-2 text-start">
                             <label for="confirmarPassword" class="form-label">Confirmar contraseña</label>
                             <input class="form-control" type="password" id="confirmarPassword" formControlName="confirmarPassword"
                             >
