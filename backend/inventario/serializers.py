@@ -3,6 +3,7 @@ from .models import Producto
 
 
 class ProductoSerializer(serializers.ModelSerializer):
+    categoria = serializers.CharField(source='id_categoria.nombre_categoria', read_only=True)
     class Meta:
         model = Producto
         fields = [
@@ -14,4 +15,4 @@ class ProductoSerializer(serializers.ModelSerializer):
             'cantidad_existente',
             'estado',
         ]
-        read_only_fields = ['id_producto']
+        read_only_fields = ['id_producto', 'cantidad_existente']

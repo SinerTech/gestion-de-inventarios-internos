@@ -1,15 +1,11 @@
-from django.shortcuts import get_object_or_404, render
-from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import Producto
 from .serializers import ProductoSerializer
 
 
-class ProductoListView(generics.ListAPIView):
-    queryset = Producto.objects.all()
-    serializer_class = ProductoSerializer
-
-class ProductoDetailView(generics.RetrieveUpdateAPIView):
-    queryset = Producto.objects.all()
-    serializer_class = ProductoSerializer
-    lookup_field = 'id_producto'
+class ProductoListView(APIView):
+    def get(self, request):
+        productos = Producto.objects.select_related('id_categoria').order_by('nombre_producto')
+        return Response(ProductoSerializer(productos, many=True).data)
