@@ -2,6 +2,7 @@ from django.db import transaction
 from django.utils import timezone
 from .models import MovimientoInventario, TipoMovimiento
 from inventario.services import actualizar_stock
+from .constantes import OPERACION_AJUSTE_POR_MOTIVO, nombres_motivos
 
 
 def _obtener_tipo_movimiento(nombre):
@@ -13,6 +14,12 @@ def _obtener_tipo_movimiento(nombre):
 
 def _registrar_movimiento(data, tipo_nombre, operacion):
     producto = data['id_producto']
+    motivo = data['id_motivo']
+    
+    if motivo.nombre_motivo not in nombres_motivos(tipo_nombre):
+        raise ValueError(
+            f"El motivo '{motivo.nombre_motivo}' no corresponde a un movimiento de tipo {tipo_nombre.lower()}."
+        )
 
     campos = {
         'id_producto': producto,
@@ -40,13 +47,10 @@ def registrar_ingreso(data):
 
 @transaction.atomic
 def registrar_ajuste(data):
-    motivo = data['id_motivo'].nombre_motivo
+    nombre_motivo = data['id_motivo'].nombre_motivo
+    operacion = OPERACION_AJUSTE_POR_MOTIVO.get(nombre_motivo)
 
-    if motivo in ('Producto encontrado', 'Reconteo de inventario'):
-        operacion = 'sumar'
-    elif motivo in ('Producto dañado', 'Error de carga', 'Perdida'):
-        operacion = 'restar'
-    else:
+    if operacion is None:
         raise ValueError("El motivo no corresponde a un ajuste de inventario.")
 
     return _registrar_movimiento(data, tipo_nombre='Ajuste', operacion=operacion)

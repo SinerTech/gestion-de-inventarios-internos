@@ -18,5 +18,13 @@ MOTIVOS_POR_TIPO  = {
     ]
 }
 
+OPERACION_AJUSTE_POR_MOTIVO = {
+    'Producto encontrado': 'sumar',
+    'Reconteo de inventario': 'sumar',
+    'Producto dañado': 'restar',
+    'Error de carga': 'restar',
+    'Perdida': 'restar',
+}
+
 def nombres_motivos(tipo):
     return MOTIVOS_POR_TIPO.get((tipo or '').lower(), [])
