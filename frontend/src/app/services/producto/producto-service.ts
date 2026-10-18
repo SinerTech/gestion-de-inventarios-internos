@@ -2,9 +2,11 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { inject, Injectable } from '@angular/core';
 
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 import { Producto } from '../../models/producto.models';
+
+import { ProductoApi } from '../../models/producto-api.models';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +15,30 @@ export class ProductoService {
   private url = 'http://localhost:3000/productos';
 
   private httpClient = inject(HttpClient);
+  
+  private adaptarProducto(producto: ProductoApi): Producto {
+    return {
+      id: String(producto.id_producto),
+      sku: producto.sku,
+      nombreProducto: producto.nombre_producto,
+      idCategoria: String(producto.id_categoria),
+      precioUnitario: Number(producto.precio_unitario),
+      cantidadExistente: producto.cantidad_existente,
+      estado: producto.estado,
+      ultimoIngreso: '',
+    };
+  }
+
 
   // =====================================================
   // OBTENER PRODUCTOS
   // =====================================================
 
   obtenerListaProductos(): Observable<Producto[]> {
-    return this.httpClient.get<Producto[]>(this.url).pipe(catchError(this.handleError));
+    return this.httpClient.get<ProductoApi[]>(this.url).pipe(
+     map((productos) => productos.map((producto) => this.adaptarProducto(producto))),
+     catchError(this.handleError),
+   );
   }
 
   // =====================================================
