@@ -10,8 +10,7 @@ import { ProductoProveedor } from '../../models/producto-proveedor';
   providedIn: 'root',
 })
 export class ProductoProveedorService {
-  private url = 'http://localhost:3000/productos-proveedores';
-
+  private url = 'http://localhost:8000/api/v1/productos-proveedores/';
   private httpClient = inject(HttpClient);
 
   // =====================================================
@@ -38,16 +37,15 @@ export class ProductoProveedorService {
 
   actualizarRelacion(id: string, relacion: ProductoProveedor): Observable<ProductoProveedor> {
     return this.httpClient
-      .put<ProductoProveedor>(`${this.url}/${id}`, relacion)
+      .put<ProductoProveedor>(`${this.url}${id}/`, relacion)
       .pipe(catchError(this.handleError));
   }
-
   // =====================================================
   // ELIMINAR RELACIÓN
   // =====================================================
 
   eliminarRelacion(id: string): Observable<void> {
-    return this.httpClient.delete<void>(`${this.url}/${id}`).pipe(catchError(this.handleError));
+    return this.httpClient.delete<void>(`${this.url}${id}/`).pipe(catchError(this.handleError));
   }
 
   // =====================================================
