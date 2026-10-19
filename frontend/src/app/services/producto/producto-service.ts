@@ -28,13 +28,13 @@ export class ProductoService {
 
   actualizarCantidadExistente(id: string, producto: Producto): Observable<Producto> {
     return this.httpClient
-      .put<Producto>(`${this.url}/${id}`, producto)
+      .put<Producto>(`${this.url}${id}/`, producto)
       .pipe(catchError(this.handleError));
   }
 
   actualizarProducto(id: string, producto: Producto): Observable<Producto> {
     return this.httpClient
-      .put<Producto>(`${this.url}/${id}`, producto)
+      .put<Producto>(`${this.url}${id}/`, producto)
       .pipe(catchError(this.handleError));
   }
 
@@ -51,7 +51,7 @@ export class ProductoService {
   // =====================================================
 
   eliminarProducto(id: string): Observable<void> {
-    return this.httpClient.delete<void>(`${this.url}/${id}`).pipe(catchError(this.handleError));
+    return this.httpClient.delete<void>(`${this.url}${id}/`).pipe(catchError(this.handleError));
   }
 
   // =====================================================
