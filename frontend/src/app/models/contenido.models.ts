@@ -10,7 +10,19 @@ export interface IntegranteEquipo {
   bio: string;
 }
 
+export interface ValorLanding {
+  icono: string;
+  titulo: string;
+  descripcion: string;
+}
+
+export interface ContenidoLanding {
+  descripcion: string;
+  valores: ValorLanding[];
+}
+
 export interface Contenido {
   dashboards: Record<string, ConfiguracionDashboard>;
+  landing: ContenidoLanding;
   'quienes-somos': IntegranteEquipo[];
 }

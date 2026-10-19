@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { QuienesSomosService } from '../../services/quienes-somos/quienes-somos-service';
+import { Component, inject, OnInit } from '@angular/core';
+import { ContenidoService } from '../../services/contenido/contenido-service';
+import { IntegranteEquipo } from '../../models/contenido.models';
 
 @Component({
   imports: [],
@@ -8,20 +9,17 @@ import { QuienesSomosService } from '../../services/quienes-somos/quienes-somos-
   templateUrl: './quienes-somos.html',
 })
 export class QuienesSomos {
-  integrantes: any;
-  private QuienesSomosService = inject(QuienesSomosService);
-  private cdr = inject(ChangeDetectorRef);
+  integrantes: IntegranteEquipo[] = [];
+  private contenidoService = inject(ContenidoService);
 
   ngOnInit(): void {
-    this.QuienesSomosService.obtenerMiembrosEquipo().subscribe({
+    this.contenidoService.obtenerQuienesSomos().subscribe({
       next: (data) => {
         this.integrantes = data;
-        this.cdr.markForCheck()
       },
       error: (err) => {
         console.error('Error al obtener los miembros:', err);
-      }
+      },
     });
   }
- 
 }

@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import contenidoJson from '../../data/contenido.json';
 import {
   Contenido,
+  ContenidoLanding,
   IntegranteEquipo,
 } from '../../models/contenido.models';
 import { ConfiguracionDashboard } from '../../models/dashboard.models';
@@ -28,5 +29,9 @@ export class ContenidoService {
 
   obtenerQuienesSomos(): Observable<IntegranteEquipo[]> {
     return of(this.contenido['quienes-somos']);
+  }
+
+  obtenerLanding(): Observable<ContenidoLanding> {
+    return of(this.contenido.landing);
   }
 }
