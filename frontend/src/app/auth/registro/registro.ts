@@ -20,6 +20,7 @@ export class Registro {
 
     this.formularioRegistro = this.formRegistro.group({
       nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       rol: ['', Validators.required],
       password: ['', Validators.required],
@@ -36,6 +37,7 @@ export class Registro {
 
     const nuevoUsuario = {
       nombreUsuario: this.Nombre?.value,
+      apellidoUsuario: this.Nombre?.value,
       idRol: this.Rol?.value,
       emailUsuario: this.Email?.value,
       password: this.Password?.value
@@ -63,6 +65,10 @@ export class Registro {
   get Nombre () {
     return this.formularioRegistro.get("nombre")
   }
+  get Apellido () {
+    return this.formularioRegistro.get("apellido")
+  }
+
   get Email () {
     return this.formularioRegistro.get("email")
   }
