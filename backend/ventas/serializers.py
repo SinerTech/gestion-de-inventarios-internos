@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from decimal import Decimal
 from .models import Pedido, DetallePedido
+from .models import Cliente
 
 
 class DetallePedidoSerializer(serializers.ModelSerializer):
@@ -55,3 +56,35 @@ class PedidoSerializer(serializers.ModelSerializer):
                 "La venta debe incluir al menos un producto."
             )
         return detalles
+
+
+class ClienteSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(source="id_cliente", read_only=True)
+    nombreCliente = serializers.CharField(
+        source="nombre_cliente",
+        read_only=True
+    )
+    apellidoCliente = serializers.CharField(
+        source="apellido_cliente",
+        read_only=True
+    )
+    telefonoCliente = serializers.CharField(
+        source="telefono_cliente",
+        read_only=True,
+        allow_null=True
+    )
+    emailCliente = serializers.EmailField(
+        source="email_cliente",
+        read_only=True,
+        allow_null=True
+    )
+
+    class Meta:
+        model = Cliente
+        fields = [
+            "id",
+            "nombreCliente",
+            "apellidoCliente",
+            "telefonoCliente",
+            "emailCliente",
+        ]

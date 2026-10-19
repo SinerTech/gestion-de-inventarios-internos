@@ -159,8 +159,10 @@ export class ControlStock implements OnInit {
   // OBTENER CATEGORÍA
   // ==========================================
 
-  obtenerNombreCategoria(idCategoria: string): string {
-    const categoria = this.listaCategorias.find((categoria) => categoria.id === idCategoria);
+  obtenerNombreCategoria(idCategoria: string | number): string {
+    const categoria = this.listaCategorias.find(
+      (categoria) => String(categoria.id) === String(idCategoria)
+    );
 
     return categoria?.nombreCategoria ?? 'Sin categoría';
   }
@@ -227,12 +229,14 @@ export class ControlStock implements OnInit {
 
   obtenerProveedoresProducto(idProducto: string): Proveedor[] {
     const relaciones = this.listaProductosProveedores.filter(
-      (relacion) => relacion.idProducto === idProducto,
+      (relacion) => String(relacion.idProducto) === String(idProducto),
     );
 
     return relaciones
       .map((relacion) =>
-        this.listaProveedores.find((proveedor) => proveedor.id === relacion.idProveedor),
+        this.listaProveedores.find(
+          (proveedor) => String(proveedor.id) === String(relacion.idProveedor),
+        ),
       )
       .filter((proveedor): proveedor is Proveedor => proveedor !== undefined);
   }

@@ -16,6 +16,8 @@ import { AuthService } from '../../../../services/auth/auth-service';
 export class AjusteStock implements OnInit {
     listaProductos: Producto[] = [];
     listaMotivos: Motivo[] = [];
+    mensajeExito = '';
+    mensajeError = '';
 
     private formBuilder = inject(FormBuilder);
     private movimientoService = inject(MovimientoInventarioService);
@@ -118,18 +120,23 @@ export class AjusteStock implements OnInit {
             id_producto: Number(datos.idProducto),
             cantidad_movimiento: Number(datos.cantidadMovimiento),
             id_motivo: Number(datos.idMotivo),
-            id_usuario: Number(usuarioActual.id),
+            id_usuario: Number(usuarioActual.idUsuario),
             observaciones: datos.observaciones ?? ''
         }).subscribe({
             next: respuesta => {
-                console.log(respuesta.mensaje);
+                this.mensajeExito = respuesta.mensaje;
+                this.mensajeError = '';
                 this.formularioAjuste.reset();
+                this.cdr.detectChanges();
             },
             error: error => {
-                console.error(
-                    'No se pudo registrar el ajuste.',
-                    error.error ?? error
-                );
+                this.mensajeError =
+                error.error?.error ||
+                'No se pudo registrar el ajuste.';
+                this.mensajeExito = '';
+                this.cdr.detectChanges();
+
+                console.error('No se pudo registrar el ajuste.', error.error ?? error);
             }
         });
     }

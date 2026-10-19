@@ -79,37 +79,45 @@ export class ResumenVenta implements OnInit {
 
 
   ngOnInit(): void {
-  forkJoin({
-    productos: this.productoService.obtenerListaProductos(),
-    clientes: this.clienteService.obtenerClientes()
-  }).subscribe({
-    next: ({ productos, clientes }) => {
-      this.productos = productos;
-      this.clientes = clientes;
+    this.productoService.obtenerListaProductos().subscribe({
+      next: (productos) => {
+        this.productos = productos;
+        this.cargandoProductos = false;
+        this.cdr.markForCheck();
 
-      const consumidorFinal = clientes.find(cliente =>
-        cliente.nombreCliente === 'Consumidor' &&
-        cliente.apellidoCliente === 'Final'
-      );
+        console.log('Productos cargados:', this.productos);
+      },
+      error: (error) => {
+        this.mensajeErrorProductos =
+          'No se pudieron cargar los productos. Intentá nuevamente más tarde.';
+        this.cargandoProductos = false;
 
-      this.ventaForm.controls.cliente.setValue(
-        consumidorFinal?.id ?? ''
-      );
+        console.error('Error al cargar productos:', error);
+        this.cdr.markForCheck();
+      }
+    });
 
-      this.cargandoProductos = false;
-      this.cdr.markForCheck();
-    },
-    error: (error) => {
-      this.mensajeErrorProductos =
-        'No se pudieron cargar los productos o los clientes. ' +
-        'Intentá nuevamente más tarde.';
+    this.clienteService.obtenerClientes().subscribe({
+      next: (clientes) => {
+        this.clientes = clientes;
 
-      this.cargandoProductos = false;
-      console.error('Error al cargar los datos de venta:', error);
-      this.cdr.markForCheck();
-    }
-  });
-}
+        const consumidorFinal = clientes.find(cliente =>
+          cliente.nombreCliente === 'Consumidor' &&
+          cliente.apellidoCliente === 'Final'
+        );
+
+        this.ventaForm.controls.cliente.setValue(
+          consumidorFinal?.id ?? ''
+        );
+
+        this.cdr.markForCheck();
+      },
+      error: (error) => {
+        console.error('Error al cargar clientes:', error);
+        this.cdr.markForCheck();
+      }
+    });
+  }
   agregarProducto(): void {
     if (this.guardandoVenta || this.ventaPendienteRevision) {
     return;
@@ -257,7 +265,7 @@ finalizarTransaccion(): void {
   }
 
   const idCliente = Number(cliente.id);
-  const idUsuario = Number(usuarioActual.id);
+  const idUsuario = Number(usuarioActual.idUsuario);
 
   if (
     !Number.isInteger(idCliente) || idCliente <= 0 ||

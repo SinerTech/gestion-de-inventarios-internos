@@ -6,5 +6,5 @@ export interface Producto {
   precioUnitario: number;
   cantidadExistente: number;
   estado: 'Activo' | 'Inactivo' | 'Suspendido';
-  ultimoIngreso?: string;
+  ultimoIngreso: string | null;
 }

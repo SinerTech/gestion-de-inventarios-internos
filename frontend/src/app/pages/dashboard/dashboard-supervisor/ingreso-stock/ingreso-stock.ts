@@ -19,6 +19,8 @@ export class IngresoStock implements OnInit {
     listaProductos: Producto[] = [];
     listaProveedores: Proveedor[] = [];
     listaMotivos: Motivo[] = [];
+    mensajeExito = '';
+    mensajeError = '';
 
     private formBuilder = inject(FormBuilder);
     private movimientoService = inject(MovimientoInventarioService);
@@ -39,8 +41,15 @@ export class IngresoStock implements OnInit {
 
     ngOnInit(): void {
         this.productosService.obtenerListaProductos().subscribe({
-            next: data => this.listaProductos = data,
-            error: e => console.error('Error al cargar productos', e)
+            next: data => {
+                console.log('Productos recibidos:', data);
+                this.listaProductos = data;
+                this.cdr.detectChanges();
+            },
+            error: e => {
+                console.error('Error al cargar productos', e);
+                this.cdr.detectChanges();
+            }
         });
 
         this.proveedorService.obtenerProveedores().subscribe({
@@ -130,7 +139,7 @@ export class IngresoStock implements OnInit {
             id_producto: Number(datos.idProducto),
             cantidad_movimiento: Number(datos.cantidadMovimiento),
             id_motivo: Number(datos.idMotivo),
-            id_usuario: Number(usuarioActual.id),
+            id_usuario: Number(usuarioActual.idUsuario),
             observaciones: datos.observaciones ?? '',
             id_proveedor: datos.idProveedor
                 ? Number(datos.idProveedor)
@@ -138,10 +147,18 @@ export class IngresoStock implements OnInit {
             numero_lote_factura: datos.numeroLoteFactura?.trim() || null
         }).subscribe({
             next: respuesta => {
-                console.log(respuesta.mensaje);
+                this.mensajeExito = respuesta.mensaje;
+                this.mensajeError = '';
                 this.formularioIngreso.reset();
+                this.cdr.detectChanges();
             },
             error: error => {
+                this.mensajeError =
+                    error.error?.error ||
+                    'No se pudo registrar el ingreso.';
+                this.mensajeExito = '';
+                this.cdr.detectChanges();
+
                 console.error(
                     'No se pudo registrar el ingreso.',
                     error.error ?? error

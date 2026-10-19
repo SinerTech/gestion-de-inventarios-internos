@@ -18,14 +18,14 @@ export class ProductoService {
   
   private adaptarProducto(producto: ProductoApi): Producto {
     return {
-      id: String(producto.id_producto),
+      id: String(producto.id),
       sku: producto.sku,
-      nombreProducto: producto.nombre_producto,
-      idCategoria: String(producto.id_categoria),
-      precioUnitario: Number(producto.precio_unitario),
-      cantidadExistente: producto.cantidad_existente,
+      nombreProducto: producto.nombreProducto,
+      idCategoria: String(producto.idCategoria),
+      precioUnitario: Number(producto.precioUnitario),
+      cantidadExistente: producto.cantidadExistente,
       estado: producto.estado,
-      ultimoIngreso: '',
+      ultimoIngreso: producto.ultimoIngreso,
     };
   }
 

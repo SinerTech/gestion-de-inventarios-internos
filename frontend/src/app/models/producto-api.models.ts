@@ -1,10 +1,11 @@
 
 export interface ProductoApi {
-  id_producto: number;
+  id: number;
   sku: string;
-  nombre_producto: string;
-  id_categoria: number;
-  precio_unitario: string | number;
-  cantidad_existente: number;
+  nombreProducto: string;
+  idCategoria: number;
+  precioUnitario: string | number;
+  cantidadExistente: number;
   estado: 'Activo' | 'Inactivo' | 'Suspendido';
+  ultimoIngreso: string | null;
 }

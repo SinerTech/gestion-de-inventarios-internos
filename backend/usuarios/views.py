@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import check_password, is_password_usable
 from rest_framework.views import APIView as ApiView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Rol, Usuario
 from .serializers import UsuarioSerializer, RolSerializer, PrimerAdministradorSerializer
 from .services import requiere_setup, crear_primer_administrador, SetupYaRealizado
+
 
 class UsuarioView(ApiView):
     def get(self, request):
@@ -86,11 +87,25 @@ class LoginView(ApiView):
             'id_rol'
         ).filter(email_usuario=email).first()
 
-        if (
-            usuario is None
-            or not usuario.activo
-            or not check_password(password, usuario.password)
-        ):
+        if usuario is None or not usuario.activo:
+            return Response(
+                {'mensaje': 'Credenciales incorrectas.'},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        password_guardada = usuario.password
+
+        if is_password_usable(password_guardada):
+            # Primero intenta validar la contraseña como hash de Django.
+            es_valida = check_password(password, password_guardada)
+
+            # Compatibilidad temporal con usuarios de prueba en texto plano.
+            if not es_valida and password == password_guardada:
+                es_valida = True
+        else:
+            es_valida = password == password_guardada
+
+        if not es_valida:
             return Response(
                 {'mensaje': 'Credenciales incorrectas.'},
                 status=status.HTTP_401_UNAUTHORIZED,
@@ -102,6 +117,7 @@ class LoginView(ApiView):
             {'usuario': datos_usuario},
             status=status.HTTP_200_OK,
         )
+
     
 class SetupEstadoView(ApiView):
     def get(self, request):
