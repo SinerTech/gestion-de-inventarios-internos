@@ -7,10 +7,6 @@ import { Proveedor } from '../../../../models/proveedor.models';
 import { ProveedorService } from '../../../../services/proveedor/proveedor-service';
 import { Motivo } from '../../../../models/motivo.models';
 import { MotivoService } from '../../../../services/motivo/motivo-service';
-import { TipoMovimientoService } from '../../../../services/tipo-movimiento/tipo-movimiento-service';
-import { MovimientoInventario } from '../../../../models/movimiento-inventario.models';
-import { ProductoProveedor } from '../../../../models/producto-proveedor';
-import { ProductoProveedorService } from '../../../../services/producto-proveedor/producto-proveedor-service';
 import { AuthService } from '../../../../services/auth/auth-service';
 
 @Component({
@@ -20,73 +16,108 @@ import { AuthService } from '../../../../services/auth/auth-service';
     templateUrl: './ingreso-stock.html',
 })
 export class IngresoStock implements OnInit {
-    listaProductos: Producto[] = []
-    listaProveedores: Proveedor[] = []
-    listaMotivos: Motivo[] = []
+    listaProductos: Producto[] = [];
+    listaProveedores: Proveedor[] = [];
+    listaMotivos: Motivo[] = [];
+    mensajeExito = '';
+    mensajeError = '';
 
-    private formBuilder = inject(FormBuilder)
-    private movimientoService = inject(MovimientoInventarioService)
-    private productosService = inject(ProductoService)
-    private proveedorService = inject(ProveedorService)
-    private motivoService = inject(MotivoService)
-    private tiposMovimientoService = inject(TipoMovimientoService)
-    private productoProveedorService = inject(ProductoProveedorService)
+    private formBuilder = inject(FormBuilder);
+    private movimientoService = inject(MovimientoInventarioService);
+    private productosService = inject(ProductoService);
+    private proveedorService = inject(ProveedorService);
+    private motivoService = inject(MotivoService);
+    private authService = inject(AuthService);
     private cdr = inject(ChangeDetectorRef)
-    private authService = inject(AuthService)
 
     formularioIngreso: FormGroup = this.formBuilder.group({
-            idProducto: ['', Validators.required],
-            cantidadMovimiento: ['', [Validators.required, Validators.min(1)]],
-            idProveedor: ['', Validators.required],
-            numeroLoteFactura: ['', Validators.required],
-            idMotivo: ['', Validators.required],
-            observaciones: ['']
-        });
+        idProducto: ['', Validators.required],
+        cantidadMovimiento: ['', [Validators.required, Validators.min(1), Validators.max(200)]],
+        idProveedor: [''],
+        numeroLoteFactura: [''],
+        idMotivo: ['', Validators.required],
+        observaciones: ['']
+    });
 
     ngOnInit(): void {
         this.productosService.obtenerListaProductos().subscribe({
-            next: (data) => {
-                console.log(data);
+            next: data => {
+                console.log('Productos recibidos:', data);
                 this.listaProductos = data;
-            },
-            error: (e) =>
-                console.error('Error al cargar productos', e),
-            complete: () => {
                 this.cdr.detectChanges();
-                console.info('complete');
+            },
+            error: e => {
+                console.error('Error al cargar productos', e);
+                this.cdr.detectChanges();
             }
         });
 
         this.proveedorService.obtenerProveedores().subscribe({
-            next: (data) => {
-                console.log(data);
+            next: data => {
                 this.listaProveedores = data;
-            },
-            error: (e) =>
-                console.error('Error al cargar productos', e),
-            complete: () => {
                 this.cdr.detectChanges();
-                console.info('complete');
+            },
+            error: e => {
+                console.error('Error al cargar proveedores', e);
+                this.cdr.detectChanges();
             }
         });
 
         this.motivoService.obtenerMotivos().subscribe({
-            next: (data) => {
-                console.log(data);
+            next: data => {
                 this.listaMotivos = data;
-            },
-            error: (e) =>
-                console.error('Error al cargar motivos', e),
-            complete: () => {
                 this.cdr.detectChanges();
-                console.info('complete');
+            },
+            error: e => {
+                console.error('Error al cargar motivos', e);
+                this.cdr.detectChanges();
             }
         });
-    };
 
-    get motivosIngresoFiltrados() {
-        const idsIngreso = ['1', '2']
-        return this.listaMotivos.filter(motivo => idsIngreso.includes(motivo.id));
+        this.formularioIngreso.get('idMotivo')?.valueChanges.subscribe(() => {
+            this.actualizarValidadoresCompra();
+        });
+    }
+
+    get motivosIngresoFiltrados(): Motivo[] {
+        const nombres = [
+            'Compra a proveedor',
+            'Devolucion de cliente'
+        ];
+
+        return this.listaMotivos.filter(motivo =>
+            nombres.includes(motivo.nombreMotivo)
+        );
+    }
+
+    get esCompraProveedor(): boolean {
+        const idSeleccionado = String(
+            this.formularioIngreso.get('idMotivo')?.value ?? ''
+        );
+
+        const motivo = this.listaMotivos.find(
+            item => String(item.id) === idSeleccionado
+        );
+
+        return motivo?.nombreMotivo === 'Compra a proveedor';
+    }
+
+    private actualizarValidadoresCompra(): void {
+        const proveedor = this.formularioIngreso.get('idProveedor');
+        const lote = this.formularioIngreso.get('numeroLoteFactura');
+
+        if (this.esCompraProveedor) {
+            proveedor?.setValidators([Validators.required]);
+            lote?.setValidators([Validators.required]);
+        } else {
+            proveedor?.clearValidators();
+            lote?.clearValidators();
+            proveedor?.setValue('');
+            lote?.setValue('');
+        }
+
+        proveedor?.updateValueAndValidity({ emitEvent: false });
+        lote?.updateValueAndValidity({ emitEvent: false });
     }
 
     onEnviarIngreso(): void {
@@ -94,87 +125,45 @@ export class IngresoStock implements OnInit {
             this.formularioIngreso.markAllAsTouched();
             return;
         }
-        this.tiposMovimientoService.obtenerTiposMovimiento().subscribe({
-            next: (data) => {
-                const tipoIngreso = data.find(
-                    tipo => tipo.nombreTipoMovimiento === 'Ingreso'
-                );
-                if (!tipoIngreso) {
-                    console.error("No se encontró el tipo de movimiento 'Ingreso'");
-                    return;
-                }
-                const usuarioActual = this.authService.obtenerUsuarioActual();
-                if (!usuarioActual) {
-                    console.error('No hay un usuario logueado');
-                    return;
-                }
-                const movimiento: MovimientoInventario = {
-                    idProducto: this.formularioIngreso.value.idProducto,
-                    cantidadMovimiento: this.formularioIngreso.value.cantidadMovimiento,
-                    idProveedor: this.formularioIngreso.value.idProveedor,
-                    numeroLoteFactura: this.formularioIngreso.value.numeroLoteFactura,
-                    idMotivo: this.formularioIngreso.value.idMotivo,
-                    observaciones: this.formularioIngreso.value.observaciones,
-                    idUsuario: usuarioActual.id,
-                    idTipoMovimiento: tipoIngreso.id,
-                    fechaHoraMovimiento: new Date().toISOString()
-                };
-                this.movimientoService.registrarMovimiento(movimiento).subscribe({
-                    next: () => {
-                        console.log('Movimiento enviado:', movimiento);
-                        console.log('ID del producto en movimiento:', movimiento.idProducto);
-                        console.log('Lista de productos:', this.listaProductos);
-                        const producto = this.listaProductos.find(
-                            producto => producto.id === movimiento.idProducto
-                        );
-                        if (!producto) {
-                            console.error('No se encontró el producto seleccionado.')
-                            return;
-                        }
-                        const productoActualizado: Producto = {
-                            id: producto.id,
-                            sku: producto.sku,
-                            nombreProducto: producto.nombreProducto,
-                            idCategoria: producto.idCategoria,
-                            precioUnitario: producto.precioUnitario,
-                            cantidadExistente: producto.cantidadExistente + movimiento.cantidadMovimiento,
-                            estado: producto.estado,
-                            ultimoIngreso: movimiento.fechaHoraMovimiento
-                        };
-                        const productoProveedor: ProductoProveedor = {
-                            idProducto: this.formularioIngreso.value.idProducto,
-                            idProveedor: this.formularioIngreso.value.idProveedor
-                            };
-                        this.productosService.actualizarCantidadExistente(producto.id, productoActualizado).subscribe({
-                            next: () => {
-                                console.log('Producto actualizado');
-                            },
-                            error: (e) => {
-                                console.error('Error al actualizar el producto', e)
-                            }
-                        });
-                        this.productoProveedorService.registrarRelacion(productoProveedor).subscribe({
-                            next: () => {
-                                console.log('Relacion registrada');
-                                this.formularioIngreso.reset();
-                            },
-                            error: (e) => {
-                                console.error('Error al registrar la relación', e)
-                            }
-                        });
-                    },
-                    error: (e) => {
-                        console.error('Error al registrar movimiento', e);
-                    }
-                });
-            },
-            error: (e) => {
-                console.error('Error al buscar el tipo de movimiento', e);
-            },
-            complete: () => {
+
+        const usuarioActual = this.authService.obtenerUsuarioActual();
+
+        if (!usuarioActual) {
+            console.error('No hay un usuario logueado.');
+            return;
+        }
+
+        const datos = this.formularioIngreso.getRawValue();
+
+        this.movimientoService.registrarIngreso({
+            id_producto: Number(datos.idProducto),
+            cantidad_movimiento: Number(datos.cantidadMovimiento),
+            id_motivo: Number(datos.idMotivo),
+            id_usuario: Number(usuarioActual.idUsuario),
+            observaciones: datos.observaciones ?? '',
+            id_proveedor: datos.idProveedor
+                ? Number(datos.idProveedor)
+                : null,
+            numero_lote_factura: datos.numeroLoteFactura?.trim() || null
+        }).subscribe({
+            next: respuesta => {
+                this.mensajeExito = respuesta.mensaje;
+                this.mensajeError = '';
+                this.formularioIngreso.reset();
                 this.cdr.detectChanges();
-                console.info('complete');
+            },
+            error: error => {
+                this.mensajeError =
+                    error.error?.error ||
+                    'No se pudo registrar el ingreso.';
+                this.mensajeExito = '';
+                this.cdr.detectChanges();
+
+                console.error(
+                    'No se pudo registrar el ingreso.',
+                    error.error ?? error
+                );
             }
         });
-    }   
+    }
 }

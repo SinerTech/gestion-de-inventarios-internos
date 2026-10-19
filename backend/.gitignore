@@ -1,0 +1,9 @@
+# Base de datos local
+db.sqlite3
+
+# Caché de Python
+__pycache__/
+*.py[cod]
+
+# Variables de entorno y secretos
+.env

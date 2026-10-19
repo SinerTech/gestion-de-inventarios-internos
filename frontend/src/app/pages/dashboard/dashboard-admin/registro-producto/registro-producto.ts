@@ -207,7 +207,7 @@ export class RegistroProducto implements OnInit {
   cargarProductoParaEditar(id: string): void {
     this.productoService.obtenerListaProductos().subscribe({
       next: (productos) => {
-        const producto = productos.find((producto) => producto.id === id);
+        const producto = productos.find((producto) => String(producto.id) === id);
 
         if (!producto) {
           console.error('No se encontró el producto:', id);
@@ -223,7 +223,7 @@ export class RegistroProducto implements OnInit {
         // GUARDAR ÚLTIMO INGRESO ORIGINAL
         // =================================================
 
-        this.ultimoIngresoProductoEditar = producto.ultimoIngreso;
+        this.ultimoIngresoProductoEditar = producto.ultimoIngreso ?? '';
 
         // =================================================
         // CARGAR DATOS DEL PRODUCTO
@@ -249,7 +249,7 @@ export class RegistroProducto implements OnInit {
 
         this.productoProveedorService.obtenerProductosProveedores().subscribe({
           next: (relaciones) => {
-            const relacion = relaciones.find((relacion) => relacion.idProducto === id);
+            const relacion = relaciones.find((relacion) => String(relacion.idProducto) === id);
 
             if (!relacion) {
               console.warn('El producto no tiene un proveedor asociado');

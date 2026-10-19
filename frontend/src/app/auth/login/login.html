@@ -7,23 +7,7 @@
             <div class="w-100 mx-auto login-form-wrapper">
                 <h1 class="text-center mb-4">Iniciar Sesión</h1>
                 <form class="form_panel_admin" [formGroup]="formularioLogin" (ngSubmit)="ingresar()">
-                    <div class="row"> <!-- Rol -->
-                        <div class="col-md-6 mb-3 text-start"> 
-                            <label class="form-label" for="login_rol"> Seleccionar Rol </label> 
-                            <select class="form-select" id="login_rol" formControlName="rol">
-                                <option value="">Seleccionar</option>
-                                <option value="1">Administrador</option>
-                                <option value="2">Supervisor</option>
-                                <option value="3">Vendedor</option>
-                            </select> 
-                            @if (Rol?.invalid && Rol?.touched) { 
-                                <div class="invalid-feedback"> Seleccioná un rol. </div>
-                            } 
-                        </div> 
-                        <div class="col-md-10 alert alert-info d-flex align-items-center" role="alert"> 
-                            <i class="bi bi-info-circle-fill me-2"></i>
-                            <div class="texto-informativo"> Selecciona tu rol asignado correctamente. </div>
-                        </div> 
+                    <div class="row"> <!-- Formulario -->
                         <div class="col-md-12 mb-3 text-start"> 
                             <label for="email" class="form-label"> Email </label>
                             <input class="form-control" type="email" id="email" formControlName="email"> 

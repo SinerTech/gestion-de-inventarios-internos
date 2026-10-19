@@ -10,7 +10,7 @@ import { Proveedor } from '../../models/proveedor.models';
   providedIn: 'root',
 })
 export class ProveedorService {
-  private url = 'http://localhost:3000/proveedores';
+  private url = 'http://localhost:8000/api/v1/proveedores/';
 
   private httpClient = inject(HttpClient);
 

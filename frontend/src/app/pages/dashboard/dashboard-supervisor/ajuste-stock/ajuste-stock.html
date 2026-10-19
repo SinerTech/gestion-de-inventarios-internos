@@ -1,5 +1,16 @@
 <section class="seccion_panel_admin" id="ajustes">
     <h2>Ajustes de Stock</h2>
+    @if (mensajeExito) {
+        <div class="alert alert-success" role="alert">
+            {{ mensajeExito }}
+        </div>
+    }
+
+    @if (mensajeError) {
+        <div class="alert alert-danger" role="alert">
+            {{ mensajeError }}
+        </div>
+    }
     <form class="form_panel_admin" [formGroup]="formularioAjuste" (ngSubmit)="onEnviarAjuste()">
         <div class="row g-3">
             <div class="col-md-6">

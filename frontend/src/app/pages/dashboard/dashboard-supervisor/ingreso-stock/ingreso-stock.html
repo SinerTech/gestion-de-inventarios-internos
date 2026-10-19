@@ -1,5 +1,16 @@
 <section class="seccion_panel_admin" id="ingresos">
     <h2>Registrar Ingresos</h2>
+    @if (mensajeExito) {
+        <div class="alert alert-success" role="alert">
+            {{ mensajeExito }}
+        </div>
+    }
+
+    @if (mensajeError) {
+        <div class="alert alert-danger" role="alert">
+            {{ mensajeError }}
+        </div>
+    }
     <form class="form_panel_admin" [formGroup]="formularioIngreso" (ngSubmit)="onEnviarIngreso()">
         <div class="row g-3">
             <div class="col-md-6">
@@ -27,14 +38,15 @@
                     <div class="text-danger">Debe ingresar una cantidad válida.</div>
                 }
             </div>
-            <div class="col-md-6">
-                <label for="ingreso_proveedor" class="form-label">Proveedor</label>
-                <select class="form-select" id="ingreso_proveedor" formControlName="idProveedor">
-                    <option value="">Seleccionar</option>
-                    @for (proveedor of listaProveedores; track proveedor.id) {
-                    <option [value]="proveedor.id">{{ proveedor.razonSocial }}</option>
-                    }
-                </select>
+            @if (esCompraProveedor) {
+                <div class="col-md-6">
+                    <label for="ingreso_proveedor" class="form-label">Proveedor</label>
+                    <select class="form-select" id="ingreso_proveedor" formControlName="idProveedor">
+                        <option value="">Seleccionar</option>
+                        @for (proveedor of listaProveedores; track proveedor.id) {
+                        <option [value]="proveedor.id">{{ proveedor.razonSocial }}</option>
+                        }
+                    </select>
                 @if (
                     formularioIngreso.get('idProveedor')?.invalid &&
                     formularioIngreso.get('idProveedor')?.touched
@@ -54,6 +66,7 @@
                     </div>
                 }
             </div>
+            }
             <div class="col-md-6">
                 <label for="ingreso_motivo" class="form-label">Motivo</label>
                 <select class="form-select" id="ingreso_motivo" formControlName="idMotivo">

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { DashboardService } from '../../services/dashboard/dashboard-service';
+import { ContenidoService } from '../../services/contenido/contenido-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from '../../models/producto.models';
 import { ProductoService } from '../../services/producto/producto-service';
@@ -29,8 +29,7 @@ export class ControlStock implements OnInit {
 
   configuracionActual!: ConfiguracionDashboard;
 
-  private servicioDashboard = inject(DashboardService);
-  private ruta = inject(ActivatedRoute);
+  private contenidoService = inject(ContenidoService);  private ruta = inject(ActivatedRoute);
   private router = inject(Router);
 
   private productService = inject(ProductoService);
@@ -53,20 +52,18 @@ export class ControlStock implements OnInit {
     // CONFIGURACIÓN DEL DASHBOARD
     // ==========================================
 
-    this.servicioDashboard.obtenerConfiguracion().subscribe({
+    this.contenidoService.obtenerDashboard(tipoDashboard).subscribe({
       next: (data) => {
         console.log(data);
-
-        this.configuracionActual = data[tipoDashboard];
-      },
-
-      error: (e) => console.error('Error al cargar información de configuración del dashboard', e),
-
-      complete: () => {
+        this.configuracionActual = data;
         this.cdr.detectChanges();
+     },
 
-        console.info('complete');
-      },
+      error: (e) => 
+        console.error(
+         'Error al cargar información de configuración del dashboard',
+         e,
+       ),
     });
 
     // ==========================================
@@ -162,8 +159,10 @@ export class ControlStock implements OnInit {
   // OBTENER CATEGORÍA
   // ==========================================
 
-  obtenerNombreCategoria(idCategoria: string): string {
-    const categoria = this.listaCategorias.find((categoria) => categoria.id === idCategoria);
+  obtenerNombreCategoria(idCategoria: string | number): string {
+    const categoria = this.listaCategorias.find(
+      (categoria) => String(categoria.id) === String(idCategoria)
+    );
 
     return categoria?.nombreCategoria ?? 'Sin categoría';
   }
@@ -230,12 +229,14 @@ export class ControlStock implements OnInit {
 
   obtenerProveedoresProducto(idProducto: string): Proveedor[] {
     const relaciones = this.listaProductosProveedores.filter(
-      (relacion) => relacion.idProducto === idProducto,
+      (relacion) => String(relacion.idProducto) === String(idProducto),
     );
 
     return relaciones
       .map((relacion) =>
-        this.listaProveedores.find((proveedor) => proveedor.id === relacion.idProveedor),
+        this.listaProveedores.find(
+          (proveedor) => String(proveedor.id) === String(relacion.idProveedor),
+        ),
       )
       .filter((proveedor): proveedor is Proveedor => proveedor !== undefined);
   }

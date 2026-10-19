@@ -2,24 +2,43 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { inject, Injectable } from '@angular/core';
 
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 import { Producto } from '../../models/producto.models';
+
+import { ProductoApi } from '../../models/producto-api.models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductoService {
-  private url = 'http://localhost:3000/productos';
+  private url = 'http://localhost:8000/api/v1/productos/';
 
   private httpClient = inject(HttpClient);
+  
+  private adaptarProducto(producto: ProductoApi): Producto {
+    return {
+      id: String(producto.id),
+      sku: producto.sku,
+      nombreProducto: producto.nombreProducto,
+      idCategoria: String(producto.idCategoria),
+      precioUnitario: Number(producto.precioUnitario),
+      cantidadExistente: producto.cantidadExistente,
+      estado: producto.estado,
+      ultimoIngreso: producto.ultimoIngreso,
+    };
+  }
+
 
   // =====================================================
   // OBTENER PRODUCTOS
   // =====================================================
 
   obtenerListaProductos(): Observable<Producto[]> {
-    return this.httpClient.get<Producto[]>(this.url).pipe(catchError(this.handleError));
+    return this.httpClient.get<ProductoApi[]>(this.url).pipe(
+     map((productos) => productos.map((producto) => this.adaptarProducto(producto))),
+     catchError(this.handleError),
+   );
   }
 
   // =====================================================
@@ -28,13 +47,13 @@ export class ProductoService {
 
   actualizarCantidadExistente(id: string, producto: Producto): Observable<Producto> {
     return this.httpClient
-      .put<Producto>(`${this.url}/${id}`, producto)
+      .put<Producto>(`${this.url}${id}/`, producto)
       .pipe(catchError(this.handleError));
   }
 
   actualizarProducto(id: string, producto: Producto): Observable<Producto> {
     return this.httpClient
-      .put<Producto>(`${this.url}/${id}`, producto)
+      .put<Producto>(`${this.url}${id}/`, producto)
       .pipe(catchError(this.handleError));
   }
 
@@ -51,7 +70,7 @@ export class ProductoService {
   // =====================================================
 
   eliminarProducto(id: string): Observable<void> {
-    return this.httpClient.delete<void>(`${this.url}/${id}`).pipe(catchError(this.handleError));
+    return this.httpClient.delete<void>(`${this.url}${id}/`).pipe(catchError(this.handleError));
   }
 
   // =====================================================

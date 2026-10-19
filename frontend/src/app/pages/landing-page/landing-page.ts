@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth-service';
-import { LandingPageService } from '../../services/landing-page/landing-page-service';
+import { ContenidoService } from '../../services/contenido/contenido-service';
+import { ValorLanding } from '../../models/contenido.models';
 
 @Component({
   imports: [],
@@ -12,14 +13,13 @@ import { LandingPageService } from '../../services/landing-page/landing-page-ser
 export class LandingPage {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
-  private readonly landingPageService = inject(LandingPageService);
-  private cdr = inject(ChangeDetectorRef)
+  private readonly contenidoService = inject(ContenidoService);
 
   descripcion = '';
   valores: any[] = [];
 
   ngOnInit(): void {
-    this.landingPageService.obtenerContenido().subscribe({
+    this.contenidoService.obtenerLanding().subscribe({
       next: (data) => {
         this.descripcion = data.descripcion;
         this.valores = data.valores;
@@ -27,10 +27,6 @@ export class LandingPage {
       error: (err) => {
         console.error('Error al obtener el contenido de la landing:', err);
       },
-      complete: () => {
-        console.info('complete');
-        this.cdr.detectChanges();
-      }
     });
   }
 
