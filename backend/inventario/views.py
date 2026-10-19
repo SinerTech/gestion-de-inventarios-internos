@@ -1,5 +1,7 @@
 
 from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import Categoria, Producto, Proveedor, ProductoProveedor
 from .serializers import (
@@ -50,3 +52,9 @@ class ProductoProveedorDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProductoProveedor.objects.all()
     serializer_class = ProductoProveedorSerializer
     lookup_field = "id_producto_proveedor"
+
+
+class ProductoListView(APIView):
+    def get(self, request):
+        productos = Producto.objects.select_related('id_categoria').order_by('nombre_producto')
+        return Response(ProductoSerializer(productos, many=True).data)

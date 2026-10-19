@@ -4,6 +4,9 @@ from .models import Producto
 
 @transaction.atomic
 def actualizar_stock(id_producto: int, cantidad: int, operacion: str) -> Producto:
+    if cantidad <= 0:
+        raise ValueError("La cantidad debe ser mayor a cero.")
+    
     try:
         producto = Producto.objects.select_for_update().get(pk=id_producto)
     except Producto.DoesNotExist:

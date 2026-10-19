@@ -25,7 +25,7 @@ class IngresoView(APIView):
             producto = registrar_ingreso(serializer.validated_data)
         except ValueError as e:
             return Response({"error": str(e)},
-                            status=status.HTTP_500_INTERNAL_SERVER_ERROR,)
+                            status=status.HTTP_400_BAD_REQUEST,)
         except Exception:
             return Response({"error": "Ocurrio un error interno al registrar el ingreso."},
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR,)
