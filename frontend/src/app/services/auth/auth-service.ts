@@ -46,7 +46,6 @@ export class AuthService {
             nombre_usuario: nuevo.nombreUsuario,
             apellido_usuario: nuevo.apellidoUsuario,
             email_usuario: nuevo.emailUsuario,
-            id_rol: nuevo.idRol,
             password: nuevo.password,
         })
         .pipe(catchError(this.handleError));
