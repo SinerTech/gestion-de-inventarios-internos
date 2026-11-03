@@ -1,11 +1,12 @@
 from django.urls import path
-from .views import UsuarioView, RolView, UsuarioDetalleView, LoginView,  SetupEstadoView, SetupAdministradorView
+from .views import (
+    UsuarioView,
+    RolView,
+    LoginView,
+)
 
 urlpatterns = [
-    path('login/', LoginView.as_view()),
-    path('usuarios/', UsuarioView.as_view()),
-    path('usuarios/<int:id_usuario>/', UsuarioDetalleView.as_view()),
-    path('roles/', RolView.as_view()),
-    path('setup/estado/', SetupEstadoView.as_view()),
-    path('setup/administrador/', SetupAdministradorView.as_view()),
+    path('usuarios/', UsuarioView.as_view(), name='usuarios'),
+    path('roles/', RolView.as_view(), name='roles'),
+    path('login/', LoginView.as_view(), name='login'),
 ]

@@ -38,6 +38,23 @@
                     <div class="text-danger">Debe ingresar una cantidad válida.</div>
                 }
             </div>
+            <div class="col-md-6">
+                <label for="ingreso_motivo" class="form-label">Motivo</label>
+                <select class="form-select" id="ingreso_motivo" formControlName="idMotivo">
+                    <option value="">Seleccionar</option>
+                    @for (motivo of motivosIngresoFiltrados; track motivo.id) {
+                    <option [value]="motivo.id">{{ motivo.nombreMotivo }}</option>
+                    }
+                </select>
+                @if (
+                    formularioIngreso.get('idMotivo')?.invalid &&
+                    formularioIngreso.get('idMotivo')?.touched
+                ) {
+                    <div class="text-danger">
+                        Debe seleccionar un motivo.
+                    </div>
+                }
+            </div>
             @if (esCompraProveedor) {
                 <div class="col-md-6">
                     <label for="ingreso_proveedor" class="form-label">Proveedor</label>
@@ -67,23 +84,6 @@
                 }
             </div>
             }
-            <div class="col-md-6">
-                <label for="ingreso_motivo" class="form-label">Motivo</label>
-                <select class="form-select" id="ingreso_motivo" formControlName="idMotivo">
-                    <option value="">Seleccionar</option>
-                    @for (motivo of motivosIngresoFiltrados; track motivo.id) {
-                    <option [value]="motivo.id">{{ motivo.nombreMotivo }}</option>
-                    }
-                </select>
-                @if (
-                    formularioIngreso.get('idMotivo')?.invalid &&
-                    formularioIngreso.get('idMotivo')?.touched
-                ) {
-                    <div class="text-danger">
-                        Debe seleccionar un motivo.
-                    </div>
-                }
-            </div>
             <div class="col-md-12">
                 <label for="ingreso_observaciones" class="form-label">Observaciones</label>
                 <textarea class="form-control" id="ingreso_observaciones" formControlName="observaciones"></textarea>

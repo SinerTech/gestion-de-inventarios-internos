@@ -14,6 +14,5 @@ export interface NuevoUsuario {
   nombreUsuario: string;
   apellidoUsuario: string;
   emailUsuario: string;
-  idRol: number;
   password: string;
 }
